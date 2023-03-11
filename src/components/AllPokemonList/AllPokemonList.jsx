@@ -5,7 +5,7 @@ import AllPokemonItem from "../AllPokemonItem/AllPokemonItem";
 function AllPokemonList() {
 
     const dispatch = useDispatch();
-    const allPokemonList  = useSelector((store) => store.allPokemonReducer.results);
+    const allPokemonList  = useSelector((store) => store.allPokemonList.results);
     const user = useSelector((store) => store.user);
   
     useEffect(() => {
