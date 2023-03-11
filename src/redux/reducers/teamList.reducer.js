@@ -1,10 +1,10 @@
-const allPokemonList = (state = [], action) => {
+const teamList = (state = [], action) => {
     switch (action.type) {
-        case 'SET_ALL_POKEMON':
+        case 'SET_TEAM_LIST':
           return action.payload;
         default:
           return state;
       }
 }
 
-export default allPokemonList;
+export default teamList;
