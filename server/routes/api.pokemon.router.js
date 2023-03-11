@@ -8,7 +8,7 @@ const axios = require('axios');
  */
 router.get('/', (req, res) => {
 
-  axios.get(`https://pokeapi.co/api/v2/pokemon?limit=1000`)
+  axios.get(`https://pokeapi.co/api/v2/pokemon?limit=1010`)
     .then(response => {
       console.log(response.data);
       res.send(response.data);

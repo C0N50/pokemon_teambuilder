@@ -4,13 +4,18 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
 
+//Material UI imports
+
+
+
+
 function Nav() {
   const user = useSelector((store) => store.user);
 
   return (
     <div className="nav">
       <Link to="/home">
-        <h2 className="nav-title">Prime Solo Project</h2>
+        <h2 className="nav-title">Pokemon Team Builder</h2>
       </Link>
       <div>
         {/* If no user is logged in, show these links */}
