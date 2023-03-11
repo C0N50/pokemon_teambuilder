@@ -1,32 +1,21 @@
 import React from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import AllPokemonList from '../AllPokemonList/AllPokemonList';
-import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
 
-function UserPage() {
+function TeamEditPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
 
   const user = useSelector((store) => store.user);
 
-  const handleEditClick = () => {
-
-  }
-
   return (
     <div className="container">
-      <h1>Teams</h1>
-      <Button variant='contained'>
-        <Link className="navLink" to="/teamEdit">
-          Edit
-        </Link>
-      </Button>
+      <AllPokemonList />
     </div>
   );
 }
 
 // this allows us to use <App /> in index.js
-export default UserPage;
+export default TeamEditPage;

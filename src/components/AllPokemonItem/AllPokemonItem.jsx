@@ -12,16 +12,20 @@ function AllPokemonItem(pokemon) {
 
     console.log('pokemon', pokemon)
     console.log('pokemon names', pokemon.pokemon.name)
+    const capitalized = pokemon.pokemon.name.charAt(0).toUpperCase() + pokemon.pokemon.name.slice(1);
+    const imageURL = `https://img.pokemondb.net/artwork/large/${pokemon.pokemon.name}.jpg`
 
     return (
-        <Card sx={{ minWidth: 275 }}>
+        <Card sx={{ width: 400 }}>
             <CardContent>
-                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                    {pokemon.pokemon.name}
-                </Typography>
                 <Typography variant="h5" component="div">
-                    {pokemon.pokemon.name}
+                    {capitalized}
                 </Typography>
+                <CardMedia sx={{
+                    height: 100,
+                    width: '100%',
+                    backgroundSize: 'contain',
+                }} image={imageURL} />
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
                     {pokemon.pokemon.name}
                 </Typography>
