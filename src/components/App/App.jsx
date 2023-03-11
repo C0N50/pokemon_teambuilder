@@ -22,6 +22,26 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
 
+import { ThemeProvider } from '@mui/material';
+import { createTheme } from '@mui/material/styles';
+
+const themeOptions = {
+  palette: {
+    mode: 'light',
+    primary: {
+      main: '#ff0004',
+      dark: '#b28100',
+    },
+    secondary: {
+      main: '#9c27b0',
+    },
+  },
+};
+
+const theme = createTheme(themeOptions);
+
+
+
 function App() {
   const dispatch = useDispatch();
 
@@ -32,6 +52,7 @@ function App() {
   }, [dispatch]);
 
   return (
+    <ThemeProvider theme={theme}>
     <Router>
       <div>
         <Nav />
@@ -118,6 +139,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </ThemeProvider>
   );
 }
 
