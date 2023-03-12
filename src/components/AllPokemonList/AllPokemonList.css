@@ -1,0 +1,4 @@
+.all-pokemon-list-style {
+        display: flex;
+        flex-wrap: wrap;
+    }

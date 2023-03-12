@@ -34,7 +34,7 @@ function AllPokemonItem(pokemon) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small">{pokemon.pokemon.url}</Button>
+                <Button size="small">Details</Button>
             </CardActions>
         </Card>
 

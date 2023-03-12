@@ -11,12 +11,23 @@ function* fetchAllPokemon() {
     } catch (error) {
         console.log("Pokemon API GET all request failed", error);
     }
-
 }
+
+// function* fetchCurrentTeam(action) {
+//     try {
+//         console.log('in single pokemon');
+//         const response = yield axios.get(`/api/pokemon/currentTeam`, action.payload);
+//         yield put ({ type : "SET_CURRENT_TEAM", payload : response.data })
+        
+//     } catch (error) {
+//         console.log("Pokemon API GET current Team request failed", error);
+//     }
+// }
 
 
 function* pokeapiSaga() {
     yield takeLatest('FETCH_ALL_POKEMON', fetchAllPokemon);
+    // yield takeLatest('FETCH_CURRENT_TEAM', fetchCurrentTeam);
   }
 
 
