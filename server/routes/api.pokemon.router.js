@@ -24,6 +24,30 @@ router.get('/', (req, res) => {
   // GET route code here
 });
 
+router.get('/currentTeam', (req, res) => {
+
+  console.log('in get')
+  console.log(req.body);
+
+
+  res.sendStatus(200);
+
+
+
+  // axios.get(`https://pokeapi.co/api/v2/pokemon/`, rejectUnauthenticated)
+  //   .then(response => {
+  //     console.log(response.data);
+  //     res.send(response.data);
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //     res.sendStatus(500);
+  //   })
+  // GET route code here
+});
+
+
+
 /**
  * POST route template
  */

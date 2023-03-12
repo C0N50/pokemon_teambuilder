@@ -1,28 +1,32 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TeamItem from "../TeamItem/TeamItem";
+import { useState } from "react";
+import './TeamList.css';
 
 function TeamList() {
 
     const dispatch = useDispatch();
-    const teamList  = useSelector((store) => store.teamList);
+    const teamList = useSelector((store) => store.teamList);
     const user = useSelector((store) => store.user);
-  
+
+
     useEffect(() => {
-      console.log("in use effect");
-      dispatch({
-        type: "FETCH_TEAM_LIST",
-      });
+        console.log("in use effect");
+        console.log('in fetch Team API data')
+        dispatch({
+            type: 'FETCH_TEAM_LIST',
+        });
     }, []);
-  
-    console.log('Team list', teamList);
+
+    // console.log('teamList', teamList);
 
     return (
-        <section className="pokemon-list-style">
-        {teamList?.map((team) => {
+        <section className="team-list-style">
+            {teamList?.map((team) => {
                 return <TeamItem key={teamList.indexOf(team)} team={team} />;
-        })}
-      </section>
+            })}
+        </section>
     )
 }
 

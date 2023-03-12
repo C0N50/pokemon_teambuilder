@@ -1,0 +1,4 @@
+.team-list-style {
+    display: flex;
+    flex-flow: row;
+}

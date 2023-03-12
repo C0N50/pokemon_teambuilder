@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AllPokemonItem from "../AllPokemonItem/AllPokemonItem";
+import "./AllPokemonList.css";
 
 function AllPokemonList() {
 
@@ -18,7 +19,7 @@ function AllPokemonList() {
     console.log('pokemon list', allPokemonList);
 
     return (
-        <section className="pokemon-list-style">
+        <section className="all-pokemon-list-style">
         {allPokemonList?.map((pokemon) => {
                 return <AllPokemonItem key={pokemon.id} pokemon={pokemon} />;
         })}
