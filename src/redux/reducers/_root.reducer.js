@@ -3,7 +3,7 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import allPokemonList from './pokemonList.reducer';
 import teamList from './teamList.reducer';
-import currentTeam from './currentTeam.reducer';
+import createdTeamsByUser from './createdteamsbyuser.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -16,6 +16,7 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   allPokemonList,
   teamList,
+  createdTeamsByUser,
   // currentTeam, //holds list of all pokemon
 });
 

@@ -19,13 +19,7 @@ function UserPage() {
     <div className="container">
       <h1>Teams</h1>
 
-
       <CreatedTeamsByUserList />
-      < TeamList />
-
-
-
-
 
       <Button variant='contained'>
         <Link className="navLink" to="/teamEdit">
