@@ -7,6 +7,7 @@ import AllPokemonList from '../AllPokemonList/AllPokemonList';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
+import CreatedTeamsByUserList from '../CreatedTeamsByUserList/CreatedTeamsByUserList';
 import TeamList from '../TeamList/TeamList';
 
 function UserPage() {
@@ -18,11 +19,7 @@ function UserPage() {
     <div className="container">
       <h1>Teams</h1>
 
-      < TeamList />
-
-
-
-
+      <CreatedTeamsByUserList />
 
       <Button variant='contained'>
         <Link className="navLink" to="/teamEdit">

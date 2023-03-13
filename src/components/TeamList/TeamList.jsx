@@ -4,12 +4,13 @@ import TeamItem from "../TeamItem/TeamItem";
 import { useState } from "react";
 import './TeamList.css';
 
-function TeamList() {
+function TeamList(createdTeamsByUser) {
 
     const dispatch = useDispatch();
     const teamList = useSelector((store) => store.teamList);
     const user = useSelector((store) => store.user);
 
+    console.log('in teamlist createdTeamsByUser', createdTeamsByUser);
 
     useEffect(() => {
         console.log("in use effect");
@@ -19,7 +20,9 @@ function TeamList() {
         });
     }, []);
 
-    // console.log('teamList', teamList);
+    console.log('teamList', teamList);
+
+    
 
     return (
         <section className="team-list-style">

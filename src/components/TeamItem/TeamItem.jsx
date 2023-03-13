@@ -14,9 +14,9 @@ function TeamItem({ team }) {
     // const pokemon = useSelector((store) => store.pokemon);
     // const dispatch = useDispatch();
 
-    console.log('teamItem', team)
+    // console.log('teamItem', team)
 
-    console.log('pokemon', team?.species?.name);
+    // console.log('pokemon', team?.species?.name);
     const capitalized = team?.species?.name.charAt(0).toUpperCase() + team?.species?.name.slice(1);
     const imageURL = `https://img.pokemondb.net/artwork/large/${team?.species?.name}.jpg`;
 
