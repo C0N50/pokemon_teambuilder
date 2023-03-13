@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import AllPokemonList from '../AllPokemonList/AllPokemonList';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import './UserPage.css'
 
 import CreatedTeamsByUserList from '../CreatedTeamsByUserList/CreatedTeamsByUserList';
 import TeamList from '../TeamList/TeamList';
@@ -17,16 +18,19 @@ function UserPage() {
 
   return (
     <div className="container">
+
+
       <h1>Teams</h1>
 
-      <CreatedTeamsByUserList />
+      <div>
+        <Button variant='contained' component={Link} to="/teamEdit">
+          Create New Team
+        </Button>
+      </div>
 
-      <Button variant='contained'>
-        <Link className="navLink" to="/teamEdit">
-          Edit
-        </Link>
-      </Button>
-
+      <div>
+        <CreatedTeamsByUserList />
+      </div>
     </div>
   );
 }

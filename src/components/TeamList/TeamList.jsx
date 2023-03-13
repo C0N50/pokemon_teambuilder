@@ -3,32 +3,37 @@ import { useDispatch, useSelector } from "react-redux";
 import TeamItem from "../TeamItem/TeamItem";
 import { useState } from "react";
 import './TeamList.css';
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
-function TeamList(createdTeamsByUser) {
+function TeamList({ team }) {
 
     const dispatch = useDispatch();
-    const teamList = useSelector((store) => store.teamList);
+    // const teamList = useSelector((store) => store.teamList);
     const user = useSelector((store) => store.user);
 
-    console.log('in teamlist createdTeamsByUser', createdTeamsByUser);
+    console.log('in teamlist createdTeamsByUser', team);
 
-    useEffect(() => {
-        console.log("in use effect");
-        console.log('in fetch Team API data')
-        dispatch({
-            type: 'FETCH_TEAM_LIST',
-        });
-    }, []);
+    console.log('teamList', team);
 
-    console.log('teamList', teamList);
 
-    
 
     return (
         <section className="team-list-style">
-            {teamList?.map((team) => {
-                return <TeamItem key={teamList.indexOf(team)} team={team} />;
+
+            <Button variant='contained'>
+                    Delete
+            </Button>
+
+
+            {team?.map((pokemon) => {
+                return <TeamItem key={team.indexOf(pokemon)} team={pokemon} />;
             })}
+
+            <Button variant='contained' component={Link} to="/teamEdit">
+                    Edit
+            </Button>
+
         </section>
     )
 }
