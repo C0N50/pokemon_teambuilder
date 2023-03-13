@@ -1,0 +1,4 @@
+.created-by-user-list-style {
+    display : flex;
+    flex-flow: column;
+}
