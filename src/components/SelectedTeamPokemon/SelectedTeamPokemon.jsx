@@ -8,11 +8,11 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 
-function TeamItem({ team }) {
+function SelectedTeamPokemon({ team }) {
 
     //calls reducer that stores an individual pokemon object fetched from the api
     // const pokemon = useSelector((store) => store.pokemon);
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     // console.log('teamItem', team)
 
@@ -30,6 +30,16 @@ function TeamItem({ team }) {
     // const capitalized = pokemon.species?.name.charAt(0).toUpperCase() + pokemon.species?.name.slice(1);
     // const species = pokemon.species?.name;
     // const imageURL = `https://img.pokemondb.net/artwork/large/${pokemon.species?.name}.jpg`
+
+    const handleDelete = () => {
+        console.log('in delete pokemon');
+
+        dispatch({
+            type : 'DELETE_SELECTED_POKEMON',
+            payload : team
+        })
+    }
+
 
     return (
 
@@ -51,10 +61,12 @@ function TeamItem({ team }) {
                 </Typography>
             </CardContent>
             <CardActions>
+                <Button variant='contained' size="small">Edit</Button>
+                <Button onClick={handleDelete} size="small">Delete</Button>
             </CardActions>
         </Card>
 
     )
 }
 
-export default TeamItem;
+export default SelectedTeamPokemon;
