@@ -2,6 +2,11 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 
+
+/**
+ * Posts Current Team from edit page to database to be saved.
+ * @param {object} action 
+ */
 function* postSelectedTeam(action) {
     try {
         console.log('in post', action.paylod);

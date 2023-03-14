@@ -7,7 +7,11 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
-
+/**
+ * 
+ * @param {object} team 
+ * @returns individual pokemon object/card to be displayed in TeamList on User landing page.
+ */
 function TeamItem({ team }) {
 
     //calls reducer that stores an individual pokemon object fetched from the api

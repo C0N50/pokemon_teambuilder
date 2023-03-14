@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 
+//
 function SelectedTeamPokemon({ team }) {
 
     //calls reducer that stores an individual pokemon object fetched from the api

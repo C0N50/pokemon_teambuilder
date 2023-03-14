@@ -6,6 +6,12 @@ import './TeamList.css';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
+
+/**
+ * 
+ * @param {object} team 
+ * @returns team list to be displayed on user landing page
+ */
 function TeamList({ team }) {
 
     const dispatch = useDispatch();
@@ -19,12 +25,26 @@ function TeamList({ team }) {
 
     // console.log('team name', team[0].metaData.team_name);
 
+
+    const handleTeamDelete = () => {
+        console.log('clicked delete team');
+        console.log('team id', team[0].metaData.id);
+
+        teamId = team[0].metaData.id;
+
+        // dispatch({
+        //     type : 'DELETE_TEAM',
+        //     payload : team
+        // })
+    }
+
+
     return (
         <>
             <h2>{team[0]?.metaData?.team_name}</h2>
             <section className="team-list-style">
 
-                <Button variant='contained'>
+                <Button onClick={handleTeamDelete} variant='contained'>
                     Delete
                 </Button>
 
