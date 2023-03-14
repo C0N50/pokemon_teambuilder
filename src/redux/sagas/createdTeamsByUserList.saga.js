@@ -1,7 +1,7 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
-function* createdTeamsByUserList() {
+function* fetchcreatedTeamsByUserList() {
     try {
         console.log('in list of teams');
         const response = yield axios.get(`/team/`);
@@ -13,8 +13,8 @@ function* createdTeamsByUserList() {
 
 }
 
-function* CreatedTeamsByUserListSaga() {
-    yield takeLatest('FETCH_CREATED_LIST', createdTeamsByUserList);
+function* createdTeamsByUserListSaga() {
+    yield takeLatest('FETCH_CREATED_LIST', fetchcreatedTeamsByUserList);
   }
 
-export default CreatedTeamsByUserListSaga;
+export default createdTeamsByUserListSaga;
