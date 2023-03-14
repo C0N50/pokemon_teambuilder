@@ -8,7 +8,11 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import axios from "axios";
 
-
+/**
+ * 
+ * @param {object} pokemon 
+ * @returns individual Pokemon to be displayed on edit in Allpokemon List.
+ */
 function AllPokemonItem(pokemon) {
 
     const dispatch = useDispatch();

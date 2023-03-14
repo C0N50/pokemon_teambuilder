@@ -7,6 +7,9 @@ import AllPokemonList from '../AllPokemonList/AllPokemonList';
 import SelectedTeam from '../SelectedTeam/SelectedTeam';
 import './TeamEditPage.css'
 
+/**
+ * Seperate view routed to when user clicks 'Create New Team Button' or edits an already created team by clicking the 'edit' button.
+ */
 function TeamEditPage() {
 
     // this component doesn't do much to start, just renders some user reducer info to the DOM
@@ -21,8 +24,7 @@ function TeamEditPage() {
         <div className="container">
 
             < SelectedTeam team={team} />
-
-
+            
             <AllPokemonList />
         </div>
     );

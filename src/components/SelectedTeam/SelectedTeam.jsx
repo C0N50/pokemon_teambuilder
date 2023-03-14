@@ -7,6 +7,13 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2'
 
+
+/**
+ * 
+ * @param {object} team 
+ * @returns Team List to be displayed on Edit view.
+ * The Selected Team is stored in a reducer and is not displayed on the front page.
+ */
 function SelectedTeam({ team }) {
 
     const dispatch = useDispatch();

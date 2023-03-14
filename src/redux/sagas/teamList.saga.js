@@ -1,6 +1,9 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
+/**
+ * Fetches List of User Created Team For User Front Page
+ */
 function* fetchTeamList() {
     try {
         console.log('in list of teams');

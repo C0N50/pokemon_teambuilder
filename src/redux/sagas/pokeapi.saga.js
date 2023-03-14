@@ -2,6 +2,9 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 
+/**
+ * Fetches List of all Legal pokemon from PokeApi to be displayed for user during team edit.
+ */
 function* fetchAllPokemon() {
     try {
         console.log('in fetch all pokemon');
@@ -12,18 +15,6 @@ function* fetchAllPokemon() {
         console.log("Pokemon API GET all request failed", error);
     }
 }
-
-// function* fetchCurrentTeam(action) {
-//     try {
-//         console.log('in single pokemon');
-//         const response = yield axios.get(`/api/pokemon/currentTeam`, action.payload);
-//         yield put ({ type : "SET_CURRENT_TEAM", payload : response.data })
-        
-//     } catch (error) {
-//         console.log("Pokemon API GET current Team request failed", error);
-//     }
-// }
-
 
 function* pokeapiSaga() {
     yield takeLatest('FETCH_ALL_POKEMON', fetchAllPokemon);

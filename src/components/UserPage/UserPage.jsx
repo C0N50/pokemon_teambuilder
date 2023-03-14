@@ -12,13 +12,12 @@ import CreatedTeamsByUserList from '../CreatedTeamsByUserList/CreatedTeamsByUser
 import TeamList from '../TeamList/TeamList';
 
 function UserPage() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
 
   const user = useSelector((store) => store.user);
 
+  //Displays Users landing page. Including Create team button and all teams user has created.
   return (
     <div className="container">
-
 
       <h1>Teams</h1>
 
