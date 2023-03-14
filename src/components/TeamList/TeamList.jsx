@@ -17,24 +17,29 @@ function TeamList({ team }) {
     console.log('teamList', team);
 
 
+    // console.log('team name', team[0].metaData.team_name);
 
     return (
-        <section className="team-list-style">
+        <>
+            <h2>{team[0]?.metaData?.team_name}</h2>
+            <section className="team-list-style">
 
-            <Button variant='contained'>
+                <Button variant='contained'>
                     Delete
-            </Button>
+                </Button>
 
 
-            {team?.map((pokemon) => {
-                return <TeamItem key={team.indexOf(pokemon)} team={pokemon} />;
-            })}
 
-            <Button variant='contained' component={Link} to="/teamEdit">
+                {team?.map((pokemon) => {
+                    return <TeamItem key={team.indexOf(pokemon)} team={pokemon} />;
+                })}
+
+                <Button variant='contained' component={Link} to="/teamEdit">
                     Edit
-            </Button>
+                </Button>
 
-        </section>
+            </section>
+        </>
     )
 }
 

@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 
   axios.get(`https://pokeapi.co/api/v2/pokemon?limit=1010`, rejectUnauthenticated)
     .then(response => {
-      console.log(response.data);
+      // console.log(response.data);
       res.send(response.data);
     })
     .catch(err => {
@@ -24,25 +24,23 @@ router.get('/', (req, res) => {
   // GET route code here
 });
 
-router.get('/currentTeam', (req, res) => {
+router.get('/apiURL', (req, res) => {
 
-  console.log('in get')
-  console.log(req.body);
+  console.log('in get :apiURL')
+  console.log('req.query.paramsURL', req.query.paramsURL);
 
-
-  res.sendStatus(200);
-
+  let APIURL = req.query.paramsURL;
 
 
-  // axios.get(`https://pokeapi.co/api/v2/pokemon/`, rejectUnauthenticated)
-  //   .then(response => {
-  //     console.log(response.data);
-  //     res.send(response.data);
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //     res.sendStatus(500);
-  //   })
+  axios.get(APIURL, rejectUnauthenticated)
+    .then(response => {
+      console.log(response.data);
+      res.send(response.data);
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    })
   // GET route code here
 });
 

@@ -31,10 +31,11 @@ const themeOptions = {
     mode: 'light',
     primary: {
       main: '#ff0004',
-      dark: '#b28100',
+      dark: '#f18484',
     },
     secondary: {
       main: '#9c27b0',
+      dark: '#b564c1',
     },
   },
 };
