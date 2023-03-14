@@ -4,7 +4,8 @@ import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import pokeapiSaga from './pokeapi.saga';
 import teamListSaga from './teamList.saga';
-import CreatedTeamsByUserListSaga from './CreatedTeamsByUserList';
+import createdTeamsByUserListSaga from './createdTeamsByUserList.saga';
+import selectedTeamSaga from './selectedTeam.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -20,6 +21,7 @@ export default function* rootSaga() {
     userSaga(),
     pokeapiSaga(),
     teamListSaga(),
-    CreatedTeamsByUserListSaga(),
+    createdTeamsByUserListSaga(),
+    selectedTeamSaga(),
   ]);
 }

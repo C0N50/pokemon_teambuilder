@@ -24,73 +24,73 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
   // const idParam = req.params.id;
 
-      pool
-        .query(queryText, [userParam])
-        .then((result) => {
+  pool
+    .query(queryText, [userParam])
+    .then((result) => {
 
-          // console.log(result.rows[0].username);
+      // console.log(result.rows[0].username);
 
-          const endpointsArray = result.rows.map((pokemonid) => {
-            return `https://pokeapi.co/api/v2/pokemon/${pokemonid.api_pokemon_id}`
-          })
+      const endpointsArray = result.rows.map((pokemonid) => {
+        return `https://pokeapi.co/api/v2/pokemon/${pokemonid.api_pokemon_id}`
+      })
 
-          console.log(endpointsArray);
+      console.log(endpointsArray);
 
-          let urlArray = [];
-          let promiseArray = [];
+      let urlArray = [];
+      let promiseArray = [];
 
-          for (let endpoint of endpointsArray) {
-            urlArray.push(endpoint);
-          }
+      for (let endpoint of endpointsArray) {
+        urlArray.push(endpoint);
+      }
 
-          for (let url of urlArray) {
+      for (let url of urlArray) {
 
-            console.log('url:', url);
-            const promise = axios.get(url);
-            promiseArray.push(promise);
-          }
-
-        
-
-          // let URL1 = endpointsArray[0];
-          // let URL2 = endpointsArray[1];
-          // let URL3 = endpointsArray[2];
-          // let URL4 = endpointsArray[3];
-          // let URL5 = endpointsArray[4];
-          // let URL6 = endpointsArray[5];
-
-          // const promise1 = axios.get(URL1);
-          // const promise2 = axios.get(URL2);
-          // const promise3 = axios.get(URL3);
-          // const promise4 = axios.get(URL4);
-          // const promise5 = axios.get(URL5);
-          // const promise6 = axios.get(URL6);
+        console.log('url:', url);
+        const promise = axios.get(url);
+        promiseArray.push(promise);
+      }
 
 
-          Promise.all(promiseArray).then(function (values) {
-            // console.log(values[0].data);
 
-            let valuesArray = [];
+      // let URL1 = endpointsArray[0];
+      // let URL2 = endpointsArray[1];
+      // let URL3 = endpointsArray[2];
+      // let URL4 = endpointsArray[3];
+      // let URL5 = endpointsArray[4];
+      // let URL6 = endpointsArray[5];
 
-            for (let value of values) {
-              // console.log(value.data);
-              valuesArray.push(value.data);
-            }
-            
-            // console.log('values Array', valuesArray);
+      // const promise1 = axios.get(URL1);
+      // const promise2 = axios.get(URL2);
+      // const promise3 = axios.get(URL3);
+      // const promise4 = axios.get(URL4);
+      // const promise5 = axios.get(URL5);
+      // const promise6 = axios.get(URL6);
 
-            console.log(result.rows);
 
-            for (let i = 0; i < valuesArray.length; i++) {
-              valuesArray[i]["metaData"] = result.rows[i];
-            }
+      Promise.all(promiseArray).then(function (values) {
+        // console.log(values[0].data);
 
-            
+        let valuesArray = [];
 
-            let myJsonString = JSON.stringify(valuesArray);
+        for (let value of values) {
+          // console.log(value.data);
+          valuesArray.push(value.data);
+        }
 
-            res.send(myJsonString);
-        })
+        // console.log('values Array', valuesArray);
+
+        console.log(result.rows);
+
+        for (let i = 0; i < valuesArray.length; i++) {
+          valuesArray[i]["metaData"] = result.rows[i];
+        }
+
+
+
+        let myJsonString = JSON.stringify(valuesArray);
+
+        res.send(myJsonString);
+      })
         .catch((error) => {
           console.log('Error making SELECT for secrets:', error);
           res.sendStatus(500);
@@ -107,7 +107,57 @@ router.get('/', rejectUnauthenticated, (req, res) => {
  * POST route template
  */
 router.post('/', (req, res) => {
-  // POST route code here
+
+  // console.log(req.body);
+
+  console.log('team_name', req.body.MetaData.team_name);
+  console.log('user_id', req.body.MetaData.user_id);
+  console.log('apiIDArray', req.body.apiIdArray)
+
+  const classQueryText = `
+  INSERT INTO "team" ("team_name", "user_id")
+  VALUES ($1, $2) ON CONFLICT (id) DO UPDATE 
+  SET id = excluded.id
+  RETURNING "id";
+`
+  pool.query(classQueryText, [req.body.MetaData.team_name, req.body.MetaData.user_id])
+    .then(result => {
+      console.log('New Team ID', result.rows[0].id);
+
+      const queryParams = [result.rows[0].id];
+
+      let api_idArray = req.body.apiIdArray;
+
+      for (api_id of api_idArray) {
+        queryParams.push(api_id.api_pokemon_id);
+      }
+
+      console.log('queryParams', queryParams);
+
+      while (queryParams.length < 6) {
+        queryParams.push('200');
+      }
+
+      console.log('queryParams', queryParams);
+
+      const pokemonApiIDs = `
+          INSERT INTO "team_pokemon" ("team_id", "api_pokemon_id")
+          VALUES ($1, $2), ($1, $3), ($1, $4), ($1, $5), ($1, $6), ($1, $7);
+      `
+
+      pool.query(pokemonApiIDs, queryParams)
+        .then(result => {
+          res.sendStatus(201);
+        })
+        .catch(err => {
+          console.log(err);
+          res.sendStatus(500)
+        })
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500)
+    })
 });
 
 module.exports = router;
