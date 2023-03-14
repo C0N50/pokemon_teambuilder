@@ -7,6 +7,12 @@ body,
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
+
+  margin-left: 7%;
+  margin-right: 7%;
+
+
+
 }
 
 img {
@@ -109,4 +115,12 @@ Form Treatment
 input {
   margin: 5px;
   margin-bottom: 10px;
+}
+
+
+html { 
+  background:url("../../../public/poke_ball.png") left repeat-y,url("../../../public/poke_ball.png") right repeat-y;
+  background-size: 10%;
+  background-attachment: fixed;
+
 }
