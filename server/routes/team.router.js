@@ -134,8 +134,8 @@ router.post('/', (req, res) => {
 
       console.log('queryParams', queryParams);
 
-      while (queryParams.length < 6) {
-        queryParams.push('200');
+      while (queryParams.length < 7) {
+        queryParams.push(201);
       }
 
       console.log('queryParams', queryParams);
