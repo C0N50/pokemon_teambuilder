@@ -39,6 +39,7 @@ function TeamEditPage() {
                 </div>
             </div>
 
+
             <div className="search-wrapper">
                 <label htmlFor="search-form">
                     <TextField
@@ -65,8 +66,9 @@ function TeamEditPage() {
 
 
 
-
             <AllPokemonList />
+
+
 
             <div>
                 <div className="search-wrapper">
