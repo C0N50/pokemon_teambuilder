@@ -61,7 +61,7 @@ function TeamEditPage() {
             </div>
 
 
-            < SelectedTeam team={team} />
+            < SelectedTeam team={team} />''
 
 
 
