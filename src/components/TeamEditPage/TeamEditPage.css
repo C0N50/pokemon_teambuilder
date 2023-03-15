@@ -14,5 +14,7 @@
     background-color: white;
     margin-left: 62px;
     margin-right: 62px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 
 }
