@@ -10,9 +10,11 @@
     justify-content: center;
     position: sticky;
     top: 0px;
-    z-index: 9999;
-    background-color: white;
+    z-index: 1;
+    /* background-color: white; */
     margin-left: 62px;
     margin-right: 62px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 
 }
