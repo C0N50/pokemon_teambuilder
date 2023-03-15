@@ -1,0 +1,16 @@
+.selected-list-style {
+    position: sticky;
+    top: 56px;
+    z-index: 1;
+    display: flex;
+    flex-flow: row;
+}
+
+.selected-team-name {
+    margin-left: 3%;
+}
+
+
+.swal2-container {
+    z-index: 2;
+  }

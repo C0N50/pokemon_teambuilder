@@ -106,7 +106,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
 
   // console.log(req.body);
 
@@ -157,6 +157,27 @@ router.post('/', (req, res) => {
     .catch(err => {
       console.log(err);
       res.sendStatus(500)
+    })
+});
+
+
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+
+  const userId = req.user.id;
+  const teamId = req.params.id;
+  console.log('in Delete Team')
+  console.log('TeamID', teamId);
+  console.log('userId', userId)
+
+  const queryText = `DELETE FROM "team" WHERE "id" = $1 AND "user_id" = $2;`;
+  pool
+    .query(queryText, [teamId, userId])
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log(`error in delete`, error);
+      res.sendStatus(500);
     })
 });
 

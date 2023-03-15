@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 
+//
 function SelectedTeamPokemon({ team }) {
 
     //calls reducer that stores an individual pokemon object fetched from the api
@@ -42,7 +43,6 @@ function SelectedTeamPokemon({ team }) {
 
 
     return (
-
         <Card sx={{ width: 400 }}>
             <CardContent>
                 <Typography variant="h5" component="div">
@@ -65,7 +65,6 @@ function SelectedTeamPokemon({ team }) {
                 <Button onClick={handleDelete} size="small">Delete</Button>
             </CardActions>
         </Card>
-
     )
 }
 
