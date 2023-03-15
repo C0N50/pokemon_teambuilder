@@ -18,6 +18,8 @@ import { useHistory } from "react-router-dom";
 function SelectedTeam({ team }) {
 
     const dispatch = useDispatch();
+    const history = useHistory();
+
     const selectedTeamList = useSelector((store) => store.selectedTeam);
     const user = useSelector((store) => store.user);
 
@@ -35,6 +37,9 @@ function SelectedTeam({ team }) {
 
     // console.log('teamList', team);
 
+    /**
+     * Calls Saga to send DELETE team from reducer
+     */
     const deleteTeam = () => {
         console.log('in delete team');
         dispatch({
@@ -42,6 +47,11 @@ function SelectedTeam({ team }) {
         })
     }
 
+
+    /**
+     * Calls Sweet Alert for user to input name of team, creates object with team name and array of Pokemon API ids,
+     *  then sends the object to the saga to be POST to the server.
+     */
     const saveTeam = () => {
         console.log('clicked saveTeam');
         // console.log('selected', selectedTeamList);
@@ -85,6 +95,11 @@ function SelectedTeam({ team }) {
                     payload : saveTeamObject
                 })
 
+                dispatch({
+                    type: 'DELETE_SELECTED_TEAM'
+                })
+
+  
                 history.push('/user');
 
             }
