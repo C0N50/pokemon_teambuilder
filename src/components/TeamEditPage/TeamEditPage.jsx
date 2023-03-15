@@ -48,7 +48,10 @@ function TeamEditPage() {
                         id="search-form"
                         className="search-input"
                         placeholder="Search for..."
-                        sx={{ width: 1100 }}
+                        sx={{ 
+                            width: 1100 ,
+                            bgcolor : 'white',
+                        }}
                         value={searchbarQuery}
                         /*
                         // set the value of our useState q
@@ -61,7 +64,7 @@ function TeamEditPage() {
             </div>
 
 
-            < SelectedTeam team={team} />''
+            < SelectedTeam team={team} />
 
 
 
