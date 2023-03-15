@@ -18,9 +18,7 @@ function TeamList({ team }) {
     // const teamList = useSelector((store) => store.teamList);
     const user = useSelector((store) => store.user);
 
-    console.log('in teamlist createdTeamsByUser', team);
-
-    console.log('teamList', team);
+    // console.log('teamList', team);
 
 
     // console.log('team name', team[0].metaData.team_name);
@@ -39,10 +37,19 @@ function TeamList({ team }) {
         })
     }
 
+    const handleTeamEdit = () => {
+        console.log('clicked Team Edit');
+        console.log('team', team)
+        dispatch({
+            type : 'SET_CURRENT_TEAM',
+            payload : team
+        })
+    }
+
 
     return (
         <>
-            <h2 className='team-name'>{team[0]?.metaData?.team_name}</h2>
+            <h1 className='team-name'>{team[0]?.metaData?.team_name}</h1>
             <section className="team-list-style">
 
                 <Button onClick={handleTeamDelete} variant='contained'>
@@ -53,7 +60,7 @@ function TeamList({ team }) {
                     return <TeamItem key={team.indexOf(pokemon)} team={pokemon} />;
                 })}
 
-                <Button variant='contained' component={Link} to="/teamEdit">
+                <Button onClick={handleTeamEdit} variant='contained' component={Link} to="/teamEdit">
                     Edit
                 </Button>
 

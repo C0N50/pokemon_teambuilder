@@ -19,7 +19,7 @@ function CreatedTeamsByUserList() {
         });
     }, []);
 
-    console.log('createdTeamsByUser', createdTeamsByUser);
+    // console.log('createdTeamsByUser', createdTeamsByUser);
 
     let teamIDArray = [];
     let LastId = '';
@@ -63,7 +63,7 @@ function CreatedTeamsByUserList() {
 
 
     // teamIDArray.push(teamObject?.metaData.id)
-    console.log('teamID Array', teamIDArray);
+    // console.log('teamID Array', teamIDArray);
 
 
 
@@ -73,7 +73,7 @@ function CreatedTeamsByUserList() {
         <>
             <section className='created-by-user-list-style' >
                 {teamIDArray?.map((team) => {
-                    console.log('team', team);
+                    // console.log('team', team);
                     return < TeamList key={teamIDArray.indexOf(team)} team={team} />
 
                 })}

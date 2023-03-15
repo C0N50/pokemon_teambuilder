@@ -1,0 +1,12 @@
+.selected-list-style {
+    position: sticky;
+    top: 56px;
+    z-index: 9999;
+    display: flex;
+    flex-flow: row;
+}
+
+.selected-team-name {
+    margin-left: 2%;
+}
+
