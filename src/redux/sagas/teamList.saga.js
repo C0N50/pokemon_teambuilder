@@ -25,13 +25,31 @@ function* deleteTeam(action) {
         yield axios.delete(`/team/${action.payload}`);
         yield put({ type: "FETCH_TEAM_LIST" });
     } catch (error) {
-        console.log("Delete Team request failed", error);   
+        console.log("Delete Team request failed", error);
     }
 }
+
+/**
+ * Updates Selected Saved Team inline in database
+ */
+// function* updateTeam(action) {
+//     try {
+//         console.log('in update team, action.payload is', action.payload);
+//         yield axios.put(`/team/${action.payload.UpdateTeamID}`,
+//             {
+//                 payload: { updateApiIDArray : action.payload.updateApiIDArray, previousApiIDArray : action.payload.previousApiIDArray },
+//             });
+//         yield put({ type: "FETCH_TEAM_LIST" });
+//     } catch (error) {
+//         console.log("uptead team PUT request failed", error);
+//     }
+// }
+
 
 function* teamListSaga() {
     yield takeLatest('FETCH_TEAM_LIST', fetchTeamList);
     yield takeLatest('DELETE_TEAM', deleteTeam);
+    // yield takeLatest('UPDATE_TEAM', updateTeam);
 }
 
 export default teamListSaga;

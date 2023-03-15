@@ -181,4 +181,52 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
-module.exports = router;
+// router.put("/:id", rejectUnauthenticated, (req, res) => {
+
+//   const userId = req.user.id;
+//   const teamID = req.params.id;
+//   const apiIDArray = req.body.payload.updateApiIDArray;
+
+//   const previousApiIDArray = req.body.payload.previousApiIDArray;
+
+//   const currentApiID = [];
+//   const previousApiID = [];
+
+
+
+//   console.log('userId', userId);
+//   console.log('teamID', teamID);
+//   console.log('apiIDArray', apiIDArray);
+//   console.log('previousApiIDArray', previousApiIDArray)
+
+//   for (let api_id of apiIDArray) {
+//     currentApiID.push(api_id.api_pokemon_id);
+//   }
+
+//   for (let previousApi of previousApiIDArray) {
+//     previousApiID.push(previousApi.api_pokemon_id);
+
+//   }
+
+//   while (currentApiID.length < 6) {
+//     currentApiID.push(201);
+//   }
+
+//   while (previousApiID.length < 6) {
+//     previousApiID.push(201);
+//   }
+
+//   console.log('currentApiId', currentApiID);
+//   console.log('previousApiID', previousApiID);
+
+
+//   const DeleteText = `DELETE FROM "team" WHERE "id" = $1 AND "user_id" = $2;`;
+
+
+//   const queryText = `UPDATE "team_pokemon"
+//   SET api_pokemon_id = $3 
+//   WHERE "team_pokemon".team_id = $1 AND "team_pokemon".api_pokemon_id = $2;`
+
+//   });
+
+  module.exports = router;
