@@ -42,7 +42,7 @@ function TeamList({ team }) {
 
     return (
         <>
-            <h2>{team[0]?.metaData?.team_name}</h2>
+            <h2 className='team-name'>{team[0]?.metaData?.team_name}</h2>
             <section className="team-list-style">
 
                 <Button onClick={handleTeamDelete} variant='contained'>
