@@ -28,14 +28,15 @@ function TeamList({ team }) {
 
     const handleTeamDelete = () => {
         console.log('clicked delete team');
-        console.log('team id', team[0].metaData.id);
+        // console.log('team meta', team[0].metaData);
 
-        teamId = team[0].metaData.id;
+       const teamId = team[0].metaData.id;
+       console.log('teamId', teamId);   
 
-        // dispatch({
-        //     type : 'DELETE_TEAM',
-        //     payload : team
-        // })
+        dispatch({
+            type : 'DELETE_TEAM',
+            payload : teamId
+        })
     }
 
 
@@ -47,8 +48,6 @@ function TeamList({ team }) {
                 <Button onClick={handleTeamDelete} variant='contained'>
                     Delete
                 </Button>
-
-
 
                 {team?.map((pokemon) => {
                     return <TeamItem key={team.indexOf(pokemon)} team={pokemon} />;

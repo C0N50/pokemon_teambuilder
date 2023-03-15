@@ -6,6 +6,7 @@ import '../TeamList/TeamList.css';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2'
+import { useHistory } from "react-router-dom";
 
 
 /**
@@ -49,7 +50,8 @@ function SelectedTeam({ team }) {
             title: "Save Current Team?",
             text: "Enter a Team Name:",
             input: 'text',
-            showCancelButton: true        
+            showCancelButton: true,
+            confirmButtonColor:'#FF0000'        
         }).then((result) => {
             if (result.value) {
                 // console.log("Result: " + result.value);
@@ -82,6 +84,8 @@ function SelectedTeam({ team }) {
                     type : 'POST_SELECTED_TEAM',
                     payload : saveTeamObject
                 })
+
+                history.push('/user');
 
             }
         });

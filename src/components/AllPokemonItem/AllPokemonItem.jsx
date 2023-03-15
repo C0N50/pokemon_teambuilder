@@ -7,6 +7,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import Swal from 'sweetalert2';
 
 /**
  * 
@@ -29,8 +30,6 @@ function AllPokemonItem(pokemon) {
 
         if (team.length < 6) {
 
-
-
         console.log('clicked add')
 
         console.log('pokemon url', pokemon.pokemon.url);
@@ -45,18 +44,16 @@ function AllPokemonItem(pokemon) {
                     type: 'ADD_SELECTED_POKEMON',
                     payload : response.data,
                 });
-
-
             })
             .catch(err => {
                 console.log(err);
             })
-
         }
         else {
-            alert('team is full!')
+            Swal.fire({
+                text:"Team is full!",
+                confirmButtonColor:'#FF0000' })
         }
-
     }
 
 
