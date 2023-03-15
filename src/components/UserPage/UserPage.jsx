@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import './UserPage.css'
 
+
 import CreatedTeamsByUserList from '../CreatedTeamsByUserList/CreatedTeamsByUserList';
 import TeamList from '../TeamList/TeamList';
 
@@ -20,13 +21,15 @@ function UserPage() {
     <div className="container">
 
       <div className='teams-title'>
-      <img src="Teams-unown.png" width="40%" height="auto"/>
-      </div>
+        <div >
+          <img src="Teams-unown.png" width="30%" height="auto" />
+        </div>
 
-      <div className='create-team-button'>
-        <Button variant='contained' component={Link} to="/teamEdit">
-          Create New Team
-        </Button>
+        <div>
+          <Button variant='contained' component={Link} to="/teamEdit">
+            Create New Team
+          </Button>
+        </div>
       </div>
 
       <div>

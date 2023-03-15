@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SelectedTeamPokemon from "../SelectedTeamPokemon/SelectedTeamPokemon";
 import { useState } from "react";
-import '../TeamList/TeamList.css';
+// import '../TeamList/TeamList.css';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import { useHistory } from "react-router-dom";
+import './SelectedTeam.css'
 
 
 /**
@@ -25,17 +26,19 @@ function SelectedTeam({ team }) {
 
     const [saveTeamName, setTeamName] = useState('');
     const [saveTeamMetaObject, setSaveTeamMetaObject] = useState({
-        team_name : '',
-        user_id : '',
+        team_name: '',
+        user_id: '',
     });
 
     const [saveTeamPokemonArray, setSaveTeamPokemonArray] = useState([]);
 
-
-
     // console.log('in teamlist createdTeamsByUser', team);
-
     // console.log('teamList', team);
+
+
+    const updateTeam = () => {
+        console.log('in Update Team');
+    }
 
     /**
      * Calls Saga to send DELETE team from reducer
@@ -61,23 +64,23 @@ function SelectedTeam({ team }) {
             text: "Enter a Team Name:",
             input: 'text',
             showCancelButton: true,
-            confirmButtonColor:'#FF0000'        
+            confirmButtonColor: '#FF0000'
         }).then((result) => {
             if (result.value) {
                 // console.log("Result: " + result.value);
                 // setTeamName(result.value);
 
                 const teamMetaData = {
-                    team_name : result.value,
-                    user_id : user.id
+                    team_name: result.value,
+                    user_id: user.id
                 }
                 // console.log('Team Content to Save', team);
                 // console.log('user ID', user.id);
 
-                
+
                 const saveTeamArray = team.map((savePokemon) => {
                     return {
-                        api_pokemon_id : savePokemon.id
+                        api_pokemon_id: savePokemon.id
                     }
                 })
 
@@ -85,21 +88,21 @@ function SelectedTeam({ team }) {
                 console.log('Team Name to save', saveTeamName);
 
                 const saveTeamObject = {
-                    MetaData : teamMetaData,
-                    apiIdArray : saveTeamArray
+                    MetaData: teamMetaData,
+                    apiIdArray: saveTeamArray
                 }
                 console.log('save Team Object', saveTeamObject);
 
-                dispatch ({
-                    type : 'POST_SELECTED_TEAM',
-                    payload : saveTeamObject
+                dispatch({
+                    type: 'POST_SELECTED_TEAM',
+                    payload: saveTeamObject
                 })
 
                 dispatch({
                     type: 'DELETE_SELECTED_TEAM'
                 })
 
-  
+
                 history.push('/user');
 
             }
@@ -110,12 +113,12 @@ function SelectedTeam({ team }) {
 
     return (
         <>
-            <h2>{team[0]?.metaData?.team_name}</h2>
-            <section className="team-list-style">
+            <h1 className='selected-team-name'>{team[0]?.metaData?.team_name}</h1>
+            <section className="selected-list-style">
 
                 {team[0] && (
                     <Button onClick={deleteTeam} variant='contained'>
-                        Delete Team
+                        Clear Team
                     </Button>
                 )}
 
@@ -123,7 +126,11 @@ function SelectedTeam({ team }) {
                     return <SelectedTeamPokemon key={team.indexOf(pokemon)} team={pokemon} />;
                 })}
 
-                {team[0] && (
+                {team[0] && (team[0].metaData ? 
+                    <Button onClick={updateTeam} variant='contained'>
+                        Update Team
+                    </Button>
+                    :
                     <Button onClick={saveTeam} variant='contained'>
                         Save Team
                     </Button>

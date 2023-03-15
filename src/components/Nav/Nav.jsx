@@ -39,9 +39,9 @@ function Nav() {
             <img className="nav-title" src='Pokemon-Team-Builder.png' width="500px" height="auto"></img>
           </Link>
 
-          <Link className="navLink" to="/about">
+          {/* <Link className="navLink" to="/about">
             About
-          </Link>
+          </Link> */}
 
 
           {/* If no user is logged in, show these links */}
@@ -55,13 +55,13 @@ function Nav() {
           {/* If a user is logged in, show these links */}
           {user.id && (
             <>
-              <Link className="navLink" to="/user">
+              {/* <Link className="navLink" to="/user">
                 Home
               </Link>
 
               <Link className="navLink" to="/info">
                 Info Page
-              </Link>
+              </Link> */}
 
               <LogOutButton className="navLink" />
             </>
