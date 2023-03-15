@@ -43,7 +43,6 @@ function SelectedTeamPokemon({ team }) {
 
 
     return (
-
         <Card sx={{ width: 400 }}>
             <CardContent>
                 <Typography variant="h5" component="div">
@@ -66,7 +65,6 @@ function SelectedTeamPokemon({ team }) {
                 <Button onClick={handleDelete} size="small">Delete</Button>
             </CardActions>
         </Card>
-
     )
 }
 

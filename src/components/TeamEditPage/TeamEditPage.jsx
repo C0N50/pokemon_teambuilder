@@ -22,7 +22,6 @@ function TeamEditPage() {
 
     return (
         <div className="container">
-
             < SelectedTeam team={team} />
             
             <AllPokemonList />
