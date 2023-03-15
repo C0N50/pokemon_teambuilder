@@ -19,9 +19,11 @@ function UserPage() {
   return (
     <div className="container">
 
-      <h1>Teams</h1>
+      <div className='teams-title'>
+      <img src="Teams-unown.png" width="40%" height="auto"/>
+      </div>
 
-      <div>
+      <div className='create-team-button'>
         <Button variant='contained' component={Link} to="/teamEdit">
           Create New Team
         </Button>
