@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AllPokemonList from '../AllPokemonList/AllPokemonList';
 import SelectedTeam from '../SelectedTeam/SelectedTeam';
+import PokemonEditPage from '../PokemonEditPage/PokemonEditPage';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import './TeamEditPage.css'
@@ -28,7 +29,7 @@ function TeamEditPage() {
 
     const [pokemonEditFlag, setPokemonEditFlag] = useState(false);
 
-    handlePokemonEditClick = () => {
+    const handlePokemonEditClick = () => {
         setPokemonEditFlag(!pokemonEditFlag);
         console.log('pokemon edit mode?', pokemonEditFlag)
     }
@@ -47,6 +48,8 @@ function TeamEditPage() {
             </div>
 
 
+    { !pokemonEditFlag ?
+    <>
             <div className="search-wrapper">
                 <label htmlFor="search-form">
                     <TextField
@@ -71,12 +74,14 @@ function TeamEditPage() {
             </div>
 
 
-            < SelectedTeam team={team} handlePokemonEditClick={handlePokemonEditClick}/>
+            <SelectedTeam team={team} handlePokemonEditClick={handlePokemonEditClick}/>
 
 
             <AllPokemonList />
-
-            <PokemonEditPage/>
+            </>
+            :
+            <PokemonEditPage team={team} handlePokemonEditClick={handlePokemonEditClick} />
+        }
 
         </div>    );
 }

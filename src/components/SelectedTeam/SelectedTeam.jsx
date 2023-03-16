@@ -172,7 +172,7 @@ function SelectedTeam({ team, handlePokemonEditClick }) {
                     )}
 
                     {team?.map((pokemon) => {
-                        return <SelectedTeamPokemon key={team.indexOf(pokemon)} team={pokemon} handlePokemonEditClick={handlePokemonEditClick} />;
+                        return <SelectedTeamPokemon key={team.indexOf(pokemon)} pokemon={pokemon} handlePokemonEditClick={handlePokemonEditClick} />;
                     })}
 
                     {team[0] && (team[0].metaData ?

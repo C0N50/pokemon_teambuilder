@@ -9,22 +9,22 @@ import Button from "@mui/material/Button";
 
 
 //
-function SelectedTeamPokemon({ team }) {
+function SelectedTeamPokemon({ pokemon, handlePokemonEditClick }) {
 
     const dbTypeList = useSelector((store) => store.typeList);
     //calls reducer that stores an individual pokemon object fetched from the api
     // const pokemon = useSelector((store) => store.pokemon);
     const dispatch = useDispatch();
 
-    console.log('teamItem', team)
-    console.log('team type', team.types)
-    console.log('dbtypeList', dbTypeList)
+    // console.log('pokemonItem', pokemon)
+    // console.log('pokemon type', pokemon.types)
+    // console.log('dbtypeList', dbTypeList)
 
-    // console.log('pokemon', team?.species?.name);
-    const capitalized = team?.species?.name.charAt(0).toUpperCase() + team?.species?.name.slice(1);
-    const imageURL = `https://img.pokemondb.net/artwork/large/${team?.species?.name}.jpg`;
+    // console.log('pokemon', pokemon?.species?.name);
+    const capitalized = pokemon?.species?.name.charAt(0).toUpperCase() + pokemon?.species?.name.slice(1);
+    const imageURL = `https://img.pokemondb.net/artwork/large/${pokemon?.species?.name}.jpg`;
 
-    // console.log('team', team)
+    // console.log('pokemon', pokemon)
     // console.log('pokemon names', TeamItem);
 
     // console.log('pokemon', pokemon)
@@ -40,7 +40,7 @@ function SelectedTeamPokemon({ team }) {
 
         dispatch({
             type : 'DELETE_SELECTED_POKEMON',
-            payload : team
+            payload : pokemon
         })
     }
 
@@ -52,12 +52,12 @@ function SelectedTeamPokemon({ team }) {
                     {capitalized}
                 </Typography>
                 <div className='type-flex-style'>
-                    {team.types?.map((type) => {
+                    {pokemon.types?.map((type) => {
 
                         let type_Image_url = '';
                         for (let dbType of dbTypeList) {
                             if(dbType.name === type.type.name) {
-                                console.log(dbType.image_url);
+                                // console.log(dbType.image_url);
                                 type_Image_url = dbType.image_url;
                             }
                         }
@@ -93,7 +93,7 @@ function SelectedTeamPokemon({ team }) {
                 </div>
             </CardContent>
             <CardActions>
-                <Button variant='contained' size="small">Edit</Button>
+                <Button  onClick={handlePokemonEditClick} variant='contained' size="small">Edit</Button>
                 <Button onClick={handleDelete} size="small">Delete</Button>
             </CardActions>
         </Card>
