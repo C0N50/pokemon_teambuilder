@@ -5,6 +5,10 @@
 .pokemon-card {
     display : flex;
     justify-content: center;
+
+    position: sticky;
+    top: 0px;
+    z-index: 2;
 }
 
 .type-flex-style-edit {
@@ -67,4 +71,9 @@ grid-column: 1/2;
     flex-flow :row;
     justify-content: space-between;
     column-gap: 5%;
+}
+
+.move-body {
+    display:flex;
+    flex-direction: column;
 }
