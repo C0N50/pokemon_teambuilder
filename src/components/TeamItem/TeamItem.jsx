@@ -67,7 +67,8 @@ function TeamItem({ team }) {
                                 height: 20,
                                 width: '45%',
                                 backgroundSize: 'contain',
-                            }} image={type_Image_url} />
+                            }} image={type_Image_url} referrerpolicy="no-referrer"
+                             />
                         )
                     })}
                 </div>

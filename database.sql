@@ -45,26 +45,24 @@ CREATE TABLE "pokemon_type" (
 
 INSERT INTO "pokemon_type" ("name", "image_url")
 VALUES 
-('normal', 'https://archives.bulbagarden.net/media/upload/0/08/NormalIC_SV.png'),
-('fire', 'https://archives.bulbagarden.net/media/upload/a/a2/FireIC_SV.png'),
-('fighting', 'https://archives.bulbagarden.net/media/upload/0/0f/FightingIC_SV.png'),
-('water', 'https://archives.bulbagarden.net/media/upload/d/de/WaterIC_SV.png'),
-('flying', 'https://archives.bulbagarden.net/media/upload/d/d7/FlyingIC_SV.png'),
-('grass', 'https://archives.bulbagarden.net/media/upload/7/7b/GrassIC_SV.png'),
-('poison', 'https://archives.bulbagarden.net/media/upload/9/9d/PoisonIC_SV.png'),
-('electric', 'https://archives.bulbagarden.net/media/upload/7/77/ElectricIC_SV.png'),
-('ground', 'https://archives.bulbagarden.net/media/upload/f/f8/GroundIC_SV.png'),
-('psychic', 'https://archives.bulbagarden.net/media/upload/9/96/PsychicIC_SV.png'),
-('rock', 'https://archives.bulbagarden.net/media/upload/3/32/RockIC_SV.png'),
-('ice', 'https://archives.bulbagarden.net/media/upload/1/13/IceIC_SV.png'),
-('bug', 'https://archives.bulbagarden.net/media/upload/d/d1/BugIC_SV.png'),
-('dragon', 'https://archives.bulbagarden.net/media/upload/7/7f/DragonIC_SV.png'),
-('ghost', 'https://archives.bulbagarden.net/media/upload/2/2c/GhostIC_SV.png'),
-('dark', 'https://archives.bulbagarden.net/media/upload/3/30/DarkIC_SV.png'),
-('steel', 'https://archives.bulbagarden.net/media/upload/b/b8/SteelIC_SV.png'),
-('fairy', 'https://archives.bulbagarden.net/media/upload/c/c6/FairyIC_SV.png');
-
-
+('normal', 'Types/NormalIC_SV.png'),
+('fire', 'Types/FireIC_SV.png'),
+('fighting', 'Types/FightingIC_SV.png'),
+('water', 'Types/WaterIC_SV.png'),
+('flying', 'Types/FlyingIC_SV.png'),
+('grass', 'Types/GrassIC_SV.png'),
+('poison', 'Types/PoisonIC_SV.png'),
+('electric', 'Types/ElectricIC_SV.png'),
+('ground', 'Types/GroundIC_SV.png'),
+('psychic', 'Types/PsychicIC_SV.png'),
+('rock', 'Types/RockIC_SV.png'),
+('ice', 'Types/IceIC_SV.png'),
+('bug', 'Types/BugIC_SV.png'),
+('dragon', 'Types/DragonIC_SV.png'),
+('ghost', 'Types/GhostIC_SV.png'),
+('dark', 'Types/DarkIC_SV.png'),
+('steel', 'Types/SteelIC_SV.png'),
+('fairy', 'Types/FairyIC_SV.png');
 
 
 INSERT INTO "team" ("team_name", "user_id")
@@ -141,4 +139,7 @@ SELECT "tp".api_pokemon_id
 UPDATE "team_pokemon"
 SET api_pokemon_id = '25' 
 WHERE "team_pokemon".team_id = '25' AND "team_pokemon".api_pokemon_id = '1';
+
+
+SELECT * FROM "pokemon_type";
   
