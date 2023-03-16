@@ -17,7 +17,7 @@ function PokemonMoveList() {
 
     const selectedPokemonMoveList = selectedPokemon.moves;
     const user = useSelector((store) => store.user);
-    console.log('selected mon move list', selectedPokemonMoveList)
+    // console.log('selected mon move list', selectedPokemonMoveList)
 
 
     return (

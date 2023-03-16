@@ -24,6 +24,9 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
 
     const dispatch = useDispatch();
     const selectedPokemon = useSelector((store) => store.selectedPokemon);
+
+    const selectedTeam = useSelector((store) => store.selectedTeam);
+
     const moves = useSelector((store) => store.moves);
     const dbTypeList = useSelector((store) => store.typeList);
 
@@ -33,8 +36,21 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
 
     const handlesaveChanges = () => {
         console.log('TO ADD: SAVING THE CHANGES');
+
+        for (let teamPokemon of selectedTeam) {
+            if (selectedPokemon.id === teamPokemon.id) {
+                    teamPokemon.selectedAttacks = moves
+                }
+            }
+
+
+        console.log('selectedTeam', selectedTeam)
         setPokemonEditFlag(!pokemonEditFlag);
     }
+
+
+
+
 
     const capitalized = selectedPokemon?.species?.name.charAt(0).toUpperCase() + selectedPokemon?.species?.name.slice(1);
     const imageURL = `https://img.pokemondb.net/artwork/large/${selectedPokemon?.species?.name}.jpg`;
@@ -138,42 +154,42 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
                         <div className='move-grid-style'>
                             <Typography className='Move-1' variant="h6">
                                 <div className='move-body'>
-                                    {moves[0] ? 
-                                    <> 
-                                    <div>{capitalize(moves[0])}</div> 
-                                    <div><Button onClick={(() => handleRemoveMove(0))} size="small">Remove</Button></div> 
-                                    </>
-                                    : <div></div>}
+                                    {moves[0] ?
+                                        <>
+                                            <div>{capitalize(moves[0])}</div>
+                                            <div><Button onClick={(() => handleRemoveMove(0))} size="small">Remove</Button></div>
+                                        </>
+                                        : <div></div>}
                                 </div>
                             </Typography>
                             <Typography className='Move-2' variant="h6">
-                            <div className='move-body'>
-                                    {moves[1] ? 
-                                    <> 
-                                    <div>{capitalize(moves[1])}</div> 
-                                    <div><Button onClick={(() => handleRemoveMove(1))} size="small">Remove</Button></div> 
-                                    </>
-                                    : <div></div>}
+                                <div className='move-body'>
+                                    {moves[1] ?
+                                        <>
+                                            <div>{capitalize(moves[1])}</div>
+                                            <div><Button onClick={(() => handleRemoveMove(1))} size="small">Remove</Button></div>
+                                        </>
+                                        : <div></div>}
                                 </div>
                             </Typography>
                             <Typography className='Move-3' variant="h6">
-                            <div className='move-body'>
-                                    {moves[2] ? 
-                                    <> 
-                                    <div>{capitalize(moves[2])}</div> 
-                                    <div><Button onClick={(() => handleRemoveMove(2))} size="small">Remove</Button></div> 
-                                    </>
-                                    : <div></div>}
+                                <div className='move-body'>
+                                    {moves[2] ?
+                                        <>
+                                            <div>{capitalize(moves[2])}</div>
+                                            <div><Button onClick={(() => handleRemoveMove(2))} size="small">Remove</Button></div>
+                                        </>
+                                        : <div></div>}
                                 </div>
                             </Typography>
                             <Typography className='Move-4' variant="h6">
-                            <div className='move-body'>
-                                    {moves[3] ? 
-                                    <> 
-                                    <div>{capitalize(moves[3])}</div> 
-                                    <div><Button onClick={(() => handleRemoveMove(3))} size="small">Remove</Button></div> 
-                                    </>
-                                    : <div></div>}
+                                <div className='move-body'>
+                                    {moves[3] ?
+                                        <>
+                                            <div>{capitalize(moves[3])}</div>
+                                            <div><Button onClick={(() => handleRemoveMove(3))} size="small">Remove</Button></div>
+                                        </>
+                                        : <div></div>}
                                 </div>
                             </Typography>
                         </div>
