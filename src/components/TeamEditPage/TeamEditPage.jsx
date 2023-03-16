@@ -71,29 +71,6 @@ function TeamEditPage() {
 
             <AllPokemonList />
 
-
-
-            <div>
-                <div className="search-wrapper">
-                    <label htmlFor="search-form">
-                        <TextField
-                            type="search"
-                            name="search-form"
-                            id="search-form"
-                            className="search-input"
-                            placeholder="Search for..."
-                            value={searchbarQuery}
-                            /*
-                            // set the value of our useState q
-                            //  anytime the user types in the search box
-                            */
-                            onChange={(e) => setsearchbarQuery(e.target.value)}
-                        />
-                        <span className="sr-only"></span>
-                    </label>
-                </div>
-
-            </div >
         </div>    );
 }
 
