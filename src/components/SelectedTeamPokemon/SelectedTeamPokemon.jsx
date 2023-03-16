@@ -11,11 +11,14 @@ import Button from "@mui/material/Button";
 //
 function SelectedTeamPokemon({ team }) {
 
+    const dbTypeList = useSelector((store) => store.typeList);
     //calls reducer that stores an individual pokemon object fetched from the api
     // const pokemon = useSelector((store) => store.pokemon);
     const dispatch = useDispatch();
 
-    // console.log('teamItem', team)
+    console.log('teamItem', team)
+    console.log('team type', team.types)
+    console.log('dbtypeList', dbTypeList)
 
     // console.log('pokemon', team?.species?.name);
     const capitalized = team?.species?.name.charAt(0).toUpperCase() + team?.species?.name.slice(1);
@@ -48,17 +51,46 @@ function SelectedTeamPokemon({ team }) {
                 <Typography variant="h5" component="div">
                     {capitalized}
                 </Typography>
-                <CardMedia sx={{
+                <div className='type-flex-style'>
+                    {team.types?.map((type) => {
+
+                        let type_Image_url = '';
+                        for (let dbType of dbTypeList) {
+                            if(dbType.name === type.type.name) {
+                                console.log(dbType.image_url);
+                                type_Image_url = dbType.image_url;
+                            }
+                        }
+
+                        return (
+                            <CardMedia className='pokemon-image-style' sx={{
+                                height: 20,
+                                width: '45%',
+                                backgroundSize: 'contain',
+                            }} image={type_Image_url} />
+                        )
+                    })}
+                </div>
+                <CardMedia className='pokemon-image-style' sx={{
                     height: 100,
                     width: '100%',
                     backgroundSize: 'contain',
                 }} image={imageURL} />
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {capitalized}
-                </Typography>
-                <Typography variant="body2">
-                    {capitalized}
-                </Typography>
+
+                <div className='move-grid-style'>
+                    <Typography className='Move-1' variant="body2">
+                        Move 1
+                    </Typography>
+                    <Typography className='Move-2' variant="body2">
+                        Move 2
+                    </Typography>
+                    <Typography className='Move-3' variant="body2">
+                        Move 3
+                    </Typography>
+                    <Typography className='Move-4' variant="body2">
+                        Move 4
+                    </Typography>
+                </div>
             </CardContent>
             <CardActions>
                 <Button variant='contained' size="small">Edit</Button>

@@ -25,6 +25,8 @@ function AllPokemonItem(pokemon) {
 
     const team = useSelector((store) => store.selectedTeam);
     const [selectedPokemon, setSelectedPokemon] = useState({})
+    
+    
 
     const handleAdd = () => {
 
@@ -63,7 +65,7 @@ function AllPokemonItem(pokemon) {
     return (
         <Card sx={{ width: 400 }}>
             <CardContent>
-                <Typography variant="h5" component="div">
+                <Typography variant="h6" component="div">
                     {capitalized}
                 </Typography>
                 <CardMedia sx={{
@@ -71,12 +73,6 @@ function AllPokemonItem(pokemon) {
                     width: '100%',
                     backgroundSize: 'contain',
                 }} image={imageURL} />
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {pokemon.pokemon.name}
-                </Typography>
-                <Typography variant="body2">
-                    {pokemon.pokemon.name}
-                </Typography>
             </CardContent>
             <CardActions>
                 <Button onClick={handleAdd} variant='contained' size="medium">Add</Button>

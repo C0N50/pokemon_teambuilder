@@ -9,26 +9,30 @@ import "./AllPokemonList.css";
  */
 function AllPokemonList() {
 
-    const dispatch = useDispatch();
-    const allPokemonList  = useSelector((store) => store.allPokemonList.results);
-    const user = useSelector((store) => store.user);
-  
-    useEffect(() => {
-      console.log("in use effect");
-      dispatch({
-        type: "FETCH_ALL_POKEMON",
-      });
-    }, []);
-  
-    console.log('pokemon list', allPokemonList);
+  const dispatch = useDispatch();
+  const allPokemonList = useSelector((store) => store.allPokemonList.results);
+  const user = useSelector((store) => store.user);
 
-    return (
-        <section className="all-pokemon-list-style">
-        {allPokemonList?.map((pokemon) => {
-                return <AllPokemonItem key={pokemon.id} pokemon={pokemon} />;
-        })}
-      </section>
-    )
+  useEffect(() => {
+    console.log("in use effect");
+    dispatch({
+      type: "FETCH_ALL_POKEMON",
+    });
+
+    dispatch({
+      type: 'FETCH_TYPE_LIST',
+    });
+  }, []);
+
+  console.log('pokemon list', allPokemonList);
+
+  return (
+    <section className="all-pokemon-list-style">
+      {allPokemonList?.map((pokemon) => {
+        return <AllPokemonItem key={pokemon.id} pokemon={pokemon} />;
+      })}
+    </section>
+  )
 }
 
 export default AllPokemonList;

@@ -47,8 +47,6 @@ function TeamItem({ team }) {
         <Card sx={{ width: 400 }}>
             <CardContent>
 
-
-
                 <Typography variant="h6" component="div">
                     {capitalized}
                 </Typography>

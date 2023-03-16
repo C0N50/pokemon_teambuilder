@@ -10,6 +10,7 @@ function CreatedTeamsByUserList() {
 
     const dispatch = useDispatch();
     const createdTeamsByUser = useSelector((store) => store.teamList);
+    
 
     useEffect(() => {
         console.log("in use effect");
