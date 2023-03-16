@@ -93,7 +93,7 @@ function SelectedTeamPokemon({ pokemon, handlePokemonEditClick }) {
                 </div>
             </CardContent>
             <CardActions>
-                <Button  onClick={((pokemon) => handlePokemonEditClick(pokemon))} variant='contained' size="small">Edit</Button>
+                <Button  onClick={(() => handlePokemonEditClick(pokemon))} variant='contained' size="small">Edit</Button>
                 <Button onClick={handleDelete} size="small">Delete</Button>
             </CardActions>
         </Card>

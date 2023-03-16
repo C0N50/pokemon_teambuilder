@@ -1,6 +1,70 @@
+/* * {
+    border: black solid 1px;
+} */
+
+.pokemon-card {
+    display : flex;
+    justify-content: center;
+}
+
+.type-flex-style-edit {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-evenly;
+    gap: 1px;
+}
+
+.image-stats-misc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* grid-template-rows: .5 .5 .5 .5 .5 .5 */
+}
+
+.pokemon-image-style {
+grid-row : 1/7;
+grid-column: 1/2;
+}
+
+.hp {
+    grid-row : 1/2;
+    grid-column: 2/2;
+}
+
+.attack {
+    grid-row : 2/3;
+    grid-column: 2/2;
+}
+
+.defense {
+    grid-row : 3/4;
+    grid-column: 2/2;
+}
+
+.special-attack {
+    grid-row : 4/5;
+    grid-column: 2/2;
+}
+
+.special-defense {
+    grid-row : 5/6;
+    grid-column: 2/2;
+
+}
+
+.speed {
+    grid-row : 6/7;
+    grid-column: 2/2;
+}
+
+.stat-body {
+    display:flex;
+    flex-flow: wrap row;
+    justify-content: space-between;
+}
+
 .button-flex {
     display : flex;
     flex-flow :row;
-    justify-content: space-around;
+    justify-content: space-between;
     column-gap: 5%;
 }
