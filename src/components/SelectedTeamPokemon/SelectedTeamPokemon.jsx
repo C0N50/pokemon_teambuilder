@@ -63,7 +63,7 @@ function SelectedTeamPokemon({ pokemon, handlePokemonEditClick }) {
                         }
 
                         return (
-                            <CardMedia className='pokemon-image-style' sx={{
+                            <CardMedia referrerpolicy="no-referrer" className='pokemon-image-style' sx={{
                                 height: 20,
                                 width: '45%',
                                 backgroundSize: 'contain',
