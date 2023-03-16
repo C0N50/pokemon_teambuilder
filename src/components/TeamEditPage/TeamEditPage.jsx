@@ -26,6 +26,13 @@ function TeamEditPage() {
 
     console.log('selected Team is', team);
 
+    const [pokemonEditFlag, setPokemonEditFlag] = useState(false);
+
+    handlePokemonEditClick = () => {
+        setPokemonEditFlag(!pokemonEditFlag);
+        console.log('pokemon edit mode?', pokemonEditFlag)
+    }
+
 
     return (
         <div className="container">
@@ -64,12 +71,12 @@ function TeamEditPage() {
             </div>
 
 
-            < SelectedTeam team={team} />
-
-
+            < SelectedTeam team={team} handlePokemonEditClick={handlePokemonEditClick}/>
 
 
             <AllPokemonList />
+
+            <PokemonEditPage/>
 
         </div>    );
 }

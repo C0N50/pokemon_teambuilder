@@ -16,7 +16,7 @@ import './SelectedTeam.css'
  * @returns Team List to be displayed on Edit view.
  * The Selected Team is stored in a reducer and is not displayed on the front page.
  */
-function SelectedTeam({ team }) {
+function SelectedTeam({ team, handlePokemonEditClick }) {
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -87,60 +87,6 @@ function SelectedTeam({ team }) {
 
 
         history.push('/user');
-
-
-
-        // const updateApiIDArray = team.map((savePokemon) => {
-        //     return {
-        //         api_pokemon_id: savePokemon.id
-        //     }
-        // })
-
-        // const previousApiIDArray = currentDatabaseTeamList.map((savePokemon) => {
-        //     return {
-        //         api_pokemon_id: savePokemon.id
-        //     }
-        // })
-
-        // const UpdateTeamID = team[0].metaData.id
-        // console.log('update Team ID', UpdateTeamID)
-
-        // console.log('original database Team IDs', previousApiIDArray);
-
-        // console.log('updateApiIDArray', updateApiIDArray)
-
-        // const updateTeamObject = {
-        //     UpdateTeamID : UpdateTeamID,
-        //     updateApiIDArray: updateApiIDArray,
-        //     previousApiIDArray : previousApiIDArray
-        // }
-        // console.log('save Team Object', updateTeamObject);
-
-        // dispatch({
-        //     type: 'UPDATE_TEAM',
-        //     payload: updateTeamObject
-        // })
-
-        // dispatch({
-        //     type: 'DELETE_SELECTED_TEAM'
-        // })
-
-        // dispatch({
-        //     type: 'DELETE_SELECTED_TEAM'
-        // })
-
-
-        // Swal.fire({
-        //     title: "Save Current Team?",
-        //     text: "Enter a Team Name:",
-        //     confirmButtonColor: '#FF0000'
-
-
-        //         history.push('/user');
-
-
-
-
         }
 
     /**
@@ -226,7 +172,7 @@ function SelectedTeam({ team }) {
                     )}
 
                     {team?.map((pokemon) => {
-                        return <SelectedTeamPokemon key={team.indexOf(pokemon)} team={pokemon} />;
+                        return <SelectedTeamPokemon key={team.indexOf(pokemon)} team={pokemon} handlePokemonEditClick={handlePokemonEditClick} />;
                     })}
 
                     {team[0] && (team[0].metaData ?
