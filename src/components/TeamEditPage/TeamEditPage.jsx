@@ -33,11 +33,10 @@ function TeamEditPage() {
 
     const handlePokemonEditClick = (pokemon) => {
 
-        
-        // dispatch ({
-        //     type : 'SET_SELECTED_POKEMON',
-        //     payload : pokemon
-        // })
+        dispatch ({
+            type : 'SET_SELECTED_POKEMON',
+            payload : pokemon
+        })
 
         setPokemonEditFlag(!pokemonEditFlag);
         console.log('pokemon edit mode?', pokemonEditFlag)
