@@ -14,8 +14,13 @@ function CreatedTeamsByUserList() {
     useEffect(() => {
         console.log("in use effect");
         console.log('in fetch Team API data')
+
         dispatch({
             type: 'FETCH_TEAM_LIST',
+        });
+
+        dispatch({
+            type: 'FETCH_TYPE_LIST',
         });
     }, []);
 

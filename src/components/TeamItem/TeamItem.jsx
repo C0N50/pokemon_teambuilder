@@ -16,7 +16,7 @@ import './TeamItem.css'
 function TeamItem({ team }) {
 
     //calls reducer that stores an individual pokemon object fetched from the api
-    // const pokemon = useSelector((store) => store.pokemon);
+    const dbTypeList = useSelector((store) => store.typeList);
     // const dispatch = useDispatch();
 
     // console.log('teamItem', team)
@@ -39,6 +39,8 @@ function TeamItem({ team }) {
     console.log('team', team);
     console.log('types', team.types);
 
+    console.log('type database', dbTypeList)
+
 
     return (
 
@@ -53,12 +55,21 @@ function TeamItem({ team }) {
 
                 <div className='type-flex-style'>
                     {team.types?.map((type) => {
+
+                        let type_Image_url = '';
+                        for (let dbType of dbTypeList) {
+                            if(dbType.name === type.type.name) {
+                                console.log(dbType.image_url);
+                                type_Image_url = dbType.image_url;
+                            }
+                        }
+
                         return (
                             <CardMedia className='pokemon-image-style' sx={{
                                 height: 20,
                                 width: '45%',
                                 backgroundSize: 'contain',
-                            }} image={'https://archives.bulbagarden.net/media/upload/2/2c/GhostIC_SV.png'} />
+                            }} image={type_Image_url} />
                         )
                     })}
                 </div>
