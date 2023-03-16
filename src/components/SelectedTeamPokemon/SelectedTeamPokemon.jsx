@@ -39,9 +39,15 @@ function SelectedTeamPokemon({ pokemon, handlePokemonEditClick }) {
         console.log('in delete pokemon');
 
         dispatch({
-            type : 'DELETE_SELECTED_POKEMON',
-            payload : pokemon
+            type: 'DELETE_SELECTED_POKEMON',
+            payload: pokemon
         })
+    }
+
+
+    const capitalize = (lowercase) => {
+        let capital = lowercase.charAt(0).toUpperCase() + lowercase.slice(1);
+        return capital;
     }
 
 
@@ -56,7 +62,7 @@ function SelectedTeamPokemon({ pokemon, handlePokemonEditClick }) {
 
                         let type_Image_url = '';
                         for (let dbType of dbTypeList) {
-                            if(dbType.name === type.type.name) {
+                            if (dbType.name === type.type.name) {
                                 // console.log(dbType.image_url);
                                 type_Image_url = dbType.image_url;
                             }
@@ -79,21 +85,45 @@ function SelectedTeamPokemon({ pokemon, handlePokemonEditClick }) {
 
                 <div className='move-grid-style'>
                     <Typography className='Move-1' variant="body2">
-                        Move 1
+                        <div className='move-body'>
+                            {pokemon?.selectedAttacks  && pokemon.selectedAttacks[0] ?
+                                <>
+                                    <div>{capitalize(pokemon.selectedAttacks[0])}</div>
+                                </>
+                                : <div></div>}
+                        </div>
                     </Typography>
                     <Typography className='Move-2' variant="body2">
-                        Move 2
+                        <div className='move-body'>
+                            {pokemon?.selectedAttacks  && pokemon.selectedAttacks[1] ?
+                                <>
+                                    <div>{capitalize(pokemon.selectedAttacks[1])}</div>
+                                </>
+                                : <div></div>}
+                        </div>
                     </Typography>
                     <Typography className='Move-3' variant="body2">
-                        Move 3
+                        <div className='move-body'>
+                            {pokemon?.selectedAttacks  && pokemon.selectedAttacks[2]  ?
+                                <>
+                                    <div>{capitalize(pokemon.selectedAttacks[2])}</div>
+                                </>
+                                : <div></div>}
+                        </div>
                     </Typography>
                     <Typography className='Move-4' variant="body2">
-                        Move 4
+                        <div className='move-body'>
+                            {pokemon?.selectedAttacks  && pokemon.selectedAttacks[3] ?
+                                <>
+                                    <div>{capitalize(pokemon.selectedAttacks[3])}</div>
+                                </>
+                                : <div></div>}
+                        </div>
                     </Typography>
                 </div>
             </CardContent>
             <CardActions>
-                <Button  onClick={(() => handlePokemonEditClick(pokemon))} variant='contained' size="small">Edit</Button>
+                <Button onClick={(() => handlePokemonEditClick(pokemon))} variant='contained' size="small">Edit</Button>
                 <Button onClick={handleDelete} size="small">Delete</Button>
             </CardActions>
         </Card>

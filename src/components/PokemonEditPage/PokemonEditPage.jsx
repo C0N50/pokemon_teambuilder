@@ -6,7 +6,10 @@ import { useEffect } from 'react';
 import AllPokemonList from '../AllPokemonList/AllPokemonList';
 import SelectedTeam from '../SelectedTeam/SelectedTeam';
 import SelectedTeamPokemon from '../SelectedTeamPokemon/SelectedTeamPokemon';
+
 import { Link } from 'react-router-dom';
+
+import PokemonMoveList from '../PokemonMoveList/PokemonMoveList';
 import './PokemonEditPage.css'
 
 //MUI imports
@@ -19,7 +22,12 @@ import Typography from "@mui/material/Typography";
 
 function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
 
+    const dispatch = useDispatch();
     const selectedPokemon = useSelector((store) => store.selectedPokemon);
+
+    const selectedTeam = useSelector((store) => store.selectedTeam);
+
+    const moves = useSelector((store) => store.moves);
     const dbTypeList = useSelector((store) => store.typeList);
 
     const handleCancel = () => {
@@ -28,14 +36,46 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
 
     const handlesaveChanges = () => {
         console.log('TO ADD: SAVING THE CHANGES');
+
+        for (let teamPokemon of selectedTeam) {
+            if (selectedPokemon.id === teamPokemon.id) {
+                    teamPokemon.selectedAttacks = moves
+                }
+            }
+
+
+        console.log('selectedTeam', selectedTeam)
+
+        dispatch({
+            type : 'DELETE_ALL_MOVES'
+        })
+
+        console.log('moves', moves)
+
         setPokemonEditFlag(!pokemonEditFlag);
+
     }
 
-    console.log('selected pokemon', selectedPokemon)
+
+
 
 
     const capitalized = selectedPokemon?.species?.name.charAt(0).toUpperCase() + selectedPokemon?.species?.name.slice(1);
     const imageURL = `https://img.pokemondb.net/artwork/large/${selectedPokemon?.species?.name}.jpg`;
+
+    const capitalize = (lowercase) => {
+        let capital = lowercase.charAt(0).toUpperCase() + lowercase.slice(1);
+        return capital;
+    }
+
+    const handleRemoveMove = (index) => {
+        if (moves[index]) {
+            dispatch({
+                type: 'DELETE_MOVE',
+                payload: moves[index]
+            })
+        }
+    }
 
     return (
         <>
@@ -76,43 +116,43 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
 
                             <Typography className='hp' variant="body1">
                                 <div className='stat-body'>
-                                <div>HP:</div> 
-                                <div>{selectedPokemon.stats[0].base_stat}</div>
+                                    <div>HP:</div>
+                                    <div>{selectedPokemon.stats[0].base_stat}</div>
                                 </div>
                             </Typography>
 
                             <Typography className='attack' variant="body1">
-                            <div className='stat-body'>
-                                Attack
-                                <div>{selectedPokemon.stats[1].base_stat}</div>
+                                <div className='stat-body'>
+                                    Attack
+                                    <div>{selectedPokemon.stats[1].base_stat}</div>
                                 </div>
                             </Typography>
 
                             <Typography className='defense' variant="body1">
-                            <div className='stat-body'>
-                                Defense
-                                <div>{selectedPokemon.stats[2].base_stat}</div>
+                                <div className='stat-body'>
+                                    Defense
+                                    <div>{selectedPokemon.stats[2].base_stat}</div>
                                 </div>
                             </Typography>
 
                             <Typography className='special-attack' variant="body1">
-                            <div className='stat-body'>
-                                Special Attack
-                                <div>{selectedPokemon.stats[3].base_stat}</div>
+                                <div className='stat-body'>
+                                    Special Attack
+                                    <div>{selectedPokemon.stats[3].base_stat}</div>
                                 </div>
                             </Typography>
 
                             <Typography className='special-defense' variant="body1">
-                            <div className='stat-body'>
-                                Special Defense
-                                <div>{selectedPokemon.stats[4].base_stat}</div>
+                                <div className='stat-body'>
+                                    Special Defense
+                                    <div>{selectedPokemon.stats[4].base_stat}</div>
                                 </div>
                             </Typography>
 
                             <Typography className='speed' variant="body1">
-                            <div className='stat-body'>
-                                Speed
-                                <div>{selectedPokemon.stats[5].base_stat}</div>
+                                <div className='stat-body'>
+                                    Speed
+                                    <div>{selectedPokemon.stats[5].base_stat}</div>
                                 </div>
                             </Typography>
 
@@ -120,21 +160,45 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
                         </div>
 
                         <div className='move-grid-style'>
-                            <Typography className='Move-1' variant="body2">
-                                Move 1
-                                <Button onClick={(() => console.log('clicked'))} size="small">Remove</Button>
+                            <Typography className='Move-1' variant="h6">
+                                <div className='move-body'>
+                                    {moves[0] ?
+                                        <>
+                                            <div>{capitalize(moves[0])}</div>
+                                            <div><Button onClick={(() => handleRemoveMove(0))} size="small">Remove</Button></div>
+                                        </>
+                                        : <div></div>}
+                                </div>
                             </Typography>
-                            <Typography className='Move-2' variant="body2">
-                                Move 2
-                                <Button onClick={(() => console.log('clicked'))} size="small">Remove</Button>
+                            <Typography className='Move-2' variant="h6">
+                                <div className='move-body'>
+                                    {moves[1] ?
+                                        <>
+                                            <div>{capitalize(moves[1])}</div>
+                                            <div><Button onClick={(() => handleRemoveMove(1))} size="small">Remove</Button></div>
+                                        </>
+                                        : <div></div>}
+                                </div>
                             </Typography>
-                            <Typography className='Move-3' variant="body2">
-                                Move 3
-                                <Button onClick={(() => console.log('clicked'))} size="small">Remove</Button>
+                            <Typography className='Move-3' variant="h6">
+                                <div className='move-body'>
+                                    {moves[2] ?
+                                        <>
+                                            <div>{capitalize(moves[2])}</div>
+                                            <div><Button onClick={(() => handleRemoveMove(2))} size="small">Remove</Button></div>
+                                        </>
+                                        : <div></div>}
+                                </div>
                             </Typography>
-                            <Typography className='Move-4' variant="body2">
-                                Move 4
-                                <Button onClick={(() => console.log('clicked'))} size="small">Remove</Button>
+                            <Typography className='Move-4' variant="h6">
+                                <div className='move-body'>
+                                    {moves[3] ?
+                                        <>
+                                            <div>{capitalize(moves[3])}</div>
+                                            <div><Button onClick={(() => handleRemoveMove(3))} size="small">Remove</Button></div>
+                                        </>
+                                        : <div></div>}
+                                </div>
                             </Typography>
                         </div>
                     </CardContent>
@@ -146,9 +210,10 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
                     </CardActions>
                 </Card>
             </div>
+
+            <PokemonMoveList />
         </>
     )
 }
-
 
 export default PokemonEditPage;
