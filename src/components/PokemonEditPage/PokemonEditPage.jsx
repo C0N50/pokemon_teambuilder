@@ -5,27 +5,35 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import AllPokemonList from '../AllPokemonList/AllPokemonList';
 import SelectedTeam from '../SelectedTeam/SelectedTeam';
+import SelectedTeamPokemon from '../SelectedTeamPokemon/SelectedTeamPokemon';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
 
-function PokemonEditPage ({handlePokemonEditClick, team}) {
+function PokemonEditPage ({setPokemonEditFlag, pokemonEditFlag}) {
 
+    const selectedPokemon = useSelector((store) => store.selectedPokemon);
 
-    const saveChanges = () => {
-        console.log('TO ADD: SAVING THE CHANGES');
-        handlePokemonEditClick();
+    const handleCancel = () => {
+        setPokemonEditFlag(!pokemonEditFlag);
     }
+
+    const handlesaveChanges = () => {
+        console.log('TO ADD: SAVING THE CHANGES');
+        setPokemonEditFlag(!pokemonEditFlag);
+    }
+
+    console.log('selected pokemon', selectedPokemon)
 
     return (
         <>
         <h1>Pokemon Edit Page Here</h1>
 
-        <SelectedTeam team={team} handlePokemonEditClick={handlePokemonEditClick}/>
+        
 
         <div className="button-flex">
-        <Button onClick={handlePokemonEditClick}>Cancel</Button>
-        <Button onClick={saveChanges}>Save</Button>
+        <Button onClick={handleCancel}>Cancel</Button>
+        <Button onClick={handlesaveChanges}>Save</Button>
         </div>
         </>
     )

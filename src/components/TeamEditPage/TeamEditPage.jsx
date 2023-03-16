@@ -25,11 +25,20 @@ function TeamEditPage() {
     const user = useSelector((store) => store.user);
     const team = useSelector((store) => store.selectedTeam);
 
-    console.log('selected Team is', team);
+    // console.log('selected Team is', team);
 
     const [pokemonEditFlag, setPokemonEditFlag] = useState(false);
 
-    const handlePokemonEditClick = () => {
+    const dispatch = useDispatch();
+
+    const handlePokemonEditClick = (pokemon) => {
+
+        
+        // dispatch ({
+        //     type : 'SET_SELECTED_POKEMON',
+        //     payload : pokemon
+        // })
+
         setPokemonEditFlag(!pokemonEditFlag);
         console.log('pokemon edit mode?', pokemonEditFlag)
     }
@@ -80,7 +89,7 @@ function TeamEditPage() {
             <AllPokemonList />
             </>
             :
-            <PokemonEditPage team={team} handlePokemonEditClick={handlePokemonEditClick} />
+            <PokemonEditPage team={team} setPokemonEditFlag={setPokemonEditFlag} pokemonEditFlag={pokemonEditFlag}/>
         }
 
         </div>    );
