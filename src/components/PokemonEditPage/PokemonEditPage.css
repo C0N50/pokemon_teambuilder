@@ -1,0 +1,6 @@
+.button-flex {
+    display : flex;
+    flex-flow :row;
+    justify-content: space-around;
+    column-gap: 5%;
+}
