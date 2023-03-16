@@ -1,8 +1,3 @@
-
--- USER is a reserved keyword with Postgres
--- You must use double quotes in every query that user is in:
--- ex. SELECT * FROM "user";
--- Otherwise you will have errors!
 -- MANUALLY CREATED
 
 CREATE TABLE "user" (
@@ -34,11 +29,42 @@ CREATE TABLE "pokemon_move" (
 );
 
 
+--CREATE TABLE "pokemon_type" (
+--	"id" serial PRIMARY KEY,
+--	"team_pokemon_id" INT NOT NULL REFERENCES "team_pokemon",
+--	"api_type_id" INT NOT NULL,
+--	"image_url" VARCHAR (255) NOT NULL
+--);
+
 CREATE TABLE "pokemon_type" (
 	"id" serial PRIMARY KEY,
-	"team_pokemon_id" INT NOT NULL REFERENCES "team_pokemon",
-	"api_type_id" INT NOT NULL
+	"name" VARCHAR (255) NOT NULL,
+	"image_url" VARCHAR (255) NOT NULL
 );
+
+
+INSERT INTO "pokemon_type" ("name", "image_url")
+VALUES 
+('normal', 'https://archives.bulbagarden.net/media/upload/0/08/NormalIC_SV.png'),
+('fire', 'https://archives.bulbagarden.net/media/upload/a/a2/FireIC_SV.png'),
+('fighting', 'https://archives.bulbagarden.net/media/upload/0/0f/FightingIC_SV.png'),
+('water', 'https://archives.bulbagarden.net/media/upload/d/de/WaterIC_SV.png'),
+('flying', 'https://archives.bulbagarden.net/media/upload/d/d7/FlyingIC_SV.png'),
+('grass', 'https://archives.bulbagarden.net/media/upload/7/7b/GrassIC_SV.png'),
+('poison', 'https://archives.bulbagarden.net/media/upload/9/9d/PoisonIC_SV.png'),
+('electric', 'https://archives.bulbagarden.net/media/upload/7/77/ElectricIC_SV.png'),
+('ground', 'https://archives.bulbagarden.net/media/upload/f/f8/GroundIC_SV.png'),
+('psychic', 'https://archives.bulbagarden.net/media/upload/9/96/PsychicIC_SV.png'),
+('rock', 'https://archives.bulbagarden.net/media/upload/3/32/RockIC_SV.png'),
+('ice', 'https://archives.bulbagarden.net/media/upload/1/13/IceIC_SV.png'),
+('bug', 'https://archives.bulbagarden.net/media/upload/d/d1/BugIC_SV.png'),
+('dragon', 'https://archives.bulbagarden.net/media/upload/7/7f/DragonIC_SV.png'),
+('ghost', 'https://archives.bulbagarden.net/media/upload/2/2c/GhostIC_SV.png'),
+('dark', 'https://archives.bulbagarden.net/media/upload/3/30/DarkIC_SV.png'),
+('steel', 'https://archives.bulbagarden.net/media/upload/b/b8/SteelIC_SV.png'),
+('fairy', 'https://archives.bulbagarden.net/media/upload/c/c6/FairyIC_SV.png');
+
+
 
 
 INSERT INTO "team" ("team_name", "user_id")
@@ -94,4 +120,25 @@ SELECT "user".username, "team".id, "team".team_name, "team_pokemon".api_pokemon_
   GROUP BY "user".username, "team".id, "team".team_name, "team_pokemon".api_pokemon_id;
 
 
+SELECT "team_pokemon".api_pokemon_id FROM "team_pokemon"
+JOIN "team" ON "team_pokemon".team_id = "team".id
+WHERE "team".user_id ='1' AND "team_pokemon".team_id = '1' AND "team_pokemon".api_pokemon_id = '25';
 
+
+UPDATE "team_pokemon"
+  SET api_pokemon_id = '25' 
+  FROM "team_pokemon"
+  JOIN "team" ON "team_pokemon".team_id = "team".id
+  WHERE "team".user_id ='1' AND "team_pokemon".team_id = '1' AND "team_pokemon".api_pokemon_id = '1';
+  
+  
+SELECT "tp".api_pokemon_id
+  FROM "team_pokemon" AS "tp"
+  JOIN "team" as "t" ON "tp".team_id = "t".id
+  WHERE "t".user_id ='1' AND "tp".team_id = '1' AND "tp".api_pokemon_id = '1';
+  
+  
+UPDATE "team_pokemon"
+SET api_pokemon_id = '25' 
+WHERE "team_pokemon".team_id = '25' AND "team_pokemon".api_pokemon_id = '1';
+  
