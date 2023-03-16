@@ -45,7 +45,15 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
 
 
         console.log('selectedTeam', selectedTeam)
+
+        dispatch({
+            type : 'DELETE_ALL_MOVES'
+        })
+
+        console.log('moves', moves)
+
         setPokemonEditFlag(!pokemonEditFlag);
+
     }
 
 
