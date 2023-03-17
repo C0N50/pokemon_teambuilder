@@ -69,7 +69,7 @@ function CreatedTeamsByUserList() {
 
 
     // teamIDArray.push(teamObject?.metaData.id)
-    // console.log('teamID Array', teamIDArray);
+    console.log('teamID Array', teamIDArray);
 
 
 

@@ -21,13 +21,12 @@ CREATE TABLE "team_pokemon" (
 );
 
 
-
 CREATE TABLE "pokemon_move" (
 	"id" serial PRIMARY KEY,
+	"name" VARCHAR (255) NOT NULL,
 	"team_pokemon_id" INT NOT NULL REFERENCES "team_pokemon" ON DELETE CASCADE,
-	"api_move_id" INT 
+	"api_move_id" INT
 );
-
 
 --CREATE TABLE "pokemon_type" (
 --	"id" serial PRIMARY KEY,
@@ -65,6 +64,8 @@ VALUES
 ('fairy', 'Types/FairyIC_SV.png');
 
 
+
+
 INSERT INTO "team" ("team_name", "user_id")
 VALUES ( 'Electric Friends', '1');
 
@@ -82,6 +83,9 @@ VALUES ( 'TalonTusk', '2');
 
 INSERT INTO "team_pokemon" ("team_id", "api_pokemon_id")
 VALUES ('3','1000'), ('3','663'), ('3', '984'), ('3', '986'), ('3', '991'), ('3','987');
+
+INSERT INTO "pokemon_move" ("name", "team_pokemon_id")
+VALUES ('tackle', '13');
 
 
 SELECT "user".username, team.team_name, team_pokemon.api_pokemon_id FROM "user"
@@ -143,3 +147,8 @@ WHERE "team_pokemon".team_id = '25' AND "team_pokemon".api_pokemon_id = '1';
 
 SELECT * FROM "pokemon_type";
   
+  
+
+
+
+

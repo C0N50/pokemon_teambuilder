@@ -28,6 +28,9 @@ function AllPokemonList() {
 
   return (
     <section className="all-pokemon-list-style">
+
+      
+
       {allPokemonList?.map((pokemon) => {
         return <AllPokemonItem key={pokemon.name} pokemon={pokemon} />;
       })}
