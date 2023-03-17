@@ -34,7 +34,7 @@ router.get('/apiURL', (req, res) => {
 
   axios.get(APIURL, rejectUnauthenticated)
     .then(response => {
-      console.log(response.data);
+      // console.log(response.data);
       res.send(response.data);
     })
     .catch(err => {

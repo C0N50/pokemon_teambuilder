@@ -57,7 +57,7 @@ function TeamList({ team }) {
                 </Button>
 
                 {team?.map((pokemon) => {
-                    return <TeamItem key={team.indexOf(pokemon)} team={pokemon} />;
+                    return <TeamItem key={pokemon.id * team.indexOf(pokemon)} team={pokemon} />;
                 })}
 
                 <Button onClick={handleTeamEdit} variant='contained' component={Link} to="/teamEdit">

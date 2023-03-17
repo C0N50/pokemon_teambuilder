@@ -34,7 +34,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         return `https://pokeapi.co/api/v2/pokemon/${pokemonid.api_pokemon_id}`
       })
 
-      console.log(endpointsArray);
+      // console.log(endpointsArray);
 
       let urlArray = [];
       let promiseArray = [];
@@ -45,12 +45,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
       for (let url of urlArray) {
 
-        console.log('url:', url);
+        // console.log('url:', url);
         const promise = axios.get(url);
         promiseArray.push(promise);
       }
-
-
 
       // let URL1 = endpointsArray[0];
       // let URL2 = endpointsArray[1];
@@ -79,7 +77,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
         // console.log('values Array', valuesArray);
 
-        console.log(result.rows);
+        // console.log(result.rows);
 
         for (let i = 0; i < valuesArray.length; i++) {
           valuesArray[i]["metaData"] = result.rows[i];
@@ -110,9 +108,9 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
   // console.log(req.body);
 
-  console.log('team_name', req.body.MetaData.team_name);
-  console.log('user_id', req.body.MetaData.user_id);
-  console.log('apiIDArray', req.body.apiIdArray)
+  // console.log('team_name', req.body.MetaData.team_name);
+  // console.log('user_id', req.body.MetaData.user_id);
+  // console.log('apiIDArray', req.body.apiIdArray)
 
   const classQueryText = `
   INSERT INTO "team" ("team_name", "user_id")
@@ -123,6 +121,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   pool.query(classQueryText, [req.body.MetaData.team_name, req.body.MetaData.user_id])
     .then(result => {
       console.log('New Team ID', result.rows[0].id);
+
+      console.log('req.body', req.body);
 
       const queryParams = [result.rows[0].id];
 
@@ -144,7 +144,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
           INSERT INTO "team_pokemon" ("team_id", "api_pokemon_id")
           VALUES ($1, $2), ($1, $3), ($1, $4), ($1, $5), ($1, $6), ($1, $7);
       `
-
+      
       pool.query(pokemonApiIDs, queryParams)
         .then(result => {
           res.sendStatus(201);
@@ -165,9 +165,9 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
   const userId = req.user.id;
   const teamId = req.params.id;
-  console.log('in Delete Team')
-  console.log('TeamID', teamId);
-  console.log('userId', userId)
+  // console.log('in Delete Team')
+  // console.log('TeamID', teamId);
+  // console.log('userId', userId)
 
   const queryText = `DELETE FROM "team" WHERE "id" = $1 AND "user_id" = $2;`;
   pool
@@ -229,4 +229,4 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
 //   });
 
-  module.exports = router;
+module.exports = router;

@@ -25,7 +25,7 @@ function TeamItem({ team }) {
     const capitalized = team?.species?.name.charAt(0).toUpperCase() + team?.species?.name.slice(1);
     const imageURL = `https://img.pokemondb.net/artwork/large/${team?.species?.name}.jpg`;
 
-    console.log('team', team)
+    // console.log('team', team)
     // console.log('pokemon names', TeamItem);
 
     // console.log('pokemon', pokemon)
@@ -36,10 +36,10 @@ function TeamItem({ team }) {
     // const species = pokemon.species?.name;
     // const imageURL = `https://img.pokemondb.net/artwork/large/${pokemon.species?.name}.jpg`
 
-    console.log('team', team);
-    console.log('types', team.types);
+    // console.log('team', team);
+    // console.log('types', team.types);
 
-    console.log('type database', dbTypeList)
+    // console.log('type database', dbTypeList)
 
 
     return (
@@ -60,7 +60,7 @@ function TeamItem({ team }) {
                         let type_Image_url = '';
                         for (let dbType of dbTypeList) {
                             if (dbType.name === type.type.name) {
-                                console.log(dbType.image_url);
+                                // console.log(dbType.image_url);
                                 type_Image_url = dbType.image_url;
                             }
                         }
@@ -70,7 +70,7 @@ function TeamItem({ team }) {
                                 height: 20,
                                 width: '45%',
                                 backgroundSize: 'contain',
-                            }} image={type_Image_url} referrerpolicy="no-referrer"
+                            }} image={type_Image_url}
                             />
                         )
                     })}

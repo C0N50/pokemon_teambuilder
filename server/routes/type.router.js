@@ -9,13 +9,13 @@ const {
 
 router.get('/', rejectUnauthenticated, (req, res) => {
 
-  console.log('in get /type')
+  // console.log('in get /type')
 
   const queryText = `SELECT * FROM "pokemon_type";`;
 
   pool.query(queryText)
     .then(result => {
-      console.log(result.rows);
+      // console.log(result.rows);
       res.send(result.rows);
     })
     .catch(err => {
