@@ -98,15 +98,17 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 })
 
 
-
-
+/* Refactored team.router POST route to Databse. 
+Instead of a single SQL query the POST now generates uses Await & promises like Edans example from week 15. 
+This is to provide returned team_pokemon IDs for the move Database to use for their sql inserts. 
+These Ids are also to be used for any other attribute tables that are to reference the team_pokemon table*/
 
 /**
  * POST route template
  */
 router.post('/', rejectUnauthenticated, async (req, res) => {
 
-  // console.log(req.body);
+  console.log(req.body);
 
   // console.log('team_name', req.body.MetaData.team_name);
   // console.log('user_id', req.body.MetaData.user_id);
@@ -134,10 +136,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
       apiIDQueryParams.push(api_id.api_pokemon_id);
     }
 
-    while (apiIDQueryParams.length < 7) {
-      apiIDQueryParams.push(201);
-    }
-
     console.log('apiIDQueryParams', apiIDQueryParams);
     console.log('New Team ID', newTeamId);
 
@@ -146,27 +144,38 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         SET id = excluded.id
         RETURNING "id";`
 
-    const pokemonResult1 = await connection.query(pokemonApiQueryText, [newTeamId, apiIDQueryParams[0]]);
-    const pokemonResult2 = await connection.query(pokemonApiQueryText, [newTeamId, apiIDQueryParams[1]]);
-    const pokemonResult3 = await connection.query(pokemonApiQueryText, [newTeamId, apiIDQueryParams[2]]);
-    const pokemonResult4 = await connection.query(pokemonApiQueryText, [newTeamId, apiIDQueryParams[3]]);
-    const pokemonResult5 = await connection.query(pokemonApiQueryText, [newTeamId, apiIDQueryParams[4]]);
-    const pokemonResult6 = await connection.query(pokemonApiQueryText, [newTeamId, apiIDQueryParams[5]]);
+    let pokemonResultIDs = [];
 
-    console.log('pokemonIDs',
-      pokemonResult1.rows[0].id,
-      pokemonResult2.rows[0].id,
-      pokemonResult3.rows[0].id,
-      pokemonResult4.rows[0].id,
-      pokemonResult5.rows[0].id,
-      pokemonResult6.rows[0].id
-    );
+    for (let apiIDQuery in apiIDQueryParams) {
+      const pokemonResult = await connection.query(pokemonApiQueryText, [newTeamId, apiIDQueryParams[apiIDQuery]]);
+      pokemonResultIDs.push(pokemonResult);
+    }
 
+    for (let resultID of pokemonResultIDs) {
+      console.log('Pokemon Result ID', resultID.rows[0].id);
+    }
 
+    const MoveQueryText = `INSERT INTO "pokemon_move" ("name", "team_pokemon_id")
+    VALUES ($1, $2);`
 
+    const selectedAttacks = req.body.selected_attacks;
+    console.log('selectedAttacks', selectedAttacks);
+    
+    for (let insertId of pokemonResultIDs) {
+      for(atacksIndex in selectedAttacks) {
+        if(selectedAttacks[atacksIndex]) {
+          for (attack of selectedAttacks[atacksIndex]) {
+            console.log('attack name', attack);
+            console.log('insertId', insertId.rows[0].id);
+
+            const moveResult = await connection.query(MoveQueryText, [attack, insertId.rows[0].id]);
+            // console.log('inserted move:', moveResult);
+          }
+        }
+      }
+    }
     await connection.query('COMMIT');
     res.sendStatus(201);
-
   } catch (error) {
     await connection.query('ROLLBACK');
     console.log(`Transaction Error - Rolling back transfer`, error);
@@ -177,9 +186,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     // This is super important! 
     connection.release()
   }
-
-
-
 });
 
 
@@ -204,7 +210,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 });
 
 // router.put("/:id", rejectUnauthenticated, (req, res) => {
-
+  
 //   const userId = req.user.id;
 //   const teamID = req.params.id;
 //   const apiIDArray = req.body.payload.updateApiIDArray;
