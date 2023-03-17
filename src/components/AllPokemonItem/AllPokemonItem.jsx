@@ -63,7 +63,10 @@ function AllPokemonItem(pokemon) {
 
 
     return (
-        <Card sx={{ width: 400 }}>
+        <Card sx={{ 
+            boxShadow: 2,
+            width: 400 
+            }}>
             <CardContent>
                 <Typography variant="h6" component="div">
                     {capitalized}

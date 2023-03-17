@@ -34,7 +34,7 @@ function MoveItem({ move }) {
     const handleAddMove = () => {
         console.log('clicked add move')
 
-        if (moveReducer.length < 4 ) {
+        if (moveReducer.length < 4) {
             dispatch({
                 type: 'ADD_MOVE',
                 payload: move.move.name
@@ -45,7 +45,10 @@ function MoveItem({ move }) {
 
     return (
 
-        <Card sx={{ width: 400 }}>
+        <Card sx={{
+            width: 400,
+            boxShadow: 2
+        }}>
             <CardContent>
 
                 <Typography variant="h4" component="div">

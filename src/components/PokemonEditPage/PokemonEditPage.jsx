@@ -39,15 +39,15 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
 
         for (let teamPokemon of selectedTeam) {
             if (selectedPokemon.id === teamPokemon.id) {
-                    teamPokemon.selectedAttacks = moves
-                }
+                teamPokemon.selectedAttacks = moves
             }
+        }
 
 
         console.log('selectedTeam', selectedTeam)
 
         dispatch({
-            type : 'DELETE_ALL_MOVES'
+            type: 'DELETE_ALL_MOVES'
         })
 
         console.log('moves', moves)
@@ -80,7 +80,10 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
     return (
         <>
             <div className="pokemon-card">
-                <Card sx={{ width: '75%' }}>
+                <Card sx={{
+                    width: '75%',
+                    boxShadow: 3
+                }}>
                     <CardContent>
                         <Typography variant="h4" component="div">
                             {capitalized}
