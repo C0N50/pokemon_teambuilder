@@ -24,8 +24,7 @@ CREATE TABLE "team_pokemon" (
 CREATE TABLE "pokemon_move" (
 	"id" serial PRIMARY KEY,
 	"name" VARCHAR (255) NOT NULL,
-	"team_pokemon_id" INT NOT NULL REFERENCES "team_pokemon" ON DELETE CASCADE,
-	"api_move_id" INT
+	"team_pokemon_id" INT NOT NULL REFERENCES "team_pokemon" ON DELETE CASCADE
 );
 
 --CREATE TABLE "pokemon_type" (

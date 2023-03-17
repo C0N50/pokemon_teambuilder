@@ -98,66 +98,94 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 })
 
 
-
-
+/* Refactored team.router POST route to Databse. 
+Instead of a single SQL query the POST now generates uses Await & promises like Edans example from week 15. 
+This is to provide returned team_pokemon IDs for the move Database to use for their sql inserts. 
+These Ids are also to be used for any other attribute tables that are to reference the team_pokemon table*/
 
 /**
  * POST route template
  */
-router.post('/', rejectUnauthenticated, (req, res) => {
+router.post('/', rejectUnauthenticated, async (req, res) => {
 
-  // console.log(req.body);
+  console.log(req.body);
 
   // console.log('team_name', req.body.MetaData.team_name);
   // console.log('user_id', req.body.MetaData.user_id);
   // console.log('apiIDArray', req.body.apiIdArray)
+  // We need to use the same connection for all queries...
+  const connection = await pool.connect()
+  // Using basic JavaScript try/catch/finally 
+  try {
+    await connection.query('BEGIN');
+    const TeamInsertQueryText = `
+    INSERT INTO "team" ("team_name", "user_id")
+    VALUES ($1, $2) ON CONFLICT (id) DO UPDATE 
+    SET id = excluded.id
+    RETURNING "id";
+  `
+    // Use - amount & from account for withdraw
+    const result = await connection.query(TeamInsertQueryText, [req.body.MetaData.team_name, req.body.MetaData.user_id]);
+    // Use + amount & to account for deposite
+    const newTeamId = result.rows[0].id;
 
-  const classQueryText = `
-  INSERT INTO "team" ("team_name", "user_id")
-  VALUES ($1, $2) ON CONFLICT (id) DO UPDATE 
-  SET id = excluded.id
-  RETURNING "id";
-`
-  pool.query(classQueryText, [req.body.MetaData.team_name, req.body.MetaData.user_id])
-    .then(result => {
-      console.log('New Team ID', result.rows[0].id);
+    const apiIDQueryParams = [];
+    let api_idArray = req.body.apiIdArray;
 
-      console.log('req.body', req.body);
+    for (api_id of api_idArray) {
+      apiIDQueryParams.push(api_id.api_pokemon_id);
+    }
 
-      const queryParams = [result.rows[0].id];
+    console.log('apiIDQueryParams', apiIDQueryParams);
+    console.log('New Team ID', newTeamId);
 
-      let api_idArray = req.body.apiIdArray;
+    const pokemonApiQueryText = `INSERT INTO "team_pokemon" ("team_id", "api_pokemon_id")
+        VALUES ($1, $2) ON CONFLICT (id) DO UPDATE 
+        SET id = excluded.id
+        RETURNING "id";`
 
-      for (api_id of api_idArray) {
-        queryParams.push(api_id.api_pokemon_id);
+    let pokemonResultIDs = [];
+
+    for (let apiIDQuery in apiIDQueryParams) {
+      const pokemonResult = await connection.query(pokemonApiQueryText, [newTeamId, apiIDQueryParams[apiIDQuery]]);
+      pokemonResultIDs.push(pokemonResult);
+    }
+
+    for (let resultID of pokemonResultIDs) {
+      console.log('Pokemon Result ID', resultID.rows[0].id);
+    }
+
+    const MoveQueryText = `INSERT INTO "pokemon_move" ("name", "team_pokemon_id")
+    VALUES ($1, $2);`
+
+    const selectedAttacks = req.body.selected_attacks;
+    console.log('selectedAttacks', selectedAttacks);
+    
+    for (let insertId of pokemonResultIDs) {
+      for(atacksIndex in selectedAttacks) {
+        if(selectedAttacks[atacksIndex]) {
+          for (attack of selectedAttacks[atacksIndex]) {
+            console.log('attack name', attack);
+            console.log('insertId', insertId.rows[0].id);
+
+            const moveResult = await connection.query(MoveQueryText, [attack, insertId.rows[0].id]);
+            // console.log('inserted move:', moveResult);
+          }
+        }
       }
-
-      console.log('queryParams', queryParams);
-
-      while (queryParams.length < 7) {
-        queryParams.push(201);
-      }
-
-      console.log('queryParams', queryParams);
-
-      const pokemonApiIDs = `
-          INSERT INTO "team_pokemon" ("team_id", "api_pokemon_id")
-          VALUES ($1, $2), ($1, $3), ($1, $4), ($1, $5), ($1, $6), ($1, $7);
-      `
-      
-      pool.query(pokemonApiIDs, queryParams)
-        .then(result => {
-          res.sendStatus(201);
-        })
-        .catch(err => {
-          console.log(err);
-          res.sendStatus(500)
-        })
-    })
-    .catch(err => {
-      console.log(err);
-      res.sendStatus(500)
-    })
+    }
+    await connection.query('COMMIT');
+    res.sendStatus(201);
+  } catch (error) {
+    await connection.query('ROLLBACK');
+    console.log(`Transaction Error - Rolling back transfer`, error);
+    res.sendStatus(500);
+  } finally {
+    // Always runs - both after successful try & after catch
+    // Put the client connection back in the pool
+    // This is super important! 
+    connection.release()
+  }
 });
 
 
@@ -182,7 +210,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 });
 
 // router.put("/:id", rejectUnauthenticated, (req, res) => {
-
+  
 //   const userId = req.user.id;
 //   const teamID = req.params.id;
 //   const apiIDArray = req.body.payload.updateApiIDArray;

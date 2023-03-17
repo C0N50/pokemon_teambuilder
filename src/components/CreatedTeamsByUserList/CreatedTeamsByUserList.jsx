@@ -25,32 +25,36 @@ function CreatedTeamsByUserList() {
         });
     }, []);
 
-    // console.log('createdTeamsByUser', createdTeamsByUser);
+    console.log('createdTeamsByUser', createdTeamsByUser);
+
+    const sortedTeams = createdTeamsByUser.sort((a,b) => b?.metaData.id - a?.metaData.id);
+
+    console.log('sorted Teams', sortedTeams)
 
     let teamIDArray = [];
     let LastId = '';
     let TempArray = [];
 
-    for (let teamIndex in createdTeamsByUser) {
+    for (let teamIndex in sortedTeams) {
         // console.log('team id', createdTeamsByUser[teamIndex]?.metaData.id);
         // console.log('length', createdTeamsByUser.length)
         // console.log('teamIndex', teamIndex)
 
-        if (LastId === '') {
-            TempArray.push(createdTeamsByUser[teamIndex]);
-            LastId = createdTeamsByUser[teamIndex]?.metaData.id;
+        if (LastId === null) {
+            TempArray.push(sortedTeams[teamIndex]);
+            LastId = sortedTeams[teamIndex]?.metaData.id;
             // console.log('Last id', LastId);
             // console.log('TempArray', TempArray);
             // console.log('teamIndex', teamIndex)
         }
-        else if (createdTeamsByUser[teamIndex]?.metaData.id === LastId) {
-            TempArray.push(createdTeamsByUser[teamIndex]);
-            LastId = createdTeamsByUser[teamIndex]?.metaData.id;
+        else if (sortedTeams[teamIndex]?.metaData.id === LastId) {
+            TempArray.push(sortedTeams[teamIndex]);
+            LastId = sortedTeams[teamIndex]?.metaData.id;
             // console.log('Last id', LastId);
             // console.log('TempArray', TempArray);
             // console.log('teamIndex', teamIndex)
 
-            if (Number(teamIndex) === (createdTeamsByUser.length - 1)) {
+            if (Number(teamIndex) === (sortedTeams.length - 1)) {
                 teamIDArray.push(TempArray);
             }
 
@@ -58,8 +62,8 @@ function CreatedTeamsByUserList() {
         else {
             teamIDArray.push(TempArray);
             TempArray = [];
-            TempArray.push(createdTeamsByUser[teamIndex]);
-            LastId = createdTeamsByUser[teamIndex]?.metaData.id;
+            TempArray.push(sortedTeams[teamIndex]);
+            LastId = sortedTeams[teamIndex]?.metaData.id;
             // console.log('Last id', LastId);
             // console.log('TempArray', TempArray);
             // console.log('teamID Array', teamIDArray);
