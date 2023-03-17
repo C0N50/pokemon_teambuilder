@@ -11,7 +11,7 @@ const {
  */
 router.get('/', (req, res) => {
 
-  axios.get(`https://pokeapi.co/api/v2/pokemon?limit=1281offset=0`, rejectUnauthenticated)
+  axios.get(`https://pokeapi.co/api/v2/pokemon?limit=1008&offset=0`, rejectUnauthenticated)
     .then(response => {
       // console.log(response.data);
       res.send(response.data);
@@ -34,7 +34,7 @@ router.get('/apiURL', (req, res) => {
 
   axios.get(APIURL, rejectUnauthenticated)
     .then(response => {
-      console.log(response.data);
+      // console.log(response.data);
       res.send(response.data);
     })
     .catch(err => {

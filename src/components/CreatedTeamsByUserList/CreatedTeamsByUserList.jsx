@@ -10,12 +10,18 @@ function CreatedTeamsByUserList() {
 
     const dispatch = useDispatch();
     const createdTeamsByUser = useSelector((store) => store.teamList);
+    
 
     useEffect(() => {
         console.log("in use effect");
         console.log('in fetch Team API data')
+
         dispatch({
             type: 'FETCH_TEAM_LIST',
+        });
+
+        dispatch({
+            type: 'FETCH_TYPE_LIST',
         });
     }, []);
 
@@ -63,7 +69,7 @@ function CreatedTeamsByUserList() {
 
 
     // teamIDArray.push(teamObject?.metaData.id)
-    // console.log('teamID Array', teamIDArray);
+    console.log('teamID Array', teamIDArray);
 
 
 
