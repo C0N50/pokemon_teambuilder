@@ -104,60 +104,82 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 /**
  * POST route template
  */
-router.post('/', rejectUnauthenticated, (req, res) => {
+router.post('/', rejectUnauthenticated, async (req, res) => {
 
   // console.log(req.body);
 
   // console.log('team_name', req.body.MetaData.team_name);
   // console.log('user_id', req.body.MetaData.user_id);
   // console.log('apiIDArray', req.body.apiIdArray)
+  // We need to use the same connection for all queries...
+  const connection = await pool.connect()
+  // Using basic JavaScript try/catch/finally 
+  try {
+    await connection.query('BEGIN');
+    const TeamInsertQueryText = `
+    INSERT INTO "team" ("team_name", "user_id")
+    VALUES ($1, $2) ON CONFLICT (id) DO UPDATE 
+    SET id = excluded.id
+    RETURNING "id";
+  `
+    // Use - amount & from account for withdraw
+    const result = await connection.query(TeamInsertQueryText, [req.body.MetaData.team_name, req.body.MetaData.user_id]);
+    // Use + amount & to account for deposite
+    const newTeamId = result.rows[0].id;
 
-  const classQueryText = `
-  INSERT INTO "team" ("team_name", "user_id")
-  VALUES ($1, $2) ON CONFLICT (id) DO UPDATE 
-  SET id = excluded.id
-  RETURNING "id";
-`
-  pool.query(classQueryText, [req.body.MetaData.team_name, req.body.MetaData.user_id])
-    .then(result => {
-      console.log('New Team ID', result.rows[0].id);
+    const apiIDQueryParams = [];
+    let api_idArray = req.body.apiIdArray;
 
-      console.log('req.body', req.body);
+    for (api_id of api_idArray) {
+      apiIDQueryParams.push(api_id.api_pokemon_id);
+    }
 
-      const queryParams = [result.rows[0].id];
+    while (apiIDQueryParams.length < 7) {
+      apiIDQueryParams.push(201);
+    }
 
-      let api_idArray = req.body.apiIdArray;
+    console.log('apiIDQueryParams', apiIDQueryParams);
+    console.log('New Team ID', newTeamId);
 
-      for (api_id of api_idArray) {
-        queryParams.push(api_id.api_pokemon_id);
-      }
+    const pokemonApiQueryText = `INSERT INTO "team_pokemon" ("team_id", "api_pokemon_id")
+        VALUES ($1, $2) ON CONFLICT (id) DO UPDATE 
+        SET id = excluded.id
+        RETURNING "id";`
 
-      console.log('queryParams', queryParams);
+    const pokemonResult1 = await connection.query(pokemonApiQueryText, [newTeamId, apiIDQueryParams[0]]);
+    const pokemonResult2 = await connection.query(pokemonApiQueryText, [newTeamId, apiIDQueryParams[1]]);
+    const pokemonResult3 = await connection.query(pokemonApiQueryText, [newTeamId, apiIDQueryParams[2]]);
+    const pokemonResult4 = await connection.query(pokemonApiQueryText, [newTeamId, apiIDQueryParams[3]]);
+    const pokemonResult5 = await connection.query(pokemonApiQueryText, [newTeamId, apiIDQueryParams[4]]);
+    const pokemonResult6 = await connection.query(pokemonApiQueryText, [newTeamId, apiIDQueryParams[5]]);
 
-      while (queryParams.length < 7) {
-        queryParams.push(201);
-      }
+    console.log('pokemonIDs',
+      pokemonResult1.rows[0].id,
+      pokemonResult2.rows[0].id,
+      pokemonResult3.rows[0].id,
+      pokemonResult4.rows[0].id,
+      pokemonResult5.rows[0].id,
+      pokemonResult6.rows[0].id
+    );
 
-      console.log('queryParams', queryParams);
 
-      const pokemonApiIDs = `
-          INSERT INTO "team_pokemon" ("team_id", "api_pokemon_id")
-          VALUES ($1, $2), ($1, $3), ($1, $4), ($1, $5), ($1, $6), ($1, $7);
-      `
-      
-      pool.query(pokemonApiIDs, queryParams)
-        .then(result => {
-          res.sendStatus(201);
-        })
-        .catch(err => {
-          console.log(err);
-          res.sendStatus(500)
-        })
-    })
-    .catch(err => {
-      console.log(err);
-      res.sendStatus(500)
-    })
+
+    await connection.query('COMMIT');
+    res.sendStatus(201);
+
+  } catch (error) {
+    await connection.query('ROLLBACK');
+    console.log(`Transaction Error - Rolling back transfer`, error);
+    res.sendStatus(500);
+  } finally {
+    // Always runs - both after successful try & after catch
+    // Put the client connection back in the pool
+    // This is super important! 
+    connection.release()
+  }
+
+
+
 });
 
 
