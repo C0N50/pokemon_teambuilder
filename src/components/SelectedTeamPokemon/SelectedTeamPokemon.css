@@ -1,0 +1,10 @@
+.card-action-button-style {
+    align-self : flex-end;
+}
+
+.selected-card-style {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}

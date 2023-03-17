@@ -6,6 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import './SelectedTeamPokemon.css'
 
 
 //
@@ -52,7 +53,7 @@ function SelectedTeamPokemon({ pokemon, handlePokemonEditClick }) {
 
 
     return (
-        <Card sx={{
+        <Card className ='selected-card-style' sx={{
             width: 400,
             boxShadow: 3
         }}>
@@ -72,7 +73,7 @@ function SelectedTeamPokemon({ pokemon, handlePokemonEditClick }) {
                         }
 
                         return (
-                            <CardMedia referrerpolicy="no-referrer" className='pokemon-image-style' sx={{
+                            <CardMedia className='pokemon-image-style' sx={{
                                 height: 20,
                                 width: '45%',
                                 backgroundSize: 'contain',
@@ -87,7 +88,7 @@ function SelectedTeamPokemon({ pokemon, handlePokemonEditClick }) {
                 }} image={imageURL} />
 
                 <div className='move-grid-style'>
-                    <Typography className='Move-1' variant="body2">
+                    <Typography className='Move-1' variant="caption">
                         <div className='move-body'>
                             {pokemon?.selectedAttacks && pokemon.selectedAttacks[0] ?
                                 <>
@@ -96,7 +97,7 @@ function SelectedTeamPokemon({ pokemon, handlePokemonEditClick }) {
                                 : <div></div>}
                         </div>
                     </Typography>
-                    <Typography className='Move-2' variant="body2">
+                    <Typography className='Move-2' variant="caption">
                         <div className='move-body'>
                             {pokemon?.selectedAttacks && pokemon.selectedAttacks[1] ?
                                 <>
@@ -105,7 +106,7 @@ function SelectedTeamPokemon({ pokemon, handlePokemonEditClick }) {
                                 : <div></div>}
                         </div>
                     </Typography>
-                    <Typography className='Move-3' variant="body2">
+                    <Typography className='Move-3' variant="caption">
                         <div className='move-body'>
                             {pokemon?.selectedAttacks && pokemon.selectedAttacks[2] ?
                                 <>
@@ -114,7 +115,7 @@ function SelectedTeamPokemon({ pokemon, handlePokemonEditClick }) {
                                 : <div></div>}
                         </div>
                     </Typography>
-                    <Typography className='Move-4' variant="body2">
+                    <Typography className='Move-4' variant="caption">
                         <div className='move-body'>
                             {pokemon?.selectedAttacks && pokemon.selectedAttacks[3] ?
                                 <>
@@ -125,9 +126,11 @@ function SelectedTeamPokemon({ pokemon, handlePokemonEditClick }) {
                     </Typography>
                 </div>
             </CardContent>
-            <CardActions>
+            <CardActions >
+                <div className='card-action-button-style'>
                 <Button onClick={(() => handlePokemonEditClick(pokemon))} variant='contained' size="small">Edit</Button>
                 <Button onClick={handleDelete} size="small">Delete</Button>
+                </div>
             </CardActions>
         </Card>
     )
