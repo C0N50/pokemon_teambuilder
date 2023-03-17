@@ -52,7 +52,10 @@ function SelectedTeamPokemon({ pokemon, handlePokemonEditClick }) {
 
 
     return (
-        <Card sx={{ width: 400 }}>
+        <Card sx={{
+            width: 400,
+            boxShadow: 3
+        }}>
             <CardContent>
                 <Typography variant="h5" component="div">
                     {capitalized}
@@ -86,7 +89,7 @@ function SelectedTeamPokemon({ pokemon, handlePokemonEditClick }) {
                 <div className='move-grid-style'>
                     <Typography className='Move-1' variant="body2">
                         <div className='move-body'>
-                            {pokemon?.selectedAttacks  && pokemon.selectedAttacks[0] ?
+                            {pokemon?.selectedAttacks && pokemon.selectedAttacks[0] ?
                                 <>
                                     <div>{capitalize(pokemon.selectedAttacks[0])}</div>
                                 </>
@@ -95,7 +98,7 @@ function SelectedTeamPokemon({ pokemon, handlePokemonEditClick }) {
                     </Typography>
                     <Typography className='Move-2' variant="body2">
                         <div className='move-body'>
-                            {pokemon?.selectedAttacks  && pokemon.selectedAttacks[1] ?
+                            {pokemon?.selectedAttacks && pokemon.selectedAttacks[1] ?
                                 <>
                                     <div>{capitalize(pokemon.selectedAttacks[1])}</div>
                                 </>
@@ -104,7 +107,7 @@ function SelectedTeamPokemon({ pokemon, handlePokemonEditClick }) {
                     </Typography>
                     <Typography className='Move-3' variant="body2">
                         <div className='move-body'>
-                            {pokemon?.selectedAttacks  && pokemon.selectedAttacks[2]  ?
+                            {pokemon?.selectedAttacks && pokemon.selectedAttacks[2] ?
                                 <>
                                     <div>{capitalize(pokemon.selectedAttacks[2])}</div>
                                 </>
@@ -113,7 +116,7 @@ function SelectedTeamPokemon({ pokemon, handlePokemonEditClick }) {
                     </Typography>
                     <Typography className='Move-4' variant="body2">
                         <div className='move-body'>
-                            {pokemon?.selectedAttacks  && pokemon.selectedAttacks[3] ?
+                            {pokemon?.selectedAttacks && pokemon.selectedAttacks[3] ?
                                 <>
                                     <div>{capitalize(pokemon.selectedAttacks[3])}</div>
                                 </>

@@ -44,7 +44,10 @@ function TeamItem({ team }) {
 
     return (
 
-        <Card sx={{ width: 400 }}>
+        <Card sx={{
+            width: 400,
+            boxShadow: 3
+        }}>
             <CardContent>
 
                 <Typography variant="h6" component="div">
@@ -56,7 +59,7 @@ function TeamItem({ team }) {
 
                         let type_Image_url = '';
                         for (let dbType of dbTypeList) {
-                            if(dbType.name === type.type.name) {
+                            if (dbType.name === type.type.name) {
                                 console.log(dbType.image_url);
                                 type_Image_url = dbType.image_url;
                             }
@@ -68,7 +71,7 @@ function TeamItem({ team }) {
                                 width: '45%',
                                 backgroundSize: 'contain',
                             }} image={type_Image_url} referrerpolicy="no-referrer"
-                             />
+                            />
                         )
                     })}
                 </div>
