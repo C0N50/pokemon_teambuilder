@@ -36,16 +36,20 @@ function CreatedTeamsByUserList() {
     let TempArray = [];
 
     for (let teamIndex in sortedTeams) {
-        // console.log('team id', createdTeamsByUser[teamIndex]?.metaData.id);
-        // console.log('length', createdTeamsByUser.length)
-        // console.log('teamIndex', teamIndex)
+        console.log('team id', createdTeamsByUser[teamIndex]?.metaData.id);
+        console.log('length', createdTeamsByUser.length)
+        console.log('teamIndex', teamIndex)
 
-        if (LastId === null) {
+        if (LastId === '') {
             TempArray.push(sortedTeams[teamIndex]);
             LastId = sortedTeams[teamIndex]?.metaData.id;
             // console.log('Last id', LastId);
             // console.log('TempArray', TempArray);
             // console.log('teamIndex', teamIndex)
+
+            if (Number(teamIndex) === (sortedTeams.length - 1)) {
+                teamIDArray.push(TempArray);
+            }
         }
         else if (sortedTeams[teamIndex]?.metaData.id === LastId) {
             TempArray.push(sortedTeams[teamIndex]);
@@ -57,7 +61,6 @@ function CreatedTeamsByUserList() {
             if (Number(teamIndex) === (sortedTeams.length - 1)) {
                 teamIDArray.push(TempArray);
             }
-
         }
         else {
             teamIDArray.push(TempArray);
@@ -68,6 +71,9 @@ function CreatedTeamsByUserList() {
             // console.log('TempArray', TempArray);
             // console.log('teamID Array', teamIDArray);
             // console.log('teamIndex', teamIndex)
+            if (Number(teamIndex) === (sortedTeams.length - 1)) {
+                teamIDArray.push(TempArray);
+            }
         }
     }
 
@@ -75,7 +81,9 @@ function CreatedTeamsByUserList() {
     // teamIDArray.push(teamObject?.metaData.id)
     console.log('teamID Array', teamIDArray);
 
-
+    if(teamIDArray[0]?.length === 0) {
+        teamIDArray.shift();
+    }
 
 
 
