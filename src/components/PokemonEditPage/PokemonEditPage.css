@@ -19,6 +19,10 @@
     gap: 1px;
 }
 
+.pokemon-type-image-style {
+    align-self: start;
+}
+
 .image-stats-misc-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

@@ -85,11 +85,12 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
                     boxShadow: 3
                 }}>
                     <CardContent>
+
+
+                        <div className='type-flex-style-edit'>
                         <Typography variant="h4" component="div">
                             {capitalized}
                         </Typography>
-
-                        <div className='type-flex-style-edit'>
                             {selectedPokemon.types?.map((type) => {
 
                                 let type_Image_url = '';
@@ -101,9 +102,9 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
                                 }
 
                                 return (
-                                    <CardMedia className='pokemon-image-style' sx={{
+                                    <CardMedia className='pokemon-type-image-style' sx={{
                                         height: 20,
-                                        width: '45%',
+                                        width: '20%',
                                         backgroundSize: 'contain',
                                     }} image={type_Image_url} />
                                 )
