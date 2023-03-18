@@ -161,18 +161,16 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     const selectedAttacks = req.body.selected_attacks;
     console.log('selectedAttacks', selectedAttacks);
     
-    for (let insertId of pokemonResultIDs) {
-      for(atacksIndex in selectedAttacks) {
-        if(selectedAttacks[atacksIndex]) {
-          for (attack of selectedAttacks[atacksIndex]) {
-            console.log('attack name', attack);
-            console.log('insertId', insertId.rows[0].id);
+    for (let insertId in pokemonResultIDs) {
+        if(selectedAttacks[insertId]) {
+          for (attack of selectedAttacks[insertId]) {
+            // console.log('attack name', attack);
+            // console.log('insertId', pokemonResultIDs[insertId].rows[0].id);
 
-            const moveResult = await connection.query(MoveQueryText, [attack, insertId.rows[0].id]);
+            const moveResult = await connection.query(MoveQueryText, [attack, pokemonResultIDs[insertId].rows[0].id]);
             // console.log('inserted move:', moveResult);
           }
         }
-      }
     }
     await connection.query('COMMIT');
     res.sendStatus(201);
