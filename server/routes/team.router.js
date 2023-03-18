@@ -13,12 +13,11 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   // what is the value of req.user????
   //console.log('req.user:', req.user);
 
-  queryText = `SELECT "user".username, "team".id, "team".team_name, "team_pokemon".api_pokemon_id FROM "user"
+  queryText = `SELECT "user".username, "team".id AS team_id, "team".team_name, "team_pokemon".id AS team_pokemon_id, "team_pokemon".api_pokemon_id FROM "user"
   JOIN "team" ON "team".user_id = "user".id
   JOIN "team_pokemon" ON "team_pokemon".team_id = "team".id
   WHERE  "user".id=$1
-  GROUP BY "user".username, "team".id, "team".team_name, "team_pokemon".api_pokemon_id;
-  `;
+  GROUP BY "user".username, "team".id, "team".team_name, "team_pokemon".id, "team_pokemon".api_pokemon_id`;
 
   const userParam = req.user.id;
 
@@ -82,6 +81,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         for (let i = 0; i < valuesArray.length; i++) {
           valuesArray[i]["metaData"] = result.rows[i];
         }
+
+
+
+
 
 
 
