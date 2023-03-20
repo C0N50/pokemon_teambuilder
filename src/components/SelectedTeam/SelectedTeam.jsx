@@ -67,10 +67,6 @@ function SelectedTeam({ team, handlePokemonEditClick }) {
             console.log('selected attack array', pokemon.selectedAttacks);
             if (pokemon.id && pokemon.selectedAttacks) {
                 return pokemon.selectedAttacks
-                for (let selectedAttack of pokemon.selectedAttacks) {
-                    // return selectedAttack;
-                    // console.log('selected attack array', selectedAttack);
-                }
             }
         });
 
@@ -159,14 +155,10 @@ function SelectedTeam({ team, handlePokemonEditClick }) {
                     console.log('selected attack array', pokemon.selectedAttacks);
                     if (pokemon.id && pokemon.selectedAttacks) {
                         return pokemon.selectedAttacks
-                        for (let selectedAttack of pokemon.selectedAttacks) {
-                            // return selectedAttack;
-                            // console.log('selected attack array', selectedAttack);
-                        }
                     }
                 });
-        
-        
+
+
                 console.log('attackData', attackData);
                 ////////========================================================
 
