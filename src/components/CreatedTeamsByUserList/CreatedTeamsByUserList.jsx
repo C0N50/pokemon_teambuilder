@@ -10,7 +10,7 @@ function CreatedTeamsByUserList() {
 
     const dispatch = useDispatch();
     const createdTeamsByUser = useSelector((store) => store.teamList);
-    
+
 
     useEffect(() => {
         console.log("in use effect");
@@ -23,11 +23,21 @@ function CreatedTeamsByUserList() {
         dispatch({
             type: 'FETCH_TYPE_LIST',
         });
+
+
+        for (let team of createdTeamsByUser) {
+            console.log('created team by user in dispatch', team)
+
+            // dispatch({
+            //     type: 'FETCH_MOVE_DATA',
+            // });
+        }
+
     }, []);
 
     console.log('createdTeamsByUser', createdTeamsByUser);
 
-    const sortedTeams = createdTeamsByUser.sort((a,b) => b?.metaData.team_id - a?.metaData.team_id);
+    const sortedTeams = createdTeamsByUser.sort((a, b) => b?.metaData.team_id - a?.metaData.team_id);
 
     console.log('sorted Teams', sortedTeams)
 
@@ -81,7 +91,7 @@ function CreatedTeamsByUserList() {
     // teamIDArray.push(teamObject?.metaData.id)
     console.log('teamID Array', teamIDArray);
 
-    if(teamIDArray[0]?.length === 0) {
+    if (teamIDArray[0]?.length === 0) {
         teamIDArray.shift();
     }
 

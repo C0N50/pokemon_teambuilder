@@ -7,6 +7,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import axios from "axios";
 
 
 /**
@@ -22,6 +23,7 @@ function MoveItem({ move }) {
     const dispatch = useDispatch();
 
     const moveReducer = useSelector((store) => store.moves);
+    const moveDataReducer = useSelector((store) => store.moveData);
 
     const capitalized = move.move.name?.charAt(0).toUpperCase() + move.move.name?.slice(1);
     // const species = pokemon.species?.name;
@@ -34,14 +36,40 @@ function MoveItem({ move }) {
     const handleAddMove = () => {
         console.log('clicked add move')
 
+        console.log('move.move.name', move.move.name);
+
         if (moveReducer.length < 4) {
-            dispatch({
-                type: 'ADD_MOVE',
-                payload: move.move.name
-            })
+
+            fetchMoveData()
+                .then(() => {
+
+                    axios.get('/api/move/apiURL', { params: { paramsURL: move.move.name } })
+                        .then((result) => {
+
+                            console.log('result', result.data.type);
+
+
+                            dispatch({
+                                type: 'ADD_MOVE',
+                                payload: { name: move.move.name, type: result.data.type}
+                            })
+                        })
+
+
+
+                })
         }
     }
 
+
+    const fetchMoveData = () => new Promise((resolve) => {
+        // do anything here
+        dispatch({
+            type: 'FETCH_MOVE_DATA',
+            payload: move.move.name
+        })
+        resolve();
+    });
 
     return (
 
@@ -55,39 +83,6 @@ function MoveItem({ move }) {
                     {capitalized}
                 </Typography>
 
-                {/* <div className='type-flex-style'>
-                    {team.types?.map((type) => {
-
-                        let type_Image_url = '';
-                        for (let dbType of dbTypeList) {
-                            if(dbType.name === type.type.name) {
-                                console.log(dbType.image_url);
-                                type_Image_url = dbType.image_url;
-                            }
-                        }
-
-                        return (
-                            <CardMedia className='pokemon-image-style' sx={{
-                                height: 20,
-                                width: '45%',
-                                backgroundSize: 'contain',
-                            }} image={type_Image_url}
-                             />
-                        )
-                    })}
-                </div> */}
-                {/* <CardMedia className='pokemon-image-style' sx={{
-                    height: 100,
-                    width: '100%',
-                    backgroundSize: 'contain',
-                }} image={imageURL} /> */}
-
-                {/* <div className='move-grid-style'>
-                    <Typography className='move-item-style' variant="body2">
-                        {move.move.name}
-                    </Typography>
-
-                </div> */}
             </CardContent>
             <CardActions>
                 <Button onClick={handleAddMove} variant='contained' size="medium">Add</Button>

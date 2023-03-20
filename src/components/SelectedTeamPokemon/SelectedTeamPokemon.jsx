@@ -90,36 +90,36 @@ function SelectedTeamPokemon({ pokemon, handlePokemonEditClick }) {
                 <div className='move-flex-style'>
                     <Typography className='Move-1' variant="caption">
                         <div className='move-body'>
-                            {pokemon?.selectedAttacks && pokemon.selectedAttacks[0] ?
+                            {pokemon?.selectedAttacks && pokemon.selectedAttacks[0] && pokemon.selectedAttacks[0].name ?
                                 <>
-                                    <div>{capitalize(pokemon.selectedAttacks[0])}</div>
+                                    <div>{capitalize(pokemon.selectedAttacks[0].name)}</div>
                                 </>
                                 : <div></div>}
                         </div>
                     </Typography>
                     <Typography className='Move-2' variant="caption">
                         <div className='move-body'>
-                            {pokemon?.selectedAttacks && pokemon.selectedAttacks[1] ?
+                            {pokemon?.selectedAttacks && pokemon.selectedAttacks[1] && pokemon.selectedAttacks[1].name ?
                                 <>
-                                    <div>{capitalize(pokemon.selectedAttacks[1])}</div>
+                                    <div>{capitalize(pokemon.selectedAttacks[1].name)}</div>
                                 </>
                                 : <div></div>}
                         </div>
                     </Typography>
                     <Typography className='Move-3' variant="caption">
                         <div className='move-body'>
-                            {pokemon?.selectedAttacks && pokemon.selectedAttacks[2] ?
+                            {pokemon?.selectedAttacks && pokemon.selectedAttacks[2] && pokemon.selectedAttacks[2].name ?
                                 <>
-                                    <div>{capitalize(pokemon.selectedAttacks[2])}</div>
+                                    <div>{capitalize(pokemon.selectedAttacks[2].name)}</div>
                                 </>
                                 : <div></div>}
                         </div>
                     </Typography>
                     <Typography className='Move-4' variant="caption">
                         <div className='move-body'>
-                            {pokemon?.selectedAttacks && pokemon.selectedAttacks[3] ?
+                            {pokemon?.selectedAttacks && pokemon.selectedAttacks[3] && pokemon.selectedAttacks[3].name ?
                                 <>
-                                    <div>{capitalize(pokemon.selectedAttacks[3])}</div>
+                                    <div>{capitalize(pokemon.selectedAttacks[3].name)}</div>
                                 </>
                                 : <div></div>}
                         </div>

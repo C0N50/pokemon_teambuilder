@@ -12,6 +12,7 @@ const userRouter = require('./routes/user.router');
 const pokemonRouter = require('./routes/api.pokemon.router');
 const teamRouter = require('./routes/team.router');
 const typeRouter = require('./routes/type.router');
+const moveRouter = require('./routes/api.move.router')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -29,6 +30,7 @@ app.use('/api/user', userRouter);
 app.use('/api/pokemon', pokemonRouter);
 app.use('/team', teamRouter);
 app.use('/type', typeRouter);
+app.use('/api/move', moveRouter);
 
 // Serve static files
 app.use(express.static('build'));

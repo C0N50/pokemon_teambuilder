@@ -8,6 +8,7 @@ import selectedTeam from './selectedTeam.reducer';
 import typeList from './type.reducer';
 import selectedPokemon from './selectedPokemon.reducer';
 import moves from './moves.reducer';
+import moveData from './moveData.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   typeList,
   selectedPokemon,
   moves,
+  moveData,
   // currentTeam, //holds list of all pokemon
 });
 

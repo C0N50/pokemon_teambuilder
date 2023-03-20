@@ -39,7 +39,13 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
 
         for (let teamPokemon of selectedTeam) {
             if (selectedPokemon.id === teamPokemon.id) {
-                teamPokemon.selectedAttacks = moves
+                // let moveNames = [];
+                // for (let move of moves) {
+                //     console.log('move in handlesaveChanges', move)
+                //     moveNames.push(move.name);
+                // }
+
+                teamPokemon.selectedAttacks = moves;
             }
         }
 
@@ -166,9 +172,9 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
                         <div className='move-grid-style'>
                             <Typography className='Move-1' variant="h6">
                                 <div className='move-body'>
-                                    {moves[0] ?
+                                    {moves[0] && moves[0].name ?
                                         <>
-                                            <div>{capitalize(moves[0])}</div>
+                                            <div>{capitalize(moves[0].name)}</div>
                                             <div><Button onClick={(() => handleRemoveMove(0))} size="small">Remove</Button></div>
                                         </>
                                         : <div></div>}
@@ -176,9 +182,9 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
                             </Typography>
                             <Typography className='Move-2' variant="h6">
                                 <div className='move-body'>
-                                    {moves[1] ?
+                                    {moves[1] && moves[1].name ?
                                         <>
-                                            <div>{capitalize(moves[1])}</div>
+                                            <div>{capitalize(moves[1].name)}</div>
                                             <div><Button onClick={(() => handleRemoveMove(1))} size="small">Remove</Button></div>
                                         </>
                                         : <div></div>}
@@ -186,9 +192,9 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
                             </Typography>
                             <Typography className='Move-3' variant="h6">
                                 <div className='move-body'>
-                                    {moves[2] ?
+                                    {moves[2] && moves[2].name ?
                                         <>
-                                            <div>{capitalize(moves[2])}</div>
+                                            <div>{capitalize(moves[2].name)}</div>
                                             <div><Button onClick={(() => handleRemoveMove(2))} size="small">Remove</Button></div>
                                         </>
                                         : <div></div>}
@@ -196,9 +202,9 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
                             </Typography>
                             <Typography className='Move-4' variant="h6">
                                 <div className='move-body'>
-                                    {moves[3] ?
+                                    {moves[3] && moves[3].name ?
                                         <>
-                                            <div>{capitalize(moves[3])}</div>
+                                            <div>{capitalize(moves[3].name)}</div>
                                             <div><Button onClick={(() => handleRemoveMove(3))} size="small">Remove</Button></div>
                                         </>
                                         : <div></div>}

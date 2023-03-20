@@ -34,13 +34,13 @@ function AllPokemonItem(pokemon) {
 
         console.log('clicked add')
 
-        console.log('pokemon url', pokemon.pokemon.url);
+        // console.log('pokemon url', pokemon.pokemon.url);
         let pokemonUrl = pokemon.pokemon.url;
-        console.log('pokemonURL', pokemonUrl);
+        // console.log('pokemonURL', pokemonUrl);
 
         axios.get('/api/pokemon/apiURL', { params: { paramsURL: pokemonUrl } })
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
 
                 dispatch({
                     type: 'ADD_SELECTED_POKEMON',

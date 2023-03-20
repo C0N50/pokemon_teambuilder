@@ -29,8 +29,6 @@ function PokemonMoveList() {
                     )
                 })}
             </section>
-
-
         </>
     )
 }

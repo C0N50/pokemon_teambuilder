@@ -95,48 +95,97 @@ router.get('/', rejectUnauthenticated, (req, res) => {
           .then((result2) => {
 
             let movesArray = result2.rows;
+            let movePromiseArray = [];
 
-            console.log('movesArray', movesArray);
 
 
             for (let value of valuesArray) {
               // console.log('valuesArray - team-pokemon id', value.metaData.team_pokemon_id);
 
-              let attacksArray = [];
+
 
 
               for (let move of movesArray) {
                 if (move.team_pokemon_id === value.metaData.team_pokemon_id) {
-                  attacksArray.push(move.movename);
+
+                  console.log('move', move);
+
+                  let moveAPIURL = 'https://pokeapi.co/api/v2/move/' + move.movename;
+
+                  console.log('moveAPI URL', moveAPIURL);
+
+                  //BREAKS EVERYTHING IF MOVE DATA ISN"T RIGHT
+                  const promise = axios.get(moveAPIURL, rejectUnauthenticated);
+                  movePromiseArray.push(promise);
+
+
                 }
-              };
-
-              // console.log('attacksArry', attacksArray);
-
-              value.selectedAttacks = attacksArray;
-
-              // console.log('value.selectedAttacks', value.selectedAttacks);
+              }
             }
+            Promise.all(movePromiseArray).then(function (apiMoves) {
+              // console.log(values[0].data);
 
 
 
+              for (let value of valuesArray) {
+                let attacksArray = [];
+                for (let move of movesArray) {
+                  if (move.team_pokemon_id === value.metaData.team_pokemon_id) {
+                    // console.log('move.team_pokemon_id', move.team_pokemon_id);
+                    // console.log('value.metaData.team_pokemon_id', value.metaData.team_pokemon_id)
+                    // console.log('move.movename', move.movename)
 
-            let myJsonString = JSON.stringify(valuesArray);
+                    for (let apiMove of apiMoves) {
+                      if (apiMove.data.name === move.movename && move.team_pokemon_id === value.metaData.team_pokemon_id) {
 
-            res.send(myJsonString);
+                        // console.log('pokemon (value) name', value.name)
+                        // console.log('apiMoves names', apiMove.data.name)
 
-          })
-          .catch((error) => {
-            console.log('Error making SELECT for secrets:', error);
-            res.sendStatus(500);
+                        // console.log('type', apiMove.data.type.name)
+
+                        let moveObject = {
+                          name: apiMove.data.name,
+                          type: apiMove.data.type.name
+                        }
+
+                        attacksArray.push(moveObject);
+                      }
+                    }
+                  }
+
+                }
+
+                // console.log('move array', movesArray);
+
+                const key = 'name';
+                const uniqueAttackArray = [...new Map(attacksArray.map(item => [item[key], item])).values()]
+
+                // attacksArray.push(move.movename);
+                // console.log('uniqueattacksArry', uniqueAttackArray);
+
+                value.selectedAttacks = uniqueAttackArray;
+
+              }
+
+              let myJsonString = JSON.stringify(valuesArray);
+
+              res.send(myJsonString);
+
+
+            })
+
           })
       })
         .catch((error) => {
-          console.log('Error making SELECT for secrets:', error);
+          // console.log('Error making SELECT for secrets:', error);
           res.sendStatus(500);
-        });
-      // GET route code here
+        })
     })
+    .catch((error) => {
+      // console.log('Error making SELECT for secrets:', error);
+      res.sendStatus(500);
+    });
+  // GET route code here
 })
 
 
@@ -150,7 +199,7 @@ These Ids are also to be used for any other attribute tables that are to referen
  */
 router.post('/', rejectUnauthenticated, async (req, res) => {
 
-  console.log(req.body);
+  // console.log(req.body);
 
   // console.log('team_name', req.body.MetaData.team_name);
   // console.log('user_id', req.body.MetaData.user_id);
@@ -178,8 +227,8 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
       apiIDQueryParams.push(api_id.api_pokemon_id);
     }
 
-    console.log('apiIDQueryParams', apiIDQueryParams);
-    console.log('New Team ID', newTeamId);
+    // console.log('apiIDQueryParams', apiIDQueryParams);
+    // console.log('New Team ID', newTeamId);
 
     const pokemonApiQueryText = `INSERT INTO "team_pokemon" ("team_id", "api_pokemon_id")
         VALUES ($1, $2) ON CONFLICT (id) DO UPDATE 
@@ -194,14 +243,14 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     }
 
     for (let resultID of pokemonResultIDs) {
-      console.log('Pokemon Result ID', resultID.rows[0].id);
+      // console.log('Pokemon Result ID', resultID.rows[0].id);
     }
 
     const MoveQueryText = `INSERT INTO "pokemon_move" ("name", "team_pokemon_id")
     VALUES ($1, $2);`
 
     const selectedAttacks = req.body.selected_attacks;
-    console.log('selectedAttacks', selectedAttacks);
+    // console.log('selectedAttacks', selectedAttacks);
 
     for (let insertId in pokemonResultIDs) {
       if (selectedAttacks[insertId]) {
@@ -209,7 +258,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
           // console.log('attack name', attack);
           // console.log('insertId', pokemonResultIDs[insertId].rows[0].id);
 
-          const moveResult = await connection.query(MoveQueryText, [attack, pokemonResultIDs[insertId].rows[0].id]);
+          const moveResult = await connection.query(MoveQueryText, [attack.name, pokemonResultIDs[insertId].rows[0].id]);
           // console.log('inserted move:', moveResult);
         }
       }
@@ -218,7 +267,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     res.sendStatus(201);
   } catch (error) {
     await connection.query('ROLLBACK');
-    console.log(`Transaction Error - Rolling back transfer`, error);
+    // console.log(`Transaction Error - Rolling back transfer`, error);
     res.sendStatus(500);
   } finally {
     // Always runs - both after successful try & after catch
@@ -233,10 +282,10 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
   const userId = req.user.id;
   const teamId = req.params.id;
-  console.log('in Delete Team')
-  console.log('req.params', req.params);
-  console.log('TeamID', teamId);
-  console.log('userId', userId)
+  // console.log('in Delete Team')
+  // console.log('req.params', req.params);
+  // console.log('TeamID', teamId);
+  // console.log('userId', userId)
 
   const queryText = `DELETE FROM "team" WHERE "id" = $1 AND "user_id" = $2;`;
   pool

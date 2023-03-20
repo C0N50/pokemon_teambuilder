@@ -92,7 +92,7 @@ function TeamItem({ team }) {
                         <div className='move-body'>
                             {team?.selectedAttacks && team.selectedAttacks[0] ?
                                 <>
-                                    <div>{capitalize(team.selectedAttacks[0])}</div>
+                                    <div>{capitalize(team.selectedAttacks[0].name)}</div>
                                 </>
                                 : <div></div>}
                         </div>
@@ -101,7 +101,7 @@ function TeamItem({ team }) {
                         <div className='move-body'>
                             {team?.selectedAttacks && team.selectedAttacks[1] ?
                                 <>
-                                    <div>{capitalize(team.selectedAttacks[1])}</div>
+                                    <div>{capitalize(team.selectedAttacks[1].name)}</div>
                                 </>
                                 : <div></div>}
                         </div>
@@ -110,7 +110,7 @@ function TeamItem({ team }) {
                         <div className='move-body'>
                             {team?.selectedAttacks && team.selectedAttacks[2] ?
                                 <>
-                                    <div>{capitalize(team.selectedAttacks[2])}</div>
+                                    <div>{capitalize(team.selectedAttacks[2].name)}</div>
                                 </>
                                 : <div></div>}
                         </div>
@@ -119,7 +119,7 @@ function TeamItem({ team }) {
                         <div className='move-body'>
                             {team?.selectedAttacks && team.selectedAttacks[3] ?
                                 <>
-                                    <div>{capitalize(team.selectedAttacks[3])}</div>
+                                    <div>{capitalize(team.selectedAttacks[3].name)}</div>
                                 </>
                                 : <div></div>}
                         </div>
