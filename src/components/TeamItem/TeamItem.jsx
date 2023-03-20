@@ -42,6 +42,12 @@ function TeamItem({ team }) {
     // console.log('type database', dbTypeList)
 
 
+    const capitalize = (lowercase) => {
+        let capital = lowercase.charAt(0).toUpperCase() + lowercase.slice(1);
+        return capital;
+    }
+
+
     return (
 
         <Card sx={{
@@ -82,17 +88,41 @@ function TeamItem({ team }) {
                 }} image={imageURL} />
 
                 <div className='move-grid-style'>
-                    <Typography className='Move-1' variant="body2">
-                        Move 1
+                    <Typography className='Move-1' variant="caption">
+                        <div className='move-body'>
+                            {team?.selectedAttacks && team.selectedAttacks[0] ?
+                                <>
+                                    <div>{capitalize(team.selectedAttacks[0])}</div>
+                                </>
+                                : <div></div>}
+                        </div>
                     </Typography>
-                    <Typography className='Move-2' variant="body2">
-                        Move 2
+                    <Typography className='Move-2' variant="caption">
+                        <div className='move-body'>
+                            {team?.selectedAttacks && team.selectedAttacks[1] ?
+                                <>
+                                    <div>{capitalize(team.selectedAttacks[1])}</div>
+                                </>
+                                : <div></div>}
+                        </div>
                     </Typography>
-                    <Typography className='Move-3' variant="body2">
-                        Move 3
+                    <Typography className='Move-3' variant="caption">
+                        <div className='move-body'>
+                            {team?.selectedAttacks && team.selectedAttacks[2] ?
+                                <>
+                                    <div>{capitalize(team.selectedAttacks[2])}</div>
+                                </>
+                                : <div></div>}
+                        </div>
                     </Typography>
-                    <Typography className='Move-4' variant="body2">
-                        Move 4
+                    <Typography className='Move-4' variant="caption">
+                        <div className='move-body'>
+                            {team?.selectedAttacks && team.selectedAttacks[3] ?
+                                <>
+                                    <div>{capitalize(team.selectedAttacks[3])}</div>
+                                </>
+                                : <div></div>}
+                        </div>
                     </Typography>
                 </div>
             </CardContent>

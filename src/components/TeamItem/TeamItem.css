@@ -6,12 +6,16 @@
 }
 
 .move-grid-style {
-    display: grid;
+    /* display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr; */
+
+    display : flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.Move-1 {
+/* .Move-1 {
     grid-column: 1/2;
     grid-row: 1/2;
 }
@@ -29,7 +33,7 @@
 .Move-4 {
     grid-column: 2/3;
     grid-row: 2/3;
-}
+} */
 
 .pokemon-image-style {
     margin-top: 3%;

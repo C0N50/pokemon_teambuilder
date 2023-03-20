@@ -81,16 +81,55 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         for (let i = 0; i < valuesArray.length; i++) {
           valuesArray[i]["metaData"] = result.rows[i];
         }
+        // console.log('values Array', valuesArray[0].metaData);
+
+        const moveQueryText = `SELECT pokemon_move.name AS movename, pokemon_move.team_pokemon_id FROM "user"
+        JOIN "team" ON "team".user_id = "user".id
+        JOIN "team_pokemon" ON "team_pokemon".team_id = "team".id
+        JOIN "pokemon_move" ON "team_pokemon".id = "pokemon_move".team_pokemon_id
+        WHERE  "user".id=$1
+        GROUP BY  pokemon_move.name, pokemon_move.team_pokemon_id`
+
+        pool
+          .query(moveQueryText, [userParam])
+          .then((result2) => {
+
+            let movesArray = result2.rows;
+
+            console.log('movesArray', movesArray);
+
+
+            for (let value of valuesArray) {
+              // console.log('valuesArray - team-pokemon id', value.metaData.team_pokemon_id);
+
+              let attacksArray = [];
+
+
+              for (let move of movesArray) {
+                if (move.team_pokemon_id === value.metaData.team_pokemon_id) {
+                  attacksArray.push(move.movename);
+                }
+              };
+
+              // console.log('attacksArry', attacksArray);
+
+              value.selectedAttacks = attacksArray;
+
+              // console.log('value.selectedAttacks', value.selectedAttacks);
+            }
 
 
 
 
+            let myJsonString = JSON.stringify(valuesArray);
 
+            res.send(myJsonString);
 
-
-        let myJsonString = JSON.stringify(valuesArray);
-
-        res.send(myJsonString);
+          })
+          .catch((error) => {
+            console.log('Error making SELECT for secrets:', error);
+            res.sendStatus(500);
+          })
       })
         .catch((error) => {
           console.log('Error making SELECT for secrets:', error);
@@ -163,17 +202,17 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
     const selectedAttacks = req.body.selected_attacks;
     console.log('selectedAttacks', selectedAttacks);
-    
-    for (let insertId in pokemonResultIDs) {
-        if(selectedAttacks[insertId]) {
-          for (attack of selectedAttacks[insertId]) {
-            // console.log('attack name', attack);
-            // console.log('insertId', pokemonResultIDs[insertId].rows[0].id);
 
-            const moveResult = await connection.query(MoveQueryText, [attack, pokemonResultIDs[insertId].rows[0].id]);
-            // console.log('inserted move:', moveResult);
-          }
+    for (let insertId in pokemonResultIDs) {
+      if (selectedAttacks[insertId]) {
+        for (attack of selectedAttacks[insertId]) {
+          // console.log('attack name', attack);
+          // console.log('insertId', pokemonResultIDs[insertId].rows[0].id);
+
+          const moveResult = await connection.query(MoveQueryText, [attack, pokemonResultIDs[insertId].rows[0].id]);
+          // console.log('inserted move:', moveResult);
         }
+      }
     }
     await connection.query('COMMIT');
     res.sendStatus(201);
@@ -194,9 +233,10 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
   const userId = req.user.id;
   const teamId = req.params.id;
-  // console.log('in Delete Team')
-  // console.log('TeamID', teamId);
-  // console.log('userId', userId)
+  console.log('in Delete Team')
+  console.log('req.params', req.params);
+  console.log('TeamID', teamId);
+  console.log('userId', userId)
 
   const queryText = `DELETE FROM "team" WHERE "id" = $1 AND "user_id" = $2;`;
   pool
@@ -211,7 +251,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 });
 
 // router.put("/:id", rejectUnauthenticated, (req, res) => {
-  
+
 //   const userId = req.user.id;
 //   const teamID = req.params.id;
 //   const apiIDArray = req.body.payload.updateApiIDArray;

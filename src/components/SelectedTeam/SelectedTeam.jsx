@@ -43,7 +43,7 @@ function SelectedTeam({ team, handlePokemonEditClick }) {
         //Coumns : "user_id"
         console.log('team', team);
 
-        const teamId = team[0].metaData.id;
+        const teamId = team[0].metaData.team_id;
 
         // console.log('teamId', teamId);
 
