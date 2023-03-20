@@ -87,7 +87,7 @@ function SelectedTeamPokemon({ pokemon, handlePokemonEditClick }) {
                     backgroundSize: 'contain',
                 }} image={imageURL} />
 
-                <div className='move-grid-style'>
+                <div className='move-flex-style'>
                     <Typography className='Move-1' variant="caption">
                         <div className='move-body'>
                             {pokemon?.selectedAttacks && pokemon.selectedAttacks[0] ?
