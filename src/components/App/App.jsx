@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import TeamEditPage from '../TeamEditPage/TeamEditPage';
+import AnalyticsPage from '../AnalyticsPage/AnalyticsPage';
 
 import './App.css';
 
@@ -96,6 +97,14 @@ function App() {
               path="/teamEdit"
             >
               <TeamEditPage />
+            </ProtectedRoute>
+
+            <ProtectedRoute
+              // logged in shows InfoPage else shows LoginPage
+              exact
+              path="/analyze"
+            >
+              <AnalyticsPage />
             </ProtectedRoute>
 
 

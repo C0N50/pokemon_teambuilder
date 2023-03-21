@@ -8,6 +8,7 @@ import './CreatedTeamsByUserList.css';
 
 function CreatedTeamsByUserList() {
 
+    
     const dispatch = useDispatch();
     const createdTeamsByUser = useSelector((store) => store.teamList);
 
@@ -93,6 +94,11 @@ function CreatedTeamsByUserList() {
 
     // teamIDArray.push(teamObject?.metaData.id)
     console.log('teamID Array', teamIDArray);
+
+    dispatch ({
+        type : 'SET_SORTED_TEAMS',
+        payload : teamIDArray
+    })
 
 
     return (
