@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
       res.send(response.data);
     })
     .catch(err => {
-      // console.log(err);
+      console.log(err);
       res.sendStatus(500);
     })
 
@@ -38,7 +38,7 @@ router.get('/apiURL', (req, res) => {
       res.send(response.data);
     })
     .catch(err => {
-      // console.log(err);
+      console.log(err);
       res.sendStatus(500);
     })
   // GET route code here

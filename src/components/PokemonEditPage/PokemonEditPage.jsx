@@ -35,7 +35,6 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
     }
 
     const handlesaveChanges = () => {
-        console.log('TO ADD: SAVING THE CHANGES');
 
         for (let teamPokemon of selectedTeam) {
             if (selectedPokemon.id === teamPokemon.id) {
@@ -50,7 +49,7 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
         }
 
 
-        console.log('selectedTeam', selectedTeam)
+        // console.log('selectedTeam', selectedTeam)
 
         dispatch({
             type: 'DELETE_ALL_MOVES'

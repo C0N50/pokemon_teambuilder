@@ -24,7 +24,7 @@ function* fetchCurrentMoves(action) {
         console.log('action.payload fetch current moves', action.payload)
         const response = yield axios.get("/api/move/apiURL/", { params: {paramsURL : action.payload } } );
 
-        console.log('fetch current moves response.data', response.data)
+        // console.log('fetch current moves response.data', response.data)
 
         yield put ({ type : "SET_MOVE_DATA", payload : response.data })
         

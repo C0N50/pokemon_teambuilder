@@ -36,7 +36,7 @@ function MoveItem({ move }) {
     const handleAddMove = () => {
         console.log('clicked add move')
 
-        console.log('move.move.name', move.move.name);
+        // console.log('move.move.name', move.move.name);
 
         if (moveReducer.length < 4) {
 
@@ -46,7 +46,7 @@ function MoveItem({ move }) {
                     axios.get('/api/move/apiURL', { params: { paramsURL: move.move.name } })
                         .then((result) => {
 
-                            console.log('result', result.data.type);
+                            // console.log('result', result.data.type);
 
 
                             dispatch({

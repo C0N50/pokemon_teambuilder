@@ -35,11 +35,11 @@ function CreatedTeamsByUserList() {
 
     }, []);
 
-    console.log('createdTeamsByUser', createdTeamsByUser);
+    // console.log('createdTeamsByUser', createdTeamsByUser);
 
     const sortedTeams = createdTeamsByUser.sort((a, b) => b?.metaData.team_id - a?.metaData.team_id);
 
-    console.log('sorted Teams', sortedTeams)
+    // console.log('sorted Teams', sortedTeams)
 
     let teamIDArray = [];
     let LastId = '';
@@ -87,14 +87,12 @@ function CreatedTeamsByUserList() {
         }
     }
 
-
-    // teamIDArray.push(teamObject?.metaData.id)
-    console.log('teamID Array', teamIDArray);
-
     if (teamIDArray[0]?.length === 0) {
         teamIDArray.shift();
     }
 
+    // teamIDArray.push(teamObject?.metaData.id)
+    console.log('teamID Array', teamIDArray);
 
 
     return (

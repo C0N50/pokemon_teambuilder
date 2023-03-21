@@ -29,7 +29,7 @@ function TeamList({ team }) {
         // console.log('team meta', team[0].metaData);
 
        const teamId = team[0].metaData.team_id;
-       console.log('teamId metadata id', team[0].metaData.team_id);   
+    //    console.log('teamId metadata id', team[0].metaData.team_id);   
 
         dispatch({
             type : 'DELETE_TEAM',
@@ -39,7 +39,7 @@ function TeamList({ team }) {
 
     const handleTeamEdit = () => {
         console.log('clicked Team Edit');
-        console.log('team', team)
+        // console.log('team', team)
         dispatch({
             type : 'SET_CURRENT_TEAM',
             payload : team

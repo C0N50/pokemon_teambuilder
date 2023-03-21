@@ -41,7 +41,7 @@ function SelectedTeam({ team, handlePokemonEditClick }) {
 
         //Table : "team"
         //Coumns : "user_id"
-        console.log('team', team);
+        // console.log('team', team);
 
         const teamId = team[0].metaData.team_id;
 
@@ -63,20 +63,20 @@ function SelectedTeam({ team, handlePokemonEditClick }) {
 
         //////-----------------------------------------
         const attackData = team.map((pokemon) => {
-            console.log('pokemon', pokemon)
-            console.log('selected attack array', pokemon.selectedAttacks);
+            // console.log('pokemon', pokemon)
+            // console.log('selected attack array', pokemon.selectedAttacks);
             if (pokemon.id && pokemon.selectedAttacks) {
                 return pokemon.selectedAttacks
             }
         });
 
 
-        console.log('attackData', attackData);
+        // console.log('attackData', attackData);
 
-        //////=====================================
-        console.log('team', team);
-        console.log('saveTeamArray', saveTeamArray)
-        console.log('Team Name to save', saveTeamName);
+        // //////=====================================
+        // console.log('team', team);
+        // console.log('saveTeamArray', saveTeamArray)
+        // console.log('Team Name to save', saveTeamName);
 
         const saveTeamObject = {
             MetaData: teamMetaData,
@@ -147,19 +147,19 @@ function SelectedTeam({ team, handlePokemonEditClick }) {
                     }
                 })
 
-                console.log('saveTeamArray', saveTeamArray)
-                console.log('Team Name to save', saveTeamName);
+                // console.log('saveTeamArray', saveTeamArray)
+                // console.log('Team Name to save', saveTeamName);
                 ////////--------------------------------------------------------------
                 const attackData = team.map((pokemon) => {
-                    console.log('pokemon', pokemon)
-                    console.log('selected attack array', pokemon.selectedAttacks);
+                    // console.log('pokemon', pokemon)
+                    // console.log('selected attack array', pokemon.selectedAttacks);
                     if (pokemon.id && pokemon.selectedAttacks) {
                         return pokemon.selectedAttacks
                     }
                 });
 
 
-                console.log('attackData', attackData);
+                // console.log('attackData', attackData);
                 ////////========================================================
 
                 const saveTeamObject = {

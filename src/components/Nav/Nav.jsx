@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
+import { MuiDrawer } from '../Drawer/Drawer';
+import { SmallDrawer } from '../SmallDrawer/SmallDrawer';
 
 //Material UI imports
 
@@ -16,6 +18,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
 
+
+
 function Nav() {
   const user = useSelector((store) => store.user);
 
@@ -23,17 +27,33 @@ function Nav() {
 
     <Box className="nav" sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar style={{ display: "flex",justifyContent: "space-between", flexGrow: 1 }} >
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
+        <Toolbar style={{ display: "flex", justifyContent: "space-between", flexGrow: 1 }} >
 
-            sx={{ mr: 2, }}
-          >
-            <MenuIcon />
-          </IconButton>
+          {/* If a user is logged in, show these links */}
+          {user.id && (
+            <>
+              {/* <Link className="navLink" to="/user">
+                Home
+              </Link>
+
+              <Link className="navLink" to="/info">
+                Info Page
+              </Link> */}
+
+              <MuiDrawer />
+            </>
+          )}
+
+
+          {/* If no user is logged in, show these links */}
+          {!user.id && (
+            // If there's no user, show login/registration links
+
+            <SmallDrawer />
+          )}
+
+
+
 
           <Link to="/home">
             <img className="nav-title" src='Pokemon-Team-Builder.png' width="500px" height="auto"></img>

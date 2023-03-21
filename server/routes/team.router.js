@@ -108,11 +108,11 @@ router.get('/', rejectUnauthenticated, (req, res) => {
               for (let move of movesArray) {
                 if (move.team_pokemon_id === value.metaData.team_pokemon_id) {
 
-                  console.log('move', move);
+                  // console.log('move', move);
 
                   let moveAPIURL = 'https://pokeapi.co/api/v2/move/' + move.movename;
 
-                  console.log('moveAPI URL', moveAPIURL);
+                  // console.log('moveAPI URL', moveAPIURL);
 
                   //BREAKS EVERYTHING IF MOVE DATA ISN"T RIGHT
                   const promise = axios.get(moveAPIURL, rejectUnauthenticated);
