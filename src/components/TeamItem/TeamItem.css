@@ -15,6 +15,24 @@
     align-items: center;
 }
 
+.move-container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+
+.move-text {
+    position: absolute;
+    top: 48%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    /* font-weight: bold; */
+    font-size: .8em;
+}
+
+
+
 /* .Move-1 {
     grid-column: 1/2;
     grid-row: 1/2;
@@ -38,6 +56,15 @@
 .pokemon-image-style {
     margin-top: 3%;
     margin-bottom: 2%;
+}
+
+
+.move-text {
+    position: absolute;
+    top: 42%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
 }
 
 /* * {

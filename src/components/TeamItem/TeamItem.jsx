@@ -19,7 +19,7 @@ function TeamItem({ team }) {
     const dbTypeList = useSelector((store) => store.typeList);
     // const dispatch = useDispatch();
 
-    // console.log('teamItem', team)
+    // ('teamItem', team)
 
     // console.log('pokemon', team?.species?.name);
     const capitalized = team?.species?.name.charAt(0).toUpperCase() + team?.species?.name.slice(1);
@@ -92,7 +92,10 @@ function TeamItem({ team }) {
                         <div className='move-body'>
                             {team?.selectedAttacks && team.selectedAttacks[0] ?
                                 <>
-                                    <div>{capitalize(team.selectedAttacks[0].name)}</div>
+                                    <div className='move-container'>
+                                       <div><img width='100%' src={`./Background-Type/${team.selectedAttacks[0].type}_Background.png`} /></div> 
+                                        <div className = 'move-text'>{capitalize(team.selectedAttacks[0].name)}</div>
+                                    </div>
                                 </>
                                 : <div></div>}
                         </div>
@@ -101,27 +104,36 @@ function TeamItem({ team }) {
                         <div className='move-body'>
                             {team?.selectedAttacks && team.selectedAttacks[1] ?
                                 <>
-                                    <div>{capitalize(team.selectedAttacks[1].name)}</div>
-                                </>
-                                : <div></div>}
+                                <div className='move-container'>
+                                   <div><img width='100%' src={`./Background-Type/${team.selectedAttacks[1].type}_Background.png`} /></div> 
+                                    <div className = 'move-text'>{capitalize(team.selectedAttacks[1].name)}</div>
+                                </div>
+                            </>
+                            : <div></div>}
                         </div>
                     </Typography>
                     <Typography className='Move-3' variant="caption">
                         <div className='move-body'>
                             {team?.selectedAttacks && team.selectedAttacks[2] ?
                                 <>
-                                    <div>{capitalize(team.selectedAttacks[2].name)}</div>
-                                </>
-                                : <div></div>}
+                                <div className='move-container'>
+                                   <div><img width='100%' src={`./Background-Type/${team.selectedAttacks[2].type}_Background.png`} /></div> 
+                                    <div className = 'move-text'>{capitalize(team.selectedAttacks[2].name)}</div>
+                                </div>
+                            </>
+                            : <div></div>}
                         </div>
                     </Typography>
                     <Typography className='Move-4' variant="caption">
                         <div className='move-body'>
                             {team?.selectedAttacks && team.selectedAttacks[3] ?
                                 <>
-                                    <div>{capitalize(team.selectedAttacks[3].name)}</div>
-                                </>
-                                : <div></div>}
+                                <div className='move-container'>
+                                   <div><img width='100%' src={`./Background-Type/${team.selectedAttacks[3].type}_Background.png`} /></div> 
+                                    <div className = 'move-text'>{capitalize(team.selectedAttacks[3].name)}</div>
+                                </div>
+                            </>
+                            : <div></div>}
                         </div>
                     </Typography>
                 </div>
