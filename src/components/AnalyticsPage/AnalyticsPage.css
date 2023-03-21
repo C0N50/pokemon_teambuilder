@@ -1,0 +1,5 @@
+.analyze-team-isAnalyzed-style {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
