@@ -46,9 +46,47 @@ function DefensiveTypeChart({ analysisTeam }) {
         return capital;
     }
 
-    console.log('analysis team', analysisTeam);
+    // console.log('analysis team', analysisTeam);
 
-   
+    const typeReducer = useSelector((store) => store.typeList)
+
+    const typeArray = typeReducer.map((type) => {
+        return type.name;
+    }).sort();
+
+    const damageRelationArray = analysisTeam.map((pokemon) => {
+        return pokemon.typeData;
+    })
+
+    console.log('damageRelationArray', damageRelationArray);
+
+    // console.log('typeArray', typeArray);
+
+    for (let typeName of typeArray) {
+        for (let pokemon of damageRelationArray) {
+            for (let type of pokemon) {
+                for (let weakness of type.damage_relations.double_damage_from) {
+                    if (weakness & weakness.name === typeName) {
+                        console.log('weakness found!', weakness.name);
+                    }
+                }
+                for (let resistance of type.damage_relations.half_damage_from) {
+                    if (resistance && resistance.name === typeName) {
+                        console.log('resistance found!', resistance.name);
+                    }
+                }
+                for (let immunity of type.damage_relations.no_damage_from) {
+                    if (immunity && immunity.name === typeName) {
+                        console.log('weakness found!', immunity.name);
+                    }
+                }
+
+            }
+        }
+    }
+
+
+
 
     const rows = [
         {
