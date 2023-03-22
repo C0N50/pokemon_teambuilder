@@ -62,43 +62,47 @@ function DefensiveTypeChart({ analysisTeam }) {
 
     // console.log('typeArray', typeArray);
 
+    let calcRows = [];
+
     for (let typeName of typeArray) {
+        let rowObject = { name: typeName };
         for (let pokemon of damageRelationArray) {
+            let modifier = 1;
             for (let type of pokemon) {
                 for (let weakness of type.damage_relations.double_damage_from) {
-                    if (weakness & weakness.name === typeName) {
-                        console.log('weakness found!', weakness.name);
+                    if (weakness && weakness.name === typeName) {
+                        // console.log('weakness found!', weakness.name);
+                        modifier *= 2;
                     }
                 }
                 for (let resistance of type.damage_relations.half_damage_from) {
                     if (resistance && resistance.name === typeName) {
-                        console.log('resistance found!', resistance.name);
+                        // console.log('resistance found!', resistance.name);
+                        modifier /= 2;
                     }
                 }
                 for (let immunity of type.damage_relations.no_damage_from) {
                     if (immunity && immunity.name === typeName) {
-                        console.log('weakness found!', immunity.name);
+                        // console.log('immunity found!', immunity.name);
+                        modifier *= 0;
                     }
                 }
 
             }
+            // console.log('type modifier:', typeName, modifier);
+            rowObject['pokemon' + damageRelationArray.indexOf(pokemon)] = modifier
         }
+        calcRows.push(rowObject);
+    }
+
+    // console.log('calcRows', calcRows);
+
+
+    for (row of calcRows) {
+        
     }
 
 
-
-
-    const rows = [
-        {
-            name: 'Fire',
-            pokemon1: '2x',
-            pokemon2: 'Neutral',
-            pokemon3: '1/2x',
-            pokemon4: '1/2x',
-            pokemon5: '1/2x',
-            pokemon6: 'Neutral',
-        }
-    ];
 
     const totalRows = [
         {
@@ -206,7 +210,7 @@ function DefensiveTypeChart({ analysisTeam }) {
                     <Table size="small" aria-label='simple-table'>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Types</TableCell>
+                                <TableCell>Move Type</TableCell>
                                 {analysisTeam[0] ?
                                     <TableCell>{capitalize(analysisTeam[0]?.name)}</TableCell> : <></>
                                 }
@@ -228,31 +232,43 @@ function DefensiveTypeChart({ analysisTeam }) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map((row) => (
+                            {calcRows.map((row) => (
                                 <TableRow
                                     key={row.name}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
                                     <TableCell component="th" scope="row">
-                                        {row.name}
+                                        <img width='100%' src={'/Types/' + capitalize(row.name) + 'IC_SV.png'} />
                                     </TableCell>
                                     {analysisTeam[0] ?
-                                        <TableCell align="left">{row.pokemon1}</TableCell> : <></>
+                                        <TableCell align="left">
+                                            <img width='80%' src={'/Damage-Mods/' + row.pokemon0 + '.png'} />
+                                        </TableCell> : <></>
                                     }
                                     {analysisTeam[1] ?
-                                        <TableCell align="left">{row.pokemon2}</TableCell> : <></>
+                                        <TableCell align="left">
+                                            <img width='80%' src={'/Damage-Mods/' + row.pokemon1 + '.png'} />
+                                        </TableCell> : <></>
                                     }
                                     {analysisTeam[2] ?
-                                        <TableCell align="left">{row.pokemon3}</TableCell> : <></>
+                                        <TableCell align="left">
+                                            <img width='80%' src={'/Damage-Mods/' + row.pokemon2 + '.png'} />
+                                        </TableCell> : <></>
                                     }
                                     {analysisTeam[3] ?
-                                        <TableCell align="left">{row.pokemon4}</TableCell> : <></>
+                                        <TableCell align="left">
+                                            <img width='80%' src={'/Damage-Mods/' + row.pokemon3 + '.png'} />
+                                        </TableCell> : <></>
                                     }
                                     {analysisTeam[4] ?
-                                        <TableCell align="left">{row.pokemon5}</TableCell> : <></>
+                                        <TableCell align="left">
+                                        <img width='80%' src={'/Damage-Mods/' + row.pokemon4 + '.png'} />
+                                    </TableCell> : <></>
                                     }
                                     {analysisTeam[5] ?
-                                        <TableCell align="left">{row.pokemon6}</TableCell> : <></>}
+                                        <TableCell align="left">
+                                        <img width='80%' src={'/Damage-Mods/' + row.pokemon0 + '.png'} />
+                                    </TableCell> : <></>}
                                 </TableRow>
                             ))}
                         </TableBody>
