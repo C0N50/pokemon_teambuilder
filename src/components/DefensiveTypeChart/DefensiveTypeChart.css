@@ -6,7 +6,7 @@
 .table-grid-style {
     display: grid;
     grid-template-columns: 1fr .5fr;
-    column-gap: 1%
+    column-gap: 5%
 }
 
 .defensive-types-table {
