@@ -1,0 +1,27 @@
+/* * {
+    border : black solid 1px;
+} */
+
+
+.table-grid-style {
+    display: grid;
+    grid-template-columns: 1fr .5fr;
+    column-gap: 1%
+}
+
+.defensive-types-table {
+    grid-column: 1/2;
+}
+
+.totals-table {
+    grid-column: 2/3
+}
+
+
+tr {
+    height: 10px;
+}
+
+tr td {
+    height: auto !important;
+}

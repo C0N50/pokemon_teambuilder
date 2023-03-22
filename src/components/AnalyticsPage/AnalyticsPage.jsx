@@ -26,6 +26,7 @@ import AnalyzeTeamItem from '../AnalyzeTeamItem/AnalyzeTeamItem';
 import CreatedTeamsByUserList from '../CreatedTeamsByUserList/CreatedTeamsByUserList';
 import TeamList from '../TeamList/TeamList';
 import AnalyzeTeamMenu from '../AnalyzeTeamMenu/AnalyzeTeamMenu';
+import DefensiveTypeChart from '../DefensiveTypeChart/DefensiveTypeChart';
 
 import './AnalyticsPage.css'
 
@@ -41,6 +42,8 @@ function AnalyticsPage() {
     const dispatch = useDispatch();
     const createdTeamsByUser = useSelector((store) => store.teamList);
 
+
+  
 
     useEffect(() => {
         console.log("in use effect");
@@ -145,7 +148,7 @@ function AnalyticsPage() {
     return (
         <div className="container">
 
-            <div className='teams-title'>
+            <div className='analysis-teams-title'>
                 <div >
                     <img src="Data-unown.png" width="15%" height="auto" />
                 </div>
@@ -154,7 +157,7 @@ function AnalyticsPage() {
             </div>
 
             {isAnalyzing ?
-                
+                <>
                     <div onClick={() => { setIsAnalyzing(false) }} className='analyze-team-isAnalyzed-style'>
                         {analysisTeam?.map((pokemon) => {
                             return (
@@ -190,12 +193,55 @@ function AnalyticsPage() {
                                             })}
                                         </div>
                                         <CardMedia className='pokemon-image-style' sx={{
-                                            height: 75,
+                                            height: 70,
                                             width: '100%',
                                             backgroundSize: 'contain',
                                         }} image={`https://img.pokemondb.net/artwork/large/${pokemon?.species?.name}.jpg`} />
 
-                                        <div className='move-flex-style'>
+                                        {/* <Typography className='hp' variant="body1">
+                                            <div className='analysis-stat-body'>
+                                                <div>HP:</div>
+                                                <div>{pokemon.stats[0].base_stat}</div>
+                                            </div>
+                                        </Typography>
+
+                                        <Typography className='attack' variant="body">
+                                            <div className='analysis-stat-body'>
+                                                Attack
+                                                <div>{pokemon.stats[1].base_stat}</div>
+                                            </div>
+                                        </Typography>
+
+                                        <Typography className='defense' variant="body1">
+                                            <div className='analysis-stat-body'>
+                                                Defense
+                                                <div>{pokemon.stats[2].base_stat}</div>
+                                            </div>
+                                        </Typography>
+
+                                        <Typography className='special-attack' variant="body1">
+                                            <div className='analysis-stat-body'>
+                                                Special Attack
+                                                <div>{pokemon.stats[3].base_stat}</div>
+                                            </div>
+                                        </Typography>
+
+                                        <Typography className='special-defense' variant="body1">
+                                            <div className='analysis-stat-body'>
+                                                Special Defense
+                                                <div>{pokemon.stats[4].base_stat}</div>
+                                            </div>
+                                        </Typography>
+
+                                        <Typography className='speed' variant="body1">
+                                            <div className='analysis-stat-body'>
+                                                Speed
+                                                <div>{pokemon.stats[5].base_stat}</div>
+                                            </div>
+                                        </Typography> */}
+
+
+                                        {/* <div className='move-flex-style'>
                                             <Typography className='Move-1' variant="caption">
                                                 <div className='move-body'>
                                                     {pokemon?.selectedAttacks && pokemon.selectedAttacks[0] ?
@@ -244,7 +290,7 @@ function AnalyticsPage() {
                                                         : <div></div>}
                                                 </div>
                                             </Typography>
-                                        </div>
+                                        </div> */}
                                     </CardContent>
                                     <CardActions>
                                     </CardActions>
@@ -255,14 +301,19 @@ function AnalyticsPage() {
                         })}
                     </div>
 
-                    :
-                    <div>
-                        <AnalyzeTeamMenu isAnalyzing={isAnalyzing} setIsAnalyzing={setIsAnalyzing} />
-                    </div>
-}
+                    <DefensiveTypeChart analysisTeam={analysisTeam}/>
+                
+                </>
+
+
+                :
+                <div>
+                    <AnalyzeTeamMenu isAnalyzing={isAnalyzing} setIsAnalyzing={setIsAnalyzing} />
                 </div>
+            }
+        </div>
     );
 }
 
 // this allows us to use <App /> in index.js
-            export default AnalyticsPage;
+export default AnalyticsPage;
