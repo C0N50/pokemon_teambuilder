@@ -313,24 +313,24 @@ function DefensiveTypeChart({ analysisTeam }) {
                     <Table size="small" aria-label='simple-table'>
                         <TableHead>
                             <TableRow>
-                                <TableCell sx={{fontSize : '.75em'}}>Move Type</TableCell>
+                                <TableCell sx={{ fontSize: '.75em' }}>Move Type</TableCell>
                                 {analysisTeam[0] ?
-                                    <TableCell sx={{fontSize : '.75em'}}>{capitalize(analysisTeam[0]?.name)}</TableCell> : <></>
+                                    <TableCell sx={{ fontSize: '.75em' }}>{capitalize(analysisTeam[0]?.name)}</TableCell> : <></>
                                 }
                                 {analysisTeam[1] ?
-                                    <TableCell sx={{fontSize : '.75em'}}>{capitalize(analysisTeam[1]?.name)}</TableCell> : <></>
+                                    <TableCell sx={{ fontSize: '.75em' }}>{capitalize(analysisTeam[1]?.name)}</TableCell> : <></>
                                 }
                                 {analysisTeam[2] ?
-                                    <TableCell sx={{fontSize : '.75em'}}>{capitalize(analysisTeam[2]?.name)}</TableCell> : <></>
+                                    <TableCell sx={{ fontSize: '.75em' }}>{capitalize(analysisTeam[2]?.name)}</TableCell> : <></>
                                 }
                                 {analysisTeam[3] ?
-                                    <TableCell sx={{fontSize : '.75em'}}>{capitalize(analysisTeam[3]?.name)}</TableCell> : <></>
+                                    <TableCell sx={{ fontSize: '.75em' }}>{capitalize(analysisTeam[3]?.name)}</TableCell> : <></>
                                 }
                                 {analysisTeam[4] ?
-                                    <TableCell sx={{fontSize : '.75em'}}>{capitalize(analysisTeam[4]?.name)}</TableCell> : <></>
+                                    <TableCell sx={{ fontSize: '.75em' }}>{capitalize(analysisTeam[4]?.name)}</TableCell> : <></>
                                 }
                                 {analysisTeam[5] ?
-                                    <TableCell sx={{fontSize : '.75em'}}>{capitalize(analysisTeam[5]?.name)}</TableCell> : <></>
+                                    <TableCell sx={{ fontSize: '.75em' }}>{capitalize(analysisTeam[5]?.name)}</TableCell> : <></>
                                 }
                             </TableRow>
                         </TableHead>
@@ -397,13 +397,13 @@ function DefensiveTypeChart({ analysisTeam }) {
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
                                     <TableCell component="th" scope="row">
-                                        <img width='100%' height="15" src={'/Types/' + capitalize(row.name) + 'IC_SV.png'} />
+                                        <img width='80%' height="80%" src={'/Types/' + capitalize(row.name) + 'IC_SV.png'} />
                                     </TableCell>
                                     <TableCell align="left">
                                         <img width='60%' src={'/wrCount/' + row.weaknessTotal + 'w.png'} />
                                     </TableCell>
                                     <TableCell align="left">
-                                    <img width='60%' src={'/wrCount/' + row.resistanceTotal + 'r.png'} />
+                                        <img width='60%' src={'/wrCount/' + row.resistanceTotal + 'r.png'} />
                                     </TableCell>
                                 </TableRow>
                             ))}
