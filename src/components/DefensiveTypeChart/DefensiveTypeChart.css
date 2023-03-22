@@ -5,7 +5,7 @@
 
 .table-grid-style {
     display: grid;
-    grid-template-columns: 1fr .5fr;
+    grid-template-columns: 1fr .35fr;
     column-gap: 1%
 }
 
@@ -18,10 +18,3 @@
 }
 
 
-tr {
-    height: 10px;
-}
-
-tr td {
-    height: auto !important;
-}
