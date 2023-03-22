@@ -5,7 +5,7 @@
 
 .table-grid-style {
     display: grid;
-    grid-template-columns: 1fr .35fr;
+    grid-template-columns: 1fr .5fr;
     column-gap: 1%
 }
 

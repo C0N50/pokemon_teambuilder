@@ -98,8 +98,111 @@ function DefensiveTypeChart({ analysisTeam }) {
     // console.log('calcRows', calcRows);
 
 
-    for (row of calcRows) {
-        
+    let calcTotalRows = [];
+
+    for (let row of calcRows) {
+        // console.log('row', row);
+        let resistanceCount = 0;
+        let weaknessCount = 0;
+
+        switch (row.pokemon0) {
+            case .25: resistanceCount++
+                break;
+            case .5: resistanceCount++
+                break;
+            case 0: resistanceCount++
+                break;
+            case 2: weaknessCount++
+                break;
+            case 4: weaknessCount++
+                break;
+            default:
+                break;
+        }
+
+        switch (row.pokemon1) {
+            case .25: resistanceCount++
+                break;
+            case .5: resistanceCount++
+                break;
+            case 0: resistanceCount++
+                break;
+            case 2: weaknessCount++
+                break;
+            case 4: weaknessCount++
+                break;
+            default:
+                break;
+        }
+
+
+        switch (row.pokemon2) {
+            case .25: resistanceCount++
+                break;
+            case .5: resistanceCount++
+                break;
+            case 0: resistanceCount++
+                break;
+            case 2: weaknessCount++
+                break;
+            case 4: weaknessCount++
+                break;
+            default:
+                break;
+        }
+
+        switch (row.pokemon3) {
+            case .25: resistanceCount++
+                break;
+            case .5: resistanceCount++
+                break;
+            case 0: resistanceCount++
+                break;
+            case 2: weaknessCount++
+                break;
+            case 4: weaknessCount++
+                break;
+            default:
+                break;
+        }
+
+        switch (row.pokemon4) {
+            case .25: resistanceCount++
+                break;
+            case .5: resistanceCount++
+                break;
+            case 0: resistanceCount++
+                break;
+            case 2: weaknessCount++
+                break;
+            case 4: weaknessCount++
+                break;
+            default:
+                break;
+        }
+
+        switch (row.pokemon5) {
+            case .25: resistanceCount++
+                break;
+            case .5: resistanceCount++
+                break;
+            case 0: resistanceCount++
+                break;
+            case 2: weaknessCount++
+                break;
+            case 4: weaknessCount++
+                break;
+            default:
+                break;
+        }
+
+        let rowObject = {
+            name: row.name,
+            weaknessTotal: weaknessCount,
+            resistanceTotal: resistanceCount
+        }
+
+        calcTotalRows.push(rowObject)
     }
 
 
@@ -210,24 +313,24 @@ function DefensiveTypeChart({ analysisTeam }) {
                     <Table size="small" aria-label='simple-table'>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Move Type</TableCell>
+                                <TableCell sx={{fontSize : '.75em'}}>Move Type</TableCell>
                                 {analysisTeam[0] ?
-                                    <TableCell>{capitalize(analysisTeam[0]?.name)}</TableCell> : <></>
+                                    <TableCell sx={{fontSize : '.75em'}}>{capitalize(analysisTeam[0]?.name)}</TableCell> : <></>
                                 }
                                 {analysisTeam[1] ?
-                                    <TableCell>{capitalize(analysisTeam[1]?.name)}</TableCell> : <></>
+                                    <TableCell sx={{fontSize : '.75em'}}>{capitalize(analysisTeam[1]?.name)}</TableCell> : <></>
                                 }
                                 {analysisTeam[2] ?
-                                    <TableCell>{capitalize(analysisTeam[2]?.name)}</TableCell> : <></>
+                                    <TableCell sx={{fontSize : '.75em'}}>{capitalize(analysisTeam[2]?.name)}</TableCell> : <></>
                                 }
                                 {analysisTeam[3] ?
-                                    <TableCell>{capitalize(analysisTeam[3]?.name)}</TableCell> : <></>
+                                    <TableCell sx={{fontSize : '.75em'}}>{capitalize(analysisTeam[3]?.name)}</TableCell> : <></>
                                 }
                                 {analysisTeam[4] ?
-                                    <TableCell>{capitalize(analysisTeam[4]?.name)}</TableCell> : <></>
+                                    <TableCell sx={{fontSize : '.75em'}}>{capitalize(analysisTeam[4]?.name)}</TableCell> : <></>
                                 }
                                 {analysisTeam[5] ?
-                                    <TableCell>{capitalize(analysisTeam[5]?.name)}</TableCell> : <></>
+                                    <TableCell sx={{fontSize : '.75em'}}>{capitalize(analysisTeam[5]?.name)}</TableCell> : <></>
                                 }
                             </TableRow>
                         </TableHead>
@@ -262,13 +365,13 @@ function DefensiveTypeChart({ analysisTeam }) {
                                     }
                                     {analysisTeam[4] ?
                                         <TableCell align="left">
-                                        <img width='80%' src={'/Damage-Mods/' + row.pokemon4 + '.png'} />
-                                    </TableCell> : <></>
+                                            <img width='80%' src={'/Damage-Mods/' + row.pokemon4 + '.png'} />
+                                        </TableCell> : <></>
                                     }
                                     {analysisTeam[5] ?
                                         <TableCell align="left">
-                                        <img width='80%' src={'/Damage-Mods/' + row.pokemon0 + '.png'} />
-                                    </TableCell> : <></>}
+                                            <img width='80%' src={'/Damage-Mods/' + row.pokemon5 + '.png'} />
+                                        </TableCell> : <></>}
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -288,16 +391,20 @@ function DefensiveTypeChart({ analysisTeam }) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {totalRows.map((row) => (
+                            {calcTotalRows.map((row) => (
                                 <TableRow
-                                    key={row.type}
+                                    key={row.name}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
                                     <TableCell component="th" scope="row">
-                                        {row.type}
+                                        <img width='100%' height="15" src={'/Types/' + capitalize(row.name) + 'IC_SV.png'} />
                                     </TableCell>
-                                    <TableCell align="left">{row.weaknessTotal}</TableCell>
-                                    <TableCell align="left">{row.resistanceTotal}</TableCell>
+                                    <TableCell align="left">
+                                        <img width='60%' src={'/wrCount/' + row.weaknessTotal + 'w.png'} />
+                                    </TableCell>
+                                    <TableCell align="left">
+                                    <img width='60%' src={'/wrCount/' + row.resistanceTotal + 'r.png'} />
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
