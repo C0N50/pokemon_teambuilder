@@ -171,7 +171,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                 return pokemon.types;
               })
 
-              console.log('team types', teamTypes);
+              // console.log('team types', teamTypes);
 
               let promiseArray = [];
 
@@ -186,11 +186,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
               }
               Promise.all(promiseArray).then(function (values) {
 
-
-
-                console.log('values', values);
+                // console.log('values', values);
 
                 for (let pokemon of valuesArray) {
+                  pokemon['typeData'] = [];
                   values.map((valueType) => {
                     for (let type of pokemon.types) {
                       if (valueType.data.name === type.type.name) {
@@ -201,11 +200,13 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                           damage_relations: valueType.data.damage_relations
                         }
 
-
-                        return pokemon[typeName] = typeObject;
+                        return pokemon.typeData.push(typeObject)
                       }
                     }
                   })
+                  const key = 'name';
+                  const uniqueTypeArray = [...new Map(pokemon.typeData.map(item => [item[key], item])).values()]
+                  pokemon.typeData = uniqueTypeArray;
                 }
 
                 // console.log('valuesArray type names', valuesArray)
