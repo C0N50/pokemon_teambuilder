@@ -84,7 +84,6 @@ function TeamEditPage() {
 
             <SelectedTeam team={team} handlePokemonEditClick={handlePokemonEditClick}/>
 
-
             <AllPokemonList />
             </>
             :
