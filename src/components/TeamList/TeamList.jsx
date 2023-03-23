@@ -5,6 +5,8 @@ import { useState } from "react";
 import './TeamList.css';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2'
+import { useHistory } from "react-router-dom";
 
 
 /**
@@ -14,6 +16,8 @@ import { Link } from 'react-router-dom';
  */
 function TeamList({ team }) {
 
+
+    const history = useHistory();
     const dispatch = useDispatch();
     // const teamList = useSelector((store) => store.teamList);
     const user = useSelector((store) => store.user);
@@ -62,8 +66,11 @@ function TeamList({ team }) {
                 let newTeamName = result.value;
 
                 dispatch({
-                    type: 'POST_TEAM_NAME',
-                    payload: newTeamName
+                    type: 'CHANGE_TEAM_NAME',
+                    payload: { 
+                        id: team[0].metaData.team_id, 
+                        name: newTeamName 
+                    },
                 })
 
                 history.push('/user');
