@@ -15,7 +15,7 @@ const sagaMiddleware = createSagaMiddleware();
  * Where to toggle off the @logger
  */
 const middlewareList = process.env.NODE_ENV === 'development' ?
-  [sagaMiddleware, /*logger*/] :
+  [sagaMiddleware, logger] :
   [sagaMiddleware];
 
 const store = createStore(

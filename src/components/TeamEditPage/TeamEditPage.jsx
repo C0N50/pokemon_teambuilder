@@ -58,6 +58,11 @@ function TeamEditPage() {
 
     { !pokemonEditFlag ?
     <>
+
+            
+            {/* 
+            //Search Component to be implemented at a later time
+
             <div className="search-wrapper">
                 <label htmlFor="search-form">
                     <TextField
@@ -71,15 +76,15 @@ function TeamEditPage() {
                             bgcolor : 'white',
                         }}
                         value={searchbarQuery}
-                        /*
+                        
                         // set the value of our useState q
                         //  anytime the user types in the search box
-                        */
+                        
                         onChange={(e) => setsearchbarQuery(e.target.value)}
                     />
                     <span className="sr-only"></span>
                 </label>
-            </div>
+            </div> */}
 
 
             <SelectedTeam team={team} handlePokemonEditClick={handlePokemonEditClick}/>
