@@ -1,0 +1,16 @@
+.about-page-title {
+    text-align: center;
+}
+
+
+.about-page-style-container {
+    margin-left: 5%;
+}
+
+.paragraph {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 5%;
+    margin-left:10%;
+    margin-right:10%;
+}
