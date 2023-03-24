@@ -10,9 +10,10 @@ const {
  * GET route template
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
+  console.time('GET START')
   // what is the value of req.user????
 
-
+  //Query Text to fetch Pokemon Team IDs and Pokemon API IDs from Database
   queryText = `SELECT "user".username, "team".id AS team_id, "team".team_name, "team_pokemon".id AS team_pokemon_id, "team_pokemon".api_pokemon_id FROM "user"
   JOIN "team" ON "team".user_id = "user".id
   JOIN "team_pokemon" ON "team_pokemon".team_id = "team".id
@@ -21,19 +22,14 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
   const userParam = req.user.id;
 
-  // const idParam = req.params.id;
-
+  //Pool call to fetch Pokemon Team IDs and Pokemon API IDs from Database
   pool
     .query(queryText, [userParam])
     .then((result) => {
 
-
-
       const endpointsArray = result.rows.map((pokemonid) => {
         return `https://pokeapi.co/api/v2/pokemon/${pokemonid.api_pokemon_id}`
       })
-
-
 
       let urlArray = [];
       let promiseArray = [];
@@ -43,29 +39,11 @@ router.get('/', rejectUnauthenticated, (req, res) => {
       }
 
       for (let url of urlArray) {
-
-
         const promise = axios.get(url);
         promiseArray.push(promise);
       }
 
-      // let URL1 = endpointsArray[0];
-      // let URL2 = endpointsArray[1];
-      // let URL3 = endpointsArray[2];
-      // let URL4 = endpointsArray[3];
-      // let URL5 = endpointsArray[4];
-      // let URL6 = endpointsArray[5];
-
-      // const promise1 = axios.get(URL1);
-      // const promise2 = axios.get(URL2);
-      // const promise3 = axios.get(URL3);
-      // const promise4 = axios.get(URL4);
-      // const promise5 = axios.get(URL5);
-      // const promise6 = axios.get(URL6);
-
-
       Promise.all(promiseArray).then(function (values) {
-        // console.log(values[0].data);
 
         let valuesArray = [];
 
@@ -81,14 +59,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             species : value.data.species
           }
 
-
-
           valuesArray.push(pokemonObject);
         }
 
         // console.log('values Array', valuesArray);
-
-        // console.log(result.rows);
 
         for (let i = 0; i < valuesArray.length; i++) {
           valuesArray[i]["metaData"] = result.rows[i];
@@ -110,12 +84,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             let movePromiseArray = [];
 
 
-
             for (let value of valuesArray) {
               // console.log('valuesArray - team-pokemon id', value.metaData.team_pokemon_id);
-
-
-
 
               for (let move of movesArray) {
                 if (move.team_pokemon_id === value.metaData.team_pokemon_id) {
@@ -130,14 +100,11 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                   const promise = axios.get(moveAPIURL, rejectUnauthenticated);
                   movePromiseArray.push(promise);
 
-
                 }
               }
             }
             Promise.all(movePromiseArray).then(function (apiMoves) {
               // console.log(values[0].data);
-
-
 
               for (let value of valuesArray) {
                 let attacksArray = [];
@@ -229,6 +196,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                 let myJsonString = JSON.stringify(valuesArray);
 
                 res.send(myJsonString);
+                console.timeEnd('GET START')
 
 
               })
