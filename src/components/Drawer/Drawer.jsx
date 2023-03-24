@@ -58,7 +58,7 @@ export const MuiDrawer = () => {
                                 <ListItemIcon>
                                     <QuestionMarkIcon />
                                 </ListItemIcon>
-                                <ListItemText primary={"About"} />
+                                <ListItemText primary={"Help"} />
                             </ListItem>
                         </Link>
 
