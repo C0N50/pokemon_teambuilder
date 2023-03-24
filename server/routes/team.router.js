@@ -11,7 +11,7 @@ const {
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
   // what is the value of req.user????
-  //console.log('req.user:', req.user);
+
 
   queryText = `SELECT "user".username, "team".id AS team_id, "team".team_name, "team_pokemon".id AS team_pokemon_id, "team_pokemon".api_pokemon_id FROM "user"
   JOIN "team" ON "team".user_id = "user".id
@@ -27,13 +27,13 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     .query(queryText, [userParam])
     .then((result) => {
 
-      // console.log(result.rows[0].username);
+
 
       const endpointsArray = result.rows.map((pokemonid) => {
         return `https://pokeapi.co/api/v2/pokemon/${pokemonid.api_pokemon_id}`
       })
 
-      // console.log(endpointsArray);
+
 
       let urlArray = [];
       let promiseArray = [];
@@ -44,7 +44,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
       for (let url of urlArray) {
 
-        // console.log('url:', url);
+
         const promise = axios.get(url);
         promiseArray.push(promise);
       }
@@ -71,7 +71,19 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
         for (let value of values) {
           // console.log(value.data);
-          valuesArray.push(value.data);
+
+          let pokemonObject = {
+            id : value.data.id,
+            name: value.data.name,
+            moves : value.data.moves,
+            stats : value.data.stats,
+            types : value.data.types,
+            species : value.data.species
+          }
+
+
+
+          valuesArray.push(pokemonObject);
         }
 
         // console.log('values Array', valuesArray);

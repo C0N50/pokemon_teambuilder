@@ -17,8 +17,7 @@ import Swal from 'sweetalert2';
 function AllPokemonItem(pokemon) {
 
     const dispatch = useDispatch();
-    // console.log('pokemon', pokemon)
-    // console.log('pokemon names', pokemon.pokemon.name)
+
     const capitalized = pokemon.pokemon.name.charAt(0).toUpperCase() + pokemon.pokemon.name.slice(1);
     const imageURL = `https://img.pokemondb.net/artwork/large/${pokemon.pokemon.name}.jpg`
 
@@ -34,9 +33,7 @@ function AllPokemonItem(pokemon) {
 
         console.log('clicked add')
 
-        // console.log('pokemon url', pokemon.pokemon.url);
         let pokemonUrl = pokemon.pokemon.url;
-        // console.log('pokemonURL', pokemonUrl);
 
         axios.get('/api/pokemon/apiURL', { params: { paramsURL: pokemonUrl } })
             .then(response => {

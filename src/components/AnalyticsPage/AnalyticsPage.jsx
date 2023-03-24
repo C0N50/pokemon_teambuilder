@@ -57,22 +57,11 @@ function AnalyticsPage() {
             type: 'FETCH_TYPE_LIST',
         });
 
-
-        for (let team of createdTeamsByUser) {
-            console.log('created team by user in dispatch', team)
-
-            // dispatch({
-            //     type: 'FETCH_MOVE_DATA',
-            // });
-        }
-
     }, []);
-
-    // console.log('createdTeamsByUser', createdTeamsByUser);
 
     const sortedTeams = createdTeamsByUser.sort((a, b) => b?.metaData.team_id - a?.metaData.team_id);
 
-    // console.log('sorted Teams', sortedTeams)
+    console.log('sorted Teams', sortedTeams)
 
     let teamIDArray = [];
     let LastId = '';

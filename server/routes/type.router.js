@@ -15,11 +15,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
   pool.query(queryText)
     .then(result => {
-      // console.log(result.rows);
       res.send(result.rows);
     })
     .catch(err => {
-      // console.log(err);
+      console.log(err);
       res.sendStatus(500)
     })
 
