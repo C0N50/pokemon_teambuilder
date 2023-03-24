@@ -24,10 +24,6 @@ function AboutPage() {
           Although there are technically no password requirements, it is advised the the password be of at least 8 characters and contain
           a mix of Capital & lowercase letters, numbers, and symbols.  
           </p>
-
-
-        
-
         </div>
       </div>
     </>
