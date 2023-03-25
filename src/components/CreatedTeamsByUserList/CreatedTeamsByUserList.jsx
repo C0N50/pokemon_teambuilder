@@ -25,15 +25,6 @@ function CreatedTeamsByUserList() {
             type: 'FETCH_TYPE_LIST',
         });
 
-
-        for (let team of createdTeamsByUser) {
-            console.log('created team by user in dispatch', team)
-
-            // dispatch({
-            //     type: 'FETCH_MOVE_DATA',
-            // });
-        }
-
     }, []);
 
     // console.log('createdTeamsByUser', createdTeamsByUser);

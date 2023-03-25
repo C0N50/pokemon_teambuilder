@@ -13,12 +13,13 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   console.time('GET START')
   // what is the value of req.user????
 
-  //Query Text to fetch Pokemon Team IDs and Pokemon API IDs from Database
-  queryText = `SELECT "user".username, "team".id AS team_id, "team".team_name, "team_pokemon".id AS team_pokemon_id, "team_pokemon".api_pokemon_id FROM "user"
+  //Step 1: Fetch Pokemon Team IDs and Pokemon API IDs and MoveNames from Database
+  queryText = `SELECT "user".username, "team".id AS team_id, "team".team_name, "team_pokemon".id AS team_pokemon_id, "team_pokemon".api_pokemon_id, ARRAY_AGG(pokemon_move.name) AS moveset FROM "user"
   JOIN "team" ON "team".user_id = "user".id
   JOIN "team_pokemon" ON "team_pokemon".team_id = "team".id
+  JOIN "pokemon_move" ON "team_pokemon".id = "pokemon_move".team_pokemon_id
   WHERE  "user".id=$1
-  GROUP BY "user".username, "team".id, "team".team_name, "team_pokemon".id, "team_pokemon".api_pokemon_id`;
+  GROUP BY "user".username, "team".id, "team".team_name, "team_pokemon".id, "team_pokemon".api_pokemon_id ;`;
 
   const userParam = req.user.id;
 
@@ -27,47 +28,43 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     .query(queryText, [userParam])
     .then((result) => {
 
-      const endpointsArray = result.rows.map((pokemonid) => {
+      // console.log('result', result.rows);
+
+      //Creates the URL Object from the PokeAPI Endpoint 
+      const pokemonEndpointsArray = result.rows.map((pokemonid) => {
         return `https://pokeapi.co/api/v2/pokemon/${pokemonid.api_pokemon_id}`
       })
 
-      let urlArray = [];
       let promiseArray = [];
 
-      for (let endpoint of endpointsArray) {
-        urlArray.push(endpoint);
-      }
-
-      for (let url of urlArray) {
-        const promise = axios.get(url);
+      for (let endpoint of pokemonEndpointsArray) {
+        const promise = axios.get(endpoint);
         promiseArray.push(promise);
       }
 
       Promise.all(promiseArray).then(function (values) {
 
-        let valuesArray = [];
+        let pokemonArray = [];
+        let i = 0;
 
         for (let value of values) {
-          // console.log(value.data);
+          // console.log('value.data', value.data);
 
           let pokemonObject = {
-            id : value.data.id,
+            id: value.data.id,
             name: value.data.name,
-            moves : value.data.moves,
-            stats : value.data.stats,
-            types : value.data.types,
-            species : value.data.species
+            moves: value.data.moves,
+            stats: value.data.stats,
+            types: value.data.types,
+            species: value.data.species,
+            metaData: result.rows[i]
           }
 
-          valuesArray.push(pokemonObject);
+          pokemonArray.push(pokemonObject);
+          i++;
         }
 
-        // console.log('values Array', valuesArray);
-
-        for (let i = 0; i < valuesArray.length; i++) {
-          valuesArray[i]["metaData"] = result.rows[i];
-        }
-        // console.log('values Array', valuesArray[0].metaData);
+        // console.log('values Array', pokemonArray);
 
         const moveQueryText = `SELECT pokemon_move.name AS movename, pokemon_move.team_pokemon_id FROM "user"
         JOIN "team" ON "team".user_id = "user".id
@@ -84,11 +81,11 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             let movePromiseArray = [];
 
 
-            for (let value of valuesArray) {
-              // console.log('valuesArray - team-pokemon id', value.metaData.team_pokemon_id);
+            for (let pokemon of pokemonArray) {
+              // console.log('pokemonArray - team-pokemon id', pokemon.metaData.team_pokemon_id);
 
               for (let move of movesArray) {
-                if (move.team_pokemon_id === value.metaData.team_pokemon_id) {
+                if (move.team_pokemon_id === pokemon.metaData.team_pokemon_id) {
 
                   // console.log('move', move);
 
@@ -106,7 +103,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             Promise.all(movePromiseArray).then(function (apiMoves) {
               // console.log(values[0].data);
 
-              for (let value of valuesArray) {
+              for (let value of pokemonArray) {
                 let attacksArray = [];
                 for (let move of movesArray) {
                   if (move.team_pokemon_id === value.metaData.team_pokemon_id) {
@@ -145,7 +142,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                 value.selectedAttacks = uniqueAttackArray;
               }
 
-              const teamTypes = valuesArray.map((pokemon) => {
+              const teamTypes = pokemonArray.map((pokemon) => {
 
                 return pokemon.types;
               })
@@ -167,7 +164,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
                 // console.log('values', values);
 
-                for (let pokemon of valuesArray) {
+                for (let pokemon of pokemonArray) {
                   pokemon['typeData'] = [];
                   values.map((valueType) => {
                     for (let type of pokemon.types) {
@@ -188,12 +185,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                   pokemon.typeData = uniqueTypeArray;
                 }
 
-                // console.log('valuesArray type names', valuesArray)
+                // console.log('pokemonArray type names', pokemonArray)
 
-
-
-
-                let myJsonString = JSON.stringify(valuesArray);
+                let myJsonString = JSON.stringify(pokemonArray);
 
                 res.send(myJsonString);
                 console.timeEnd('GET START')
@@ -226,7 +220,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
    */
   router.post('/', rejectUnauthenticated, async (req, res) => {
 
-    // console.log(req.body);
+    console.log('in post req.body', req.body);
 
     // console.log('team_name', req.body.MetaData.team_name);
     // console.log('user_id', req.body.MetaData.user_id);
@@ -307,10 +301,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
-
-
-
-
   const userId = req.user.id;
   const teamId = req.params.id;
   // console.log('in Delete Team')

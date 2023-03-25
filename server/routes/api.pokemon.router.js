@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
 
 router.get('/apiURL', (req, res) => {
 
-  console.log('in get :apiURL')
+  // console.log('in get :apiURL')
 
   let APIURL = req.query.paramsURL;
 
