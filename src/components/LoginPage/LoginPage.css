@@ -1,9 +1,19 @@
 
 
 .btn_asLink {
-
     color:white
+}
 
+.login-page-wrapper {
+display: flex;
+flex-flow: column;
+gap: 0%;
+align-items: center;
+}
+
+.mewtwo-wrapper {
+display: flex;
+justify-content: center;
 }
 
 

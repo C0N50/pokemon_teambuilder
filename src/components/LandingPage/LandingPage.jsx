@@ -4,6 +4,7 @@ import './LandingPage.css';
 
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
+import Button from '@mui/material/Button';
 
 function LandingPage() {
   const [heading, setHeading] = useState('Welcome');
@@ -14,16 +15,19 @@ function LandingPage() {
   };
 
   return (
-    <div className="container">
+    <div className="login-page-wrapper">
 
-          <RegisterForm />
+      <div className='mewtwo-wrapper'>
+        <img className='mew-image' width='20%' height='auto' src='Pikachu-Transparent-Background.png' />
+      </div>
 
-          <center>
-            <h4>Already a Member?</h4>
-            <button className="btn btn_sizeSm" onClick={onLogin}>
-              Login
-            </button>
-          </center>
+      <RegisterForm />
+
+      <center>
+        <Button className="btn btn_sizeSm" onClick={onLogin}>
+          Login
+        </Button>
+      </center>
 
     </div>
   );
