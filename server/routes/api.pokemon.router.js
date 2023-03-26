@@ -11,7 +11,7 @@ const {
  */
 router.get('/', (req, res) => {
 
-  axios.get(`https://pokeapi.co/api/v2/pokemon?limit=30&offset=0`, rejectUnauthenticated)
+  axios.get(`https://pokeapi.co/api/v2/pokemon?limit=500&offset=0`, rejectUnauthenticated)
     .then(response => {
       res.send(response.data);
     })

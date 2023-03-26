@@ -10,6 +10,7 @@ const {
  * GET route template
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
+
   console.time('GET START')
   // what is the value of req.user????
 
@@ -28,9 +29,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     .query(queryText, [userParam])
     .then((result) => {
 
-      // console.log('result', result.rows);
 
-      console.log('result moveset', result.rows[0].moveset);
+      // console.log('result moveset', result.rows[0].moveset);
 
       const moveSetArray = result.rows.map((pokemon) => {
         let team_pokemon_id = pokemon.team_pokemon_id;
@@ -43,6 +43,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
       })
 
       // console.log('MoveSet Array', moveSetArray)
+
 
       //Creates the URL to send a GET request to the PokeAPI Endpoint to retrieve a Pokemon Data object. 
       //The Pokemon data object provides comprehensive 
@@ -58,14 +59,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         promiseArray.push(promise);
       }
 
-
-
-
-
-      //Promise Wait
-      console.time('Pokemon API START')
+      // console.time('Pokemon API START')
       Promise.all(promiseArray).then(function (values) {
-        console.timeEnd('Pokemon API START')
+        // console.timeEnd('Pokemon API START')
 
         let pokemonArray = [];
         let i = 0;
@@ -83,54 +79,28 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             metaData: result.rows[i]
           }
 
+
           pokemonArray.push(pokemonObject);
           i++;
         }
 
-        // console.log('values Array', pokemonArray);
-
-        // const moveQueryText = `SELECT pokemon_move.name AS movename, pokemon_move.team_pokemon_id FROM "user"
-        // JOIN "team" ON "team".user_id = "user".id
-        // JOIN "team_pokemon" ON "team_pokemon".team_id = "team".id
-        // JOIN "pokemon_move" ON "team_pokemon".id = "pokemon_move".team_pokemon_id
-        // WHERE  "user".id=$1
-        // GROUP BY  pokemon_move.name, pokemon_move.team_pokemon_id`
-
-        // pool
-        //   .query(moveQueryText, [userParam])
-        //   .then((result2) => {
-
-
-
-
         let movePromiseArray = [];
-
-
-        // for (let pokemon of pokemonArray) {
-        //   // console.log('pokemonArray - team-pokemon id', pokemon.metaData.team_pokemon_id);
 
         for (let moveSet of moveSetArray)
           for (let move of moveSet.moveSet) {
 
-            // console.log('move in movesArray', move);
-            // if (move.team_pokemon_id === pokemon.metaData.team_pokemon_id) {
-
-            // console.log('move', move);
-
             let moveAPIURL = 'https://pokeapi.co/api/v2/move/' + move;
 
-            // console.log('moveAPI URL', moveAPIURL);
-
-            //BREAKS EVERYTHING IF MOVE DATA ISN"T RIGHT
+            //API call to move endpoint of PokeAPI to fetch move data. 
+            //Provides all necessary move data: type, physical or special classification, power, accuracy, pp, and effect.
             const promise = axios.get(moveAPIURL, rejectUnauthenticated);
             movePromiseArray.push(promise);
 
           }
-        //   }
-        // }
-        console.time('Move API START')
+
+        // console.time('Move API START')
         Promise.all(movePromiseArray).then(function (apiMoves) {
-          console.timeEnd('Move API START')
+          // console.timeEnd('Move API START')
           // console.log(values[0].data);
           // console.log('apiMoves', apiMoves);
 
@@ -143,7 +113,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                 // console.log('move.movename', move.movename)
                 let flattenedMoveSet = moveSet.moveSet.flat();
 
-                console.log('flattened moveSet', flattenedMoveSet);
+                // console.log('flattened moveSet', flattenedMoveSet);
                 index = 0;
 
                 for (let flattenedMove of flattenedMoveSet) {
@@ -169,7 +139,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                         type: apiMove.data.type.name
                       }
 
-                      console.log('moveObject', moveObject);
+                      // console.log('moveObject', moveObject);
 
                       attacksArray.push(moveObject);
                     }
@@ -209,9 +179,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
             }
           }
-          console.time('TYPE START')
+          // console.time('TYPE START')
           Promise.all(promiseArray).then(function (values) {
-            console.timeEnd('TYPE START')
+            // console.timeEnd('TYPE START')
 
             // console.log('values', values);
 
@@ -264,21 +234,19 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 /* Refactored team.router POST route to Databse. 
 Instead of a single SQL query the POST now generates uses Await & promises like Edans example from week 15. 
 This is to provide returned team_pokemon IDs for the move Database to use for their sql inserts. 
-These Ids are also to be used for any other attribute tables that are to reference the team_pokemon table*/
+These Ids are also to be used for any other attribute tables that are to reference the team_pokemon table
+*/
 
-/**
- * POST route template
- */
 router.post('/', rejectUnauthenticated, async (req, res) => {
 
-  // console.log('in post metaData', req.body.MetaData);
+
+  console.log('in post metaData', req.body.metaData);
+
+  console.log('metaData team id', req.body.metaData.team_id)
+
+  console.log('req.user.id', req.user.id);
 
 
-  console.log('req.body', req.body)
-
-  // console.log('team_id', req.body.metaData.team_id);
-  // console.log('user_id', req.body.MetaData.user_id);
-  // console.log('apiIDArray', req.body.apiIdArray)
   // We need to use the same connection for all queries...
   const connection = await pool.connect()
   // Using basic JavaScript try/catch/finally 
@@ -291,7 +259,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     RETURNING "id";
   `
     // Use - amount & from account for withdraw
-    const result = await connection.query(TeamInsertQueryText, [req.body.MetaData.team_name, req.body.MetaData.user_id]);
+    const result = await connection.query(TeamInsertQueryText, [req.body.metaData.team_name, req.body.metaData.user_id]);
     // Use + amount & to account for deposite
     const newTeamId = result.rows[0].id;
 
@@ -338,6 +306,20 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         }
       }
     }
+
+    if (req.body.metaData.team_id) {
+
+      const deleteQueryText = `DELETE FROM "team" WHERE "id" = $1 AND "user_id" = $2;`;
+
+      const userId = req.user.id;
+      const teamId = req.body.metaData.team_id;
+
+      await connection.query(deleteQueryText, [teamId, userId]);
+    }
+
+
+
+
     await connection.query('COMMIT');
     res.sendStatus(201);
   } catch (error) {

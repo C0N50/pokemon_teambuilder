@@ -100,7 +100,7 @@ function SelectedTeam({ team, handlePokemonEditClick }) {
             // console.log('Team Name to save', saveTeamName);
 
             const saveTeamObject = {
-                MetaData: teamMetaData,
+                metaData: teamMetaData,
                 apiIdArray: saveTeamArray,
                 selected_attacks: attackData
             }
@@ -209,7 +209,7 @@ function SelectedTeam({ team, handlePokemonEditClick }) {
                     ////////========================================================
 
                     const saveTeamObject = {
-                        MetaData: teamMetaData,
+                        metaData: teamMetaData,
                         apiIdArray: saveTeamArray,
                         selected_attacks: attackData
                     }
@@ -219,11 +219,6 @@ function SelectedTeam({ team, handlePokemonEditClick }) {
                         type: 'POST_SELECTED_TEAM',
                         payload: saveTeamObject
                     })
-
-                    dispatch({
-                        type: 'DELETE_SELECTED_TEAM'
-                    })
-
 
                     history.push('/user');
 
