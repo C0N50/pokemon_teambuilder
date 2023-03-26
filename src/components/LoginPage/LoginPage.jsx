@@ -8,26 +8,32 @@ function LoginPage() {
   const history = useHistory();
 
   return (
-    <div className = 'bg'>
+    <div className='login-page-wrapper'>
 
-      <div>
-      <LoginForm />
+      <div className='mewtwo-wrapper'>
+        <img className='mew-image' width='35%' height='auto' src='Mewtwo.png' />
       </div>
 
-      <center>
-        <Button
-        variant='contained'
-          type="button"
-          className="btn btn_asLink"
-          onClick={() => {
-            history.push('/registration');
-          }}
-        >
-          Register
-        </Button>
-      </center>
+      <div className='login-wrapper'>
+        <LoginForm />
+        <center>
+          <Button
+            variant='contained'
+            type="button"
+            className="btn btn_asLink"
+            onClick={() => {
+              history.push('/registration');
+            }}
+          >
+            Register
+          </Button>
+        </center>
+      </div>
+
+
+
     </div>
-    
+
   );
 }
 

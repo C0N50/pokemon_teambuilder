@@ -7,11 +7,13 @@ import axios from 'axios';
 function* fetchTeamList() {
     try {
         console.log('in list of teams');
+        yield put ({type : 'SET_LOADING_TRUE'})
         const response = yield axios.get(`/team/`);
         yield put({ type: "SET_TEAM_LIST", payload: response.data })
-
+        yield put ({type : 'SET_LOADING_FALSE'})
     } catch (error) {
         console.log("Get Team List request failed", error);
+        yield put ({type : 'SET_LOADING_FALSE'})
     }
 }
 

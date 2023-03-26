@@ -157,7 +157,10 @@ function App() {
 
             {/* If none of the other routes matched, we will show a 404. */}
             <Route>
-              <h1>404</h1>
+              <div className='page-not-found'>
+                <h1>404 - Pikach not Found!</h1>
+                <img width='50%' height='auto' src='pikachu-404.png' />
+              </div>
             </Route>
           </Switch>
           <Footer />

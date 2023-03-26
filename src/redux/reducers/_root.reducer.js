@@ -11,6 +11,7 @@ import moves from './moves.reducer';
 import moveData from './moveData.reducer';
 import sortedTeam from './sortedTeams.reducer';
 import analysisTeam from './analysisTeam';
+import loadingReducer from './loading.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   moveData,
   sortedTeam,
   analysisTeam,
+  loadingReducer,
   // currentTeam, //holds list of all pokemon
 });
 
