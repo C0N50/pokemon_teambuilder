@@ -4,13 +4,15 @@ import { useState } from "react";
 import TeamList from "../TeamList/TeamList";
 import './CreatedTeamsByUserList.css';
 
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 function CreatedTeamsByUserList() {
 
-    
+
     const dispatch = useDispatch();
     const createdTeamsByUser = useSelector((store) => store.teamList);
+    const isLoading = useSelector((store) => store.loadingReducer);
 
 
     useEffect(() => {
@@ -24,7 +26,6 @@ function CreatedTeamsByUserList() {
         dispatch({
             type: 'FETCH_TYPE_LIST',
         });
-
     }, []);
 
     console.log('createdTeamsByUser', createdTeamsByUser);
@@ -78,7 +79,7 @@ function CreatedTeamsByUserList() {
             }
         }
     }
-    
+
 
     if (teamIDArray[0]?.length === 0) {
         teamIDArray.shift();
@@ -87,9 +88,9 @@ function CreatedTeamsByUserList() {
     // teamIDArray.push(teamObject?.metaData.id)
     console.log('teamID Array', teamIDArray);
 
-    dispatch ({
-        type : 'SET_SORTED_TEAMS',
-        payload : teamIDArray
+    dispatch({
+        type: 'SET_SORTED_TEAMS',
+        payload: teamIDArray
     })
 
 
@@ -97,11 +98,17 @@ function CreatedTeamsByUserList() {
     return (
         <>
             <section className='created-by-user-list-style' >
-                {teamIDArray?.map((team) => {
-                    // console.log('team', team);
-                    return < TeamList key={teamIDArray.indexOf(team)} team={team} />
+                {isLoading ?
+                    <div className = 'circular-loader-wrapper'>
+                        <CircularProgress size="5em" />
+                    </div>
+                    :
+                    teamIDArray?.map((team) => {
+                        // console.log('team', team);
+                        return < TeamList key={teamIDArray.indexOf(team)} team={team} />
 
-                })}
+                    })
+                }
             </section>
         </>
     )
