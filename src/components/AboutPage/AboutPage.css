@@ -15,9 +15,22 @@
     margin: 5%;
     margin-left:10%;
     margin-right:10%;
+    font-size: 1.25em;
 }
 
 .about-page-login-button {
 text-align: center;
 }
 
+#landing-page-description {
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    font-size: 1.25em;
+}
+
+.pikachu-exaple-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
