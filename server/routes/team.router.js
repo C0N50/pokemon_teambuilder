@@ -317,9 +317,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
       await connection.query(deleteQueryText, [teamId, userId]);
     }
 
-
-
-
     await connection.query('COMMIT');
     res.sendStatus(201);
   } catch (error) {
