@@ -5,6 +5,8 @@
 
 .about-page-style-container {
     margin-left: 5%;
+    display: flex;
+    justify-content: center;
 }
 
 .paragraph {
@@ -14,3 +16,8 @@
     margin-left:10%;
     margin-right:10%;
 }
+
+.about-page-login-button {
+text-align: center;
+}
+

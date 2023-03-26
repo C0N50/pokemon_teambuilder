@@ -19,6 +19,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import Swal from 'sweetalert2'
 
 function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
 
@@ -36,28 +37,38 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
 
     const handlesaveChanges = () => {
 
-        for (let teamPokemon of selectedTeam) {
-            if (selectedPokemon.id === teamPokemon.id) {
-                // let moveNames = [];
-                // for (let move of moves) {
-                //     console.log('move in handlesaveChanges', move)
-                //     moveNames.push(move.name);
-                // }
-
-                teamPokemon.selectedAttacks = moves;
-            }
-        }
-
-
-        // console.log('selectedTeam', selectedTeam)
-
-        dispatch({
-            type: 'DELETE_ALL_MOVES'
-        })
-
         console.log('moves', moves)
 
-        setPokemonEditFlag(!pokemonEditFlag);
+        if (moves.length > 0) {
+
+            for (let teamPokemon of selectedTeam) {
+                if (selectedPokemon.id === teamPokemon.id) {
+                    // let moveNames = [];
+                    // for (let move of moves) {
+                    //     console.log('move in handlesaveChanges', move)
+                    //     moveNames.push(move.name);
+                    // }
+
+                    teamPokemon.selectedAttacks = moves;
+                }
+            }
+
+
+
+
+            // console.log('selectedTeam', selectedTeam)
+
+            dispatch({
+                type: 'DELETE_ALL_MOVES'
+            })
+
+            console.log('moves', moves)
+
+            setPokemonEditFlag(!pokemonEditFlag);
+        }
+        else {
+            Swal.fire('Please Add a Move!');
+        }
 
     }
 
@@ -93,9 +104,9 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
 
 
                         <div className='type-flex-style-edit'>
-                        <Typography variant="h4" component="div">
-                            {capitalized}
-                        </Typography>
+                            <Typography variant="h4" component="div">
+                                {capitalized}
+                            </Typography>
                             {selectedPokemon.types?.map((type) => {
 
                                 let type_Image_url = '';

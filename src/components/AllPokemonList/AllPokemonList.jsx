@@ -24,8 +24,6 @@ function AllPokemonList() {
     });
   }, []);
 
-  // console.log('pokemon list', allPokemonList);
-
   return (
     <section className="all-pokemon-list-style">
 

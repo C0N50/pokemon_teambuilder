@@ -13,11 +13,10 @@ router.get('/', (req, res) => {
 
   axios.get(`https://pokeapi.co/api/v2/move/`, rejectUnauthenticated)
     .then(response => {
-      // console.log(response.data);
       res.send(response.data);
     })
     .catch(err => {
-      // console.log(err);
+      console.log(err);
       res.sendStatus(500);
     })
 
@@ -26,15 +25,15 @@ router.get('/', (req, res) => {
 
 router.get('/apiURL', (req, res) => {
 
-  console.log('in get :apiURL')
-  console.log('req.query.paramsURL', req.query.paramsURL);
+  // console.log('in get :apiURL')
+
 
   let MOVEAPIURL = 'https://pokeapi.co/api/v2/move/' + req.query.paramsURL;
 
 
   axios.get(MOVEAPIURL, rejectUnauthenticated)
     .then(response => {
-      console.log(response.data);
+      // console.log(response.data);
 
       sendObject = {
         name : response.data.name,
@@ -44,7 +43,6 @@ router.get('/apiURL', (req, res) => {
         accuracy : response.data.accuracy
       };
 
-      console.log('send Object', sendObject)
 
       res.send(sendObject);
     })

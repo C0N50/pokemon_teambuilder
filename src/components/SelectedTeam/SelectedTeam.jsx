@@ -23,84 +23,114 @@ function SelectedTeam({ team, handlePokemonEditClick }) {
 
 
     const user = useSelector((store) => store.user);
-
-    const [saveTeamName, setTeamName] = useState('');
-
-
+    const selectedTeam = useSelector((store) => store.selectedTeam);
 
     // console.log('in teamlist createdTeamsByUser', team);
     // console.log('teamList', team);
 
-
     const updateTeam = () => {
 
-        console.log('in Update Team');
+        let hasMove = false;
 
-        //Table : "team_pokemon"
-        //Columns: "team_id", "api_id"
-
-        //Table : "team"
-        //Coumns : "user_id"
-        // console.log('team', team);
-
-        const teamId = team[0].metaData.team_id;
-
-        // console.log('teamId', teamId);
-
-
-        const teamMetaData = {
-            team_name: team[0].metaData.team_name,
-            user_id: user.id
-        }
-        // console.log('Team Content to Save', team);
-        // console.log('user ID', user.id);
-
-        const saveTeamArray = team.map((savePokemon) => {
-            return {
-                api_pokemon_id: savePokemon.id
+        for (let pokemon of team) {
+            if (pokemon.selectedAttacks && pokemon?.selectedAttacks[0]) {
+                hasMove = true;
             }
-        })
-
-        //////-----------------------------------------
-        const attackData = team.map((pokemon) => {
-            // console.log('pokemon', pokemon)
-            // console.log('selected attack array', pokemon.selectedAttacks);
-            if (pokemon.id && pokemon.selectedAttacks) {
-                return pokemon.selectedAttacks
+            else {
+                hasMove = false;
             }
-        });
-
-
-        // console.log('attackData', attackData);
-
-        // //////=====================================
-        // console.log('team', team);
-        // console.log('saveTeamArray', saveTeamArray)
-        // console.log('Team Name to save', saveTeamName);
-
-        const saveTeamObject = {
-            MetaData: teamMetaData,
-            apiIdArray: saveTeamArray,
-            selected_attacks: attackData
         }
-        console.log('save Team Object', saveTeamObject);
 
-        dispatch({
-            type: 'DELETE_TEAM',
-            payload: teamId
-        })
+        for (let selected of selectedTeam) {
+            
+            if (selected.selectedAttacks && selected?.selectedAttacks.length > 0) {
+                hasMove = true;
+            }
+            else {
+                hasMove = false;
+            }
+        }
 
-        dispatch({
-            type: 'POST_SELECTED_TEAM',
-            payload: saveTeamObject
-        })
+        if (hasMove) {
 
-        dispatch({
-            type: 'DELETE_SELECTED_TEAM'
-        })
+            console.log('in Update Team');
+
+            //Table : "team_pokemon"
+            //Columns: "team_id", "api_id"
+
+            //Table : "team"
+            //Coumns : "user_id"
+            console.log('team', team);
 
 
-        history.push('/user');
+            const teamId = team[0].metaData.team_id;
+
+            // console.log('teamId', teamId);
+
+
+            const teamMetaData = {
+                team_id: teamId,
+                team_name: team[0].metaData.team_name,
+                user_id: user.id
+            }
+            // console.log('Team Content to Save', team);
+            // console.log('user ID', user.id);
+
+            const saveTeamArray = team.map((savePokemon) => {
+                return {
+                    api_pokemon_id: savePokemon.id
+                }
+            })
+
+            //////-----------------------------------------
+            const attackData = team.map((pokemon) => {
+                // console.log('pokemon', pokemon)
+                // console.log('selected attack array', pokemon.selectedAttacks);
+                if (pokemon.id && pokemon.selectedAttacks) {
+                    return pokemon.selectedAttacks
+                }
+            });
+
+
+            // console.log('attackData', attackData);
+
+            // //////=====================================
+            // console.log('team', team);
+            // console.log('saveTeamArray', saveTeamArray)
+            // console.log('Team Name to save', saveTeamName);
+
+            const saveTeamObject = {
+                metaData: teamMetaData,
+                apiIdArray: saveTeamArray,
+                selected_attacks: attackData
+            }
+            console.log('save Team Object', saveTeamObject);
+
+
+            //This is Not Data Safe. This needs to be refactored.
+            //The Delete Should be moved to the router in Post
+
+
+            dispatch({
+                type: 'POST_SELECTED_TEAM',
+                payload: saveTeamObject
+            })
+
+            dispatch({
+                type: 'DELETE_TEAM',
+                payload: teamId
+            })
+
+            dispatch({
+                type: 'DELETE_SELECTED_TEAM'
+            })
+
+
+            history.push('/user');
+        }
+        else {
+            Swal.fire('A pokemon has no moves!');
+        }
     }
 
     /**
@@ -133,53 +163,69 @@ function SelectedTeam({ team, handlePokemonEditClick }) {
                 // console.log("Result: " + result.value);
                 // setTeamName(result.value);
 
-                const teamMetaData = {
-                    team_name: result.value,
-                    user_id: user.id
-                }
-                // console.log('Team Content to Save', team);
-                // console.log('user ID', user.id);
 
+                let hasMove = false;
 
-                const saveTeamArray = team.map((savePokemon) => {
-                    return {
-                        api_pokemon_id: savePokemon.id,
+                for (let pokemon of team) {
+
+                    console.log('in save pokemon.selectedAttacks', pokemon.selectedAttacks);
+                    if (pokemon.selectedAttacks && pokemon?.selectedAttacks[0]) {
+                        hasMove = true;
                     }
-                })
-
-                // console.log('saveTeamArray', saveTeamArray)
-                // console.log('Team Name to save', saveTeamName);
-                ////////--------------------------------------------------------------
-                const attackData = team.map((pokemon) => {
-                    // console.log('pokemon', pokemon)
-                    // console.log('selected attack array', pokemon.selectedAttacks);
-                    if (pokemon.id && pokemon.selectedAttacks) {
-                        return pokemon.selectedAttacks
+                    else {
+                        hasMove = false;
                     }
-                });
-
-
-                // console.log('attackData', attackData);
-                ////////========================================================
-
-                const saveTeamObject = {
-                    MetaData: teamMetaData,
-                    apiIdArray: saveTeamArray,
-                    selected_attacks: attackData
                 }
-                console.log('save Team Object', saveTeamObject);
 
-                dispatch({
-                    type: 'POST_SELECTED_TEAM',
-                    payload: saveTeamObject
-                })
-
-                dispatch({
-                    type: 'DELETE_SELECTED_TEAM'
-                })
+                if (hasMove) {
 
 
-                history.push('/user');
+                    const teamMetaData = {
+                        team_name: result.value,
+                        user_id: user.id
+                    }
+                    // console.log('Team Content to Save', team);
+                    // console.log('user ID', user.id);
+
+
+                    const saveTeamArray = team.map((savePokemon) => {
+                        return {
+                            api_pokemon_id: savePokemon.id,
+                        }
+                    })
+
+                    // console.log('saveTeamArray', saveTeamArray)
+                    // console.log('Team Name to save', saveTeamName);
+                    ////////--------------------------------------------------------------
+                    const attackData = team.map((pokemon) => {
+                        // console.log('pokemon', pokemon)
+                        // console.log('selected attack array', pokemon.selectedAttacks);
+                        if (pokemon.id && pokemon.selectedAttacks) {
+                            return pokemon.selectedAttacks
+                        }
+                    });
+
+                    // console.log('attackData', attackData);
+                    ////////========================================================
+
+                    const saveTeamObject = {
+                        metaData: teamMetaData,
+                        apiIdArray: saveTeamArray,
+                        selected_attacks: attackData
+                    }
+                    console.log('save Team Object', saveTeamObject);
+
+                    dispatch({
+                        type: 'POST_SELECTED_TEAM',
+                        payload: saveTeamObject
+                    })
+
+                    history.push('/user');
+
+                }
+                else {
+                    Swal.fire('A pokemon has no moves!');
+                }
 
             }
         });
