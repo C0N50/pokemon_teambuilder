@@ -30,7 +30,22 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
       // console.log('result', result.rows);
 
-      //Creates the URL Object from the PokeAPI Endpoint 
+      console.log('result moveset', result.rows[0].moveset);
+
+      const moveSetArray = result.rows.map((pokemon) => {
+        let team_pokemon_id = pokemon.team_pokemon_id;
+        let moveSet = pokemon.moveset.flat();
+
+        return {
+          team_pokemon_id: team_pokemon_id,
+          moveSet: moveSet
+        }
+      })
+
+      // console.log('MoveSet Array', moveSetArray)
+
+      //Creates the URL to send a GET request to the PokeAPI Endpoint to retrieve a Pokemon Data object. 
+      //The Pokemon data object provides comprehensive 
       const pokemonEndpointsArray = result.rows.map((pokemonid) => {
         return `https://pokeapi.co/api/v2/pokemon/${pokemonid.api_pokemon_id}`
       })
@@ -39,10 +54,18 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
       for (let endpoint of pokemonEndpointsArray) {
         const promise = axios.get(endpoint);
+
         promiseArray.push(promise);
       }
 
+
+
+
+
+      //Promise Wait
+      console.time('Pokemon API START')
       Promise.all(promiseArray).then(function (values) {
+        console.timeEnd('Pokemon API START')
 
         let pokemonArray = [];
         let i = 0;
@@ -66,237 +89,267 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
         // console.log('values Array', pokemonArray);
 
-        const moveQueryText = `SELECT pokemon_move.name AS movename, pokemon_move.team_pokemon_id FROM "user"
-        JOIN "team" ON "team".user_id = "user".id
-        JOIN "team_pokemon" ON "team_pokemon".team_id = "team".id
-        JOIN "pokemon_move" ON "team_pokemon".id = "pokemon_move".team_pokemon_id
-        WHERE  "user".id=$1
-        GROUP BY  pokemon_move.name, pokemon_move.team_pokemon_id`
+        // const moveQueryText = `SELECT pokemon_move.name AS movename, pokemon_move.team_pokemon_id FROM "user"
+        // JOIN "team" ON "team".user_id = "user".id
+        // JOIN "team_pokemon" ON "team_pokemon".team_id = "team".id
+        // JOIN "pokemon_move" ON "team_pokemon".id = "pokemon_move".team_pokemon_id
+        // WHERE  "user".id=$1
+        // GROUP BY  pokemon_move.name, pokemon_move.team_pokemon_id`
 
-        pool
-          .query(moveQueryText, [userParam])
-          .then((result2) => {
-
-            let movesArray = result2.rows;
-            let movePromiseArray = [];
+        // pool
+        //   .query(moveQueryText, [userParam])
+        //   .then((result2) => {
 
 
-            for (let pokemon of pokemonArray) {
-              // console.log('pokemonArray - team-pokemon id', pokemon.metaData.team_pokemon_id);
 
-              for (let move of movesArray) {
-                if (move.team_pokemon_id === pokemon.metaData.team_pokemon_id) {
 
-                  // console.log('move', move);
+        let movePromiseArray = [];
 
-                  let moveAPIURL = 'https://pokeapi.co/api/v2/move/' + move.movename;
 
-                  // console.log('moveAPI URL', moveAPIURL);
+        // for (let pokemon of pokemonArray) {
+        //   // console.log('pokemonArray - team-pokemon id', pokemon.metaData.team_pokemon_id);
 
-                  //BREAKS EVERYTHING IF MOVE DATA ISN"T RIGHT
-                  const promise = axios.get(moveAPIURL, rejectUnauthenticated);
-                  movePromiseArray.push(promise);
+        for (let moveSet of moveSetArray)
+          for (let move of moveSet.moveSet) {
 
-                }
-              }
-            }
-            Promise.all(movePromiseArray).then(function (apiMoves) {
-              // console.log(values[0].data);
+            // console.log('move in movesArray', move);
+            // if (move.team_pokemon_id === pokemon.metaData.team_pokemon_id) {
 
-              for (let value of pokemonArray) {
-                let attacksArray = [];
-                for (let move of movesArray) {
-                  if (move.team_pokemon_id === value.metaData.team_pokemon_id) {
-                    // console.log('move.team_pokemon_id', move.team_pokemon_id);
-                    // console.log('value.metaData.team_pokemon_id', value.metaData.team_pokemon_id)
-                    // console.log('move.movename', move.movename)
+            // console.log('move', move);
 
-                    for (let apiMove of apiMoves) {
-                      if (apiMove.data.name === move.movename && move.team_pokemon_id === value.metaData.team_pokemon_id) {
+            let moveAPIURL = 'https://pokeapi.co/api/v2/move/' + move;
 
-                        // console.log('pokemon (value) name', value.name)
-                        // console.log('apiMoves names', apiMove.data.name)
+            // console.log('moveAPI URL', moveAPIURL);
 
-                        // console.log('type', apiMove.data.type.name)
+            //BREAKS EVERYTHING IF MOVE DATA ISN"T RIGHT
+            const promise = axios.get(moveAPIURL, rejectUnauthenticated);
+            movePromiseArray.push(promise);
 
-                        let moveObject = {
-                          name: apiMove.data.name,
-                          type: apiMove.data.type.name
-                        }
+          }
+        //   }
+        // }
+        console.time('Move API START')
+        Promise.all(movePromiseArray).then(function (apiMoves) {
+          console.timeEnd('Move API START')
+          // console.log(values[0].data);
+          // console.log('apiMoves', apiMoves);
 
-                        attacksArray.push(moveObject);
+          for (let pokemon of pokemonArray) {
+            let attacksArray = [];
+            for (let moveSet of moveSetArray) {
+              if (moveSet.team_pokemon_id === pokemon.metaData.team_pokemon_id) {
+                // console.log('move.team_pokemon_id', move.team_pokemon_id);
+                // console.log('value.metaData.team_pokemon_id', value.metaData.team_pokemon_id)
+                // console.log('move.movename', move.movename)
+                let flattenedMoveSet = moveSet.moveSet.flat();
+
+                console.log('flattened moveSet', flattenedMoveSet);
+                index = 0;
+
+                for (let flattenedMove of flattenedMoveSet) {
+                  for (let apiMove of apiMoves) {
+
+                    // console.log('apiMove.data.name', apiMove.data.name);
+                    // console.log('flattened move', flattenedMoveSet[index])
+
+                    // console.log('movSet.team_pokemon_id', moveSet.team_pokemon_id)
+                    // console.log('pokemon.metaData.team_pokemon_id', pokemon.metaData.team_pokemon_id)
+
+
+
+                    if (apiMove.data.name === flattenedMove && moveSet.team_pokemon_id === pokemon.metaData.team_pokemon_id) {
+
+                      // console.log('pokemon (value) name', value.name)
+                      // console.log('apiMoves names', apiMove.data.name)
+
+                      // console.log('type', apiMove.data.type.name)
+
+                      let moveObject = {
+                        name: apiMove.data.name,
+                        type: apiMove.data.type.name
                       }
+
+                      console.log('moveObject', moveObject);
+
+                      attacksArray.push(moveObject);
                     }
                   }
-
-                }
-
-                // console.log('move array', movesArray);
-
-                const key = 'name';
-                const uniqueAttackArray = [...new Map(attacksArray.map(item => [item[key], item])).values()]
-
-                // attacksArray.push(move.movename);
-                // console.log('uniqueattacksArry', uniqueAttackArray);
-
-                value.selectedAttacks = uniqueAttackArray;
-              }
-
-              const teamTypes = pokemonArray.map((pokemon) => {
-
-                return pokemon.types;
-              })
-
-              // console.log('team types', teamTypes);
-
-              let promiseArray = [];
-
-              for (let pokemonTypes of teamTypes) {
-                for (let type of pokemonTypes) {
-                  let typeApiURL = 'https://pokeapi.co/api/v2/type/' + type.type.name;
-                  // console.log('typeApiURL', typeApiURL);
-                  const promise = axios.get(typeApiURL);
-                  promiseArray.push(promise);
-
                 }
               }
-              Promise.all(promiseArray).then(function (values) {
 
-                // console.log('values', values);
+            }
 
-                for (let pokemon of pokemonArray) {
-                  pokemon['typeData'] = [];
-                  values.map((valueType) => {
-                    for (let type of pokemon.types) {
-                      if (valueType.data.name === type.type.name) {
-                        let typeName = valueType.data.name
 
-                        let typeObject = {
-                          name: valueType.data.name,
-                          damage_relations: valueType.data.damage_relations
-                        }
+            const key = 'name';
+            const uniqueAttackArray = [...new Map(attacksArray.map(item => [item[key], item])).values()]
 
-                        return pokemon.typeData.push(typeObject)
-                      }
+            // attacksArray.push(move.movename);
+            // console.log('uniqueattacksArry', uniqueAttackArray);
+
+            pokemon.selectedAttacks = uniqueAttackArray;
+          }
+
+
+
+          const teamTypes = pokemonArray.map((pokemon) => {
+
+            return pokemon.types;
+          })
+
+          // console.log('team types', teamTypes);
+
+          let promiseArray = [];
+
+          for (let pokemonTypes of teamTypes) {
+            for (let type of pokemonTypes) {
+              let typeApiURL = 'https://pokeapi.co/api/v2/type/' + type.type.name;
+              // console.log('typeApiURL', typeApiURL);
+              const promise = axios.get(typeApiURL);
+              promiseArray.push(promise);
+
+            }
+          }
+          console.time('TYPE START')
+          Promise.all(promiseArray).then(function (values) {
+            console.timeEnd('TYPE START')
+
+            // console.log('values', values);
+
+            for (let pokemon of pokemonArray) {
+              pokemon['typeData'] = [];
+              values.map((valueType) => {
+                for (let type of pokemon.types) {
+                  if (valueType.data.name === type.type.name) {
+                    let typeName = valueType.data.name
+
+                    let typeObject = {
+                      name: valueType.data.name,
+                      damage_relations: valueType.data.damage_relations
                     }
-                  })
-                  const key = 'name';
-                  const uniqueTypeArray = [...new Map(pokemon.typeData.map(item => [item[key], item])).values()]
-                  pokemon.typeData = uniqueTypeArray;
+
+                    return pokemon.typeData.push(typeObject)
+                  }
                 }
-
-                // console.log('pokemonArray type names', pokemonArray)
-
-                let myJsonString = JSON.stringify(pokemonArray);
-
-                res.send(myJsonString);
-                console.timeEnd('GET START')
-
-
               })
+              const key = 'name';
+              const uniqueTypeArray = [...new Map(pokemon.typeData.map(item => [item[key], item])).values()]
+              pokemon.typeData = uniqueTypeArray;
+            }
 
-            })
+            // console.log('pokemonArray type names', pokemonArray)
+
+            let myJsonString = JSON.stringify(pokemonArray);
+
+            res.send(myJsonString);
+            console.timeEnd('GET START')
+
+
           })
-          .catch((error) => {
-            // console.log('Error making SELECT for secrets:', error);
-            res.sendStatus(500);
-          })
+
+        })
+        // })
+        // .catch((error) => {
+        //   // console.log('Error making SELECT for secrets:', error);
+        //   res.sendStatus(500);
       })
-        .catch((error) => {
-          // console.log('Error making SELECT for secrets:', error);
-          res.sendStatus(500);
-        });
-      // GET route code here
     })
+    .catch((error) => {
+      // console.log('Error making SELECT for secrets:', error);
+      res.sendStatus(500);
+    });
+  // GET route code here
+})
 
 
-  /* Refactored team.router POST route to Databse. 
-  Instead of a single SQL query the POST now generates uses Await & promises like Edans example from week 15. 
-  This is to provide returned team_pokemon IDs for the move Database to use for their sql inserts. 
-  These Ids are also to be used for any other attribute tables that are to reference the team_pokemon table*/
+/* Refactored team.router POST route to Databse. 
+Instead of a single SQL query the POST now generates uses Await & promises like Edans example from week 15. 
+This is to provide returned team_pokemon IDs for the move Database to use for their sql inserts. 
+These Ids are also to be used for any other attribute tables that are to reference the team_pokemon table*/
 
-  /**
-   * POST route template
-   */
-  router.post('/', rejectUnauthenticated, async (req, res) => {
+/**
+ * POST route template
+ */
+router.post('/', rejectUnauthenticated, async (req, res) => {
 
-    console.log('in post req.body', req.body);
+  // console.log('in post metaData', req.body.MetaData);
 
-    // console.log('team_name', req.body.MetaData.team_name);
-    // console.log('user_id', req.body.MetaData.user_id);
-    // console.log('apiIDArray', req.body.apiIdArray)
-    // We need to use the same connection for all queries...
-    const connection = await pool.connect()
-    // Using basic JavaScript try/catch/finally 
-    try {
-      await connection.query('BEGIN');
-      const TeamInsertQueryText = `
+
+  console.log('req.body', req.body)
+
+  // console.log('team_id', req.body.metaData.team_id);
+  // console.log('user_id', req.body.MetaData.user_id);
+  // console.log('apiIDArray', req.body.apiIdArray)
+  // We need to use the same connection for all queries...
+  const connection = await pool.connect()
+  // Using basic JavaScript try/catch/finally 
+  try {
+    await connection.query('BEGIN');
+    const TeamInsertQueryText = `
     INSERT INTO "team" ("team_name", "user_id")
     VALUES ($1, $2) ON CONFLICT (id) DO UPDATE 
     SET id = excluded.id
     RETURNING "id";
   `
-      // Use - amount & from account for withdraw
-      const result = await connection.query(TeamInsertQueryText, [req.body.MetaData.team_name, req.body.MetaData.user_id]);
-      // Use + amount & to account for deposite
-      const newTeamId = result.rows[0].id;
+    // Use - amount & from account for withdraw
+    const result = await connection.query(TeamInsertQueryText, [req.body.MetaData.team_name, req.body.MetaData.user_id]);
+    // Use + amount & to account for deposite
+    const newTeamId = result.rows[0].id;
 
-      const apiIDQueryParams = [];
-      let api_idArray = req.body.apiIdArray;
+    const apiIDQueryParams = [];
+    let api_idArray = req.body.apiIdArray;
 
-      for (api_id of api_idArray) {
-        apiIDQueryParams.push(api_id.api_pokemon_id);
-      }
+    for (api_id of api_idArray) {
+      apiIDQueryParams.push(api_id.api_pokemon_id);
+    }
 
-      // console.log('apiIDQueryParams', apiIDQueryParams);
-      // console.log('New Team ID', newTeamId);
+    // console.log('apiIDQueryParams', apiIDQueryParams);
+    // console.log('New Team ID', newTeamId);
 
-      const pokemonApiQueryText = `INSERT INTO "team_pokemon" ("team_id", "api_pokemon_id")
+    const pokemonApiQueryText = `INSERT INTO "team_pokemon" ("team_id", "api_pokemon_id")
         VALUES ($1, $2) ON CONFLICT (id) DO UPDATE 
         SET id = excluded.id
         RETURNING "id";`
 
-      let pokemonResultIDs = [];
+    let pokemonResultIDs = [];
 
-      for (let apiIDQuery in apiIDQueryParams) {
-        const pokemonResult = await connection.query(pokemonApiQueryText, [newTeamId, apiIDQueryParams[apiIDQuery]]);
-        pokemonResultIDs.push(pokemonResult);
-      }
+    for (let apiIDQuery in apiIDQueryParams) {
+      const pokemonResult = await connection.query(pokemonApiQueryText, [newTeamId, apiIDQueryParams[apiIDQuery]]);
+      pokemonResultIDs.push(pokemonResult);
+    }
 
-      for (let resultID of pokemonResultIDs) {
-        // console.log('Pokemon Result ID', resultID.rows[0].id);
-      }
+    for (let resultID of pokemonResultIDs) {
+      // console.log('Pokemon Result ID', resultID.rows[0].id);
+    }
 
-      const MoveQueryText = `INSERT INTO "pokemon_move" ("name", "team_pokemon_id")
+    const MoveQueryText = `INSERT INTO "pokemon_move" ("name", "team_pokemon_id")
     VALUES ($1, $2);`
 
-      const selectedAttacks = req.body.selected_attacks;
-      // console.log('selectedAttacks', selectedAttacks);
+    const selectedAttacks = req.body.selected_attacks;
+    // console.log('selectedAttacks', selectedAttacks);
 
-      for (let insertId in pokemonResultIDs) {
-        if (selectedAttacks[insertId]) {
-          for (attack of selectedAttacks[insertId]) {
-            // console.log('attack name', attack);
-            // console.log('insertId', pokemonResultIDs[insertId].rows[0].id);
+    for (let insertId in pokemonResultIDs) {
+      if (selectedAttacks[insertId]) {
+        for (attack of selectedAttacks[insertId]) {
+          // console.log('attack name', attack);
+          // console.log('insertId', pokemonResultIDs[insertId].rows[0].id);
 
-            const moveResult = await connection.query(MoveQueryText, [attack.name, pokemonResultIDs[insertId].rows[0].id]);
-            // console.log('inserted move:', moveResult);
-          }
+          const moveResult = await connection.query(MoveQueryText, [attack.name, pokemonResultIDs[insertId].rows[0].id]);
+          // console.log('inserted move:', moveResult);
         }
       }
-      await connection.query('COMMIT');
-      res.sendStatus(201);
-    } catch (error) {
-      await connection.query('ROLLBACK');
-      // console.log(`Transaction Error - Rolling back transfer`, error);
-      res.sendStatus(500);
-    } finally {
-      // Always runs - both after successful try & after catch
-      // Put the client connection back in the pool
-      // This is super important! 
-      connection.release()
     }
-  })
+    await connection.query('COMMIT');
+    res.sendStatus(201);
+  } catch (error) {
+    await connection.query('ROLLBACK');
+    // console.log(`Transaction Error - Rolling back transfer`, error);
+    res.sendStatus(500);
+  } finally {
+    // Always runs - both after successful try & after catch
+    // Put the client connection back in the pool
+    // This is super important! 
+    connection.release()
+  }
 })
 
 

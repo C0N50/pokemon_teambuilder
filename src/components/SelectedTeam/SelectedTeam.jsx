@@ -41,7 +41,6 @@ function SelectedTeam({ team, handlePokemonEditClick }) {
             }
         }
 
-        console.log('selected team', selectedTeam)
         for (let selected of selectedTeam) {
             
             if (selected.selectedAttacks && selected?.selectedAttacks.length > 0) {
@@ -70,6 +69,7 @@ function SelectedTeam({ team, handlePokemonEditClick }) {
 
 
             const teamMetaData = {
+                team_id: teamId,
                 team_name: team[0].metaData.team_name,
                 user_id: user.id
             }
