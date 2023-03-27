@@ -26,7 +26,7 @@ function AboutPage() {
   const pikachuImageURL = `https://img.pokemondb.net/artwork/large/pikachu.jpg`;
   const electric = 'ElectricIC_SV.png'
   const electricMove = `./Electric_Background.png`
-  const normalMove = `.Normal_Background.png`
+  const normalMove = `./Normal_Background.png`
   const waterMove = `./Water_Background.png`
   const darkMove = `./Dark_Background.png`
 
