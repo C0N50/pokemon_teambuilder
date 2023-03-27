@@ -12,7 +12,7 @@ function InfoPage() {
       <h1 className='title'>Information & Credits</h1>
 
       <center>
-        <img width='80%' src='pokedex-info.png' />
+        <img width='70%' src='pokedex-info.png' />
       </center>
     </>
   );
