@@ -243,36 +243,36 @@ function DefensiveTypeChart({ analysisTeam }) {
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
                                     <TableCell component="th" scope="row">
-                                        <img width='100%' src={capitalize(row.name) + 'IC_SV.png'} />
+                                        <img width='100%' src={`${capitalize(row.name)}IC_SV.png`} />
                                     </TableCell>
                                     {analysisTeam[0] ?
                                         <TableCell align="left">
-                                            <img width='80%' src={row.pokemon0 + '.png'} />
+                                            <img width='80%' src={`${row.pokemon0}.png`} />
                                         </TableCell> : <></>
                                     }
                                     {analysisTeam[1] ?
                                         <TableCell align="left">
-                                            <img width='80%' src={row.pokemon1 + '.png'} />
+                                            <img width='80%' src={`${row.pokemon1}.png`} />
                                         </TableCell> : <></>
                                     }
                                     {analysisTeam[2] ?
                                         <TableCell align="left">
-                                            <img width='80%' src={row.pokemon2 + '.png'} />
+                                            <img width='80%' src={`${row.pokemon2}.png`} />
                                         </TableCell> : <></>
                                     }
                                     {analysisTeam[3] ?
                                         <TableCell align="left">
-                                            <img width='80%' src={row.pokemon3 + '.png'} />
+                                            <img width='80%' src={`${row.pokemon3}.png`} />
                                         </TableCell> : <></>
                                     }
                                     {analysisTeam[4] ?
                                         <TableCell align="left">
-                                            <img width='80%' src={row.pokemon4 + '.png'} />
+                                            <img width='80%' src={`${row.pokemon4}.png`} />
                                         </TableCell> : <></>
                                     }
                                     {analysisTeam[5] ?
                                         <TableCell align="left">
-                                            <img width='80%' src={row.pokemon5 + '.png'} />
+                                            <img width='80%' src={`${row.pokemon5}.png`} />
                                         </TableCell> : <></>}
                                 </TableRow>
                             ))}
@@ -299,13 +299,13 @@ function DefensiveTypeChart({ analysisTeam }) {
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
                                     <TableCell component="th" scope="row">
-                                        <img width='80%' height="80%" src={capitalize(row.name) + 'IC_SV.png'} />
+                                        <img width='80%' height="80%" src={`${capitalize(row.name)}IC_SV.png`} />
                                     </TableCell>
                                     <TableCell align="left">
-                                        <img width='60%' src={row.weaknessTotal + 'w.png'} />
+                                        <img width='60%' src={`${row.weaknessTotal}w.png`} />
                                     </TableCell>
                                     <TableCell align="left">
-                                        <img width='60%' src={row.resistanceTotal + 'r.png'} />
+                                        <img width='60%' src={`${row.resistanceTotal}r.png`} />
                                     </TableCell>
                                 </TableRow>
                             ))}
