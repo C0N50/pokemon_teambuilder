@@ -30,7 +30,7 @@ function TeamList({ team }) {
 
 
     const handleTeamDelete = () => {
-        console.log('clicked delete team');
+        // console.log('clicked delete team');
         // console.log('team meta', team[0].metaData);
 
         const teamId = team[0].metaData.team_id;
@@ -43,7 +43,7 @@ function TeamList({ team }) {
     }
 
     const handleTeamEdit = () => {
-        console.log('clicked Team Edit');
+        // console.log('clicked Team Edit');
         // console.log('team', team)
         dispatch({
             type: 'SET_CURRENT_TEAM',
@@ -52,7 +52,7 @@ function TeamList({ team }) {
     }
 
     const handleUpdateTeamName = () => {
-        console.log('in handle update team name');
+        // console.log('in handle update team name');
 
 
         Swal.fire({
@@ -63,7 +63,7 @@ function TeamList({ team }) {
             confirmButtonColor: '#FF0000'
         }).then((result) => {
             if (result.value) {
-                console.log("Result: " + result.value);
+                // console.log("Result: " + result.value);
                 let newTeamName = result.value;
 
                 dispatch({

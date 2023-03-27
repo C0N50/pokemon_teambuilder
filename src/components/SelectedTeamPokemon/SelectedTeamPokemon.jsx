@@ -37,8 +37,6 @@ function SelectedTeamPokemon({ pokemon, handlePokemonEditClick }) {
     // const imageURL = `https://img.pokemondb.net/artwork/large/${pokemon.species?.name}.jpg`
 
     const handleDelete = () => {
-        console.log('in delete pokemon');
-
         dispatch({
             type: 'DELETE_SELECTED_POKEMON',
             payload: pokemon

@@ -6,7 +6,7 @@ import axios from 'axios';
  */
 function* fetchTypeList() {
     try {
-        console.log('in list of teams');
+        // console.log('in list of teams');
         const response = yield axios.get(`/type`);
         yield put({ type: "SET_TYPE_LIST", payload: response.data })
 

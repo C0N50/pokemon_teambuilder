@@ -6,7 +6,7 @@ import axios from 'axios';
  */
 function* fetchTeamList() {
     try {
-        console.log('in list of teams');
+        // console.log('in list of teams');
         yield put ({type : 'SET_LOADING_TRUE'})
         const response = yield axios.get(`/team/`);
         yield put({ type: "SET_TEAM_LIST", payload: response.data })
@@ -23,7 +23,7 @@ function* fetchTeamList() {
  */
 function* deleteTeam(action) {
     try {
-        console.log("action.payload", action.payload);
+        // console.log("action.payload", action.payload);
         yield axios.delete(`/team/${action.payload}`);
         yield put({ type: "FETCH_TEAM_LIST" });
     } catch (error) {

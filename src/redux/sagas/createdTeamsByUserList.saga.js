@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function* fetchcreatedTeamsByUserList() {
     try {
-        console.log('in list of teams');
+        // console.log('in list of teams');
         const response = yield axios.get(`/team/`);
         yield put ({ type : "SET_CREATED_LIST", payload : response.data })
         

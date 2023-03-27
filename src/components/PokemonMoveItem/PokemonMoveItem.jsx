@@ -34,7 +34,7 @@ function MoveItem({ move }) {
     // console.log('moveReducer', moveReducer);
 
     const handleAddMove = () => {
-        console.log('clicked add move')
+        // console.log('clicked add move')
 
         // console.log('move.move.name', move.move.name);
 

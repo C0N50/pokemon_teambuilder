@@ -15,9 +15,9 @@ function AnalyzeTeam ({ team, setIsAnalyzing, isAnalyzing }) {
 
 
     const handleAnalyze = () => {
-        console.log('in Analyze');
-        console.log('setIsAnalyzing', setIsAnalyzing)
-        console.log('clicked team info', team);
+        // console.log('in Analyze');
+        // console.log('setIsAnalyzing', setIsAnalyzing)
+        // console.log('clicked team info', team);
 
         if(isAnalyzing) {
             dispatch({
@@ -34,7 +34,7 @@ function AnalyzeTeam ({ team, setIsAnalyzing, isAnalyzing }) {
         }
 
 
-        console.log('Analyzing?', isAnalyzing);
+        // console.log('Analyzing?', isAnalyzing);
         
 
     }

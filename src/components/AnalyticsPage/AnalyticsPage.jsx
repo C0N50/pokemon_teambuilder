@@ -46,8 +46,8 @@ function AnalyticsPage() {
   
 
     useEffect(() => {
-        console.log("in use effect");
-        console.log('in fetch Team API data')
+        // console.log("in use effect");
+        // console.log('in fetch Team API data')
 
         dispatch({
             type: 'FETCH_TEAM_LIST',
@@ -61,7 +61,7 @@ function AnalyticsPage() {
 
     const sortedTeams = createdTeamsByUser.sort((a, b) => b?.metaData.team_id - a?.metaData.team_id);
 
-    console.log('sorted Teams', sortedTeams)
+    // console.log('sorted Teams', sortedTeams)
 
     let teamIDArray = [];
     let LastId = '';
@@ -114,7 +114,7 @@ function AnalyticsPage() {
     }
 
     // teamIDArray.push(teamObject?.metaData.id)
-    console.log('teamID Array', teamIDArray);
+    // console.log('teamID Array', teamIDArray);
 
     dispatch({
         type: 'SET_SORTED_TEAMS',

@@ -31,7 +31,7 @@ function AllPokemonItem(pokemon) {
 
         if (team.length < 6) {
 
-        console.log('clicked add')
+        // console.log('clicked add')
 
         let pokemonUrl = pokemon.pokemon.url;
 

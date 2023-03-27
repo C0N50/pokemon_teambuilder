@@ -39,7 +39,7 @@ function TeamEditPage() {
         })
 
         setPokemonEditFlag(!pokemonEditFlag);
-        console.log('pokemon edit mode?', pokemonEditFlag)
+        // console.log('pokemon edit mode?', pokemonEditFlag)
     }
 
 
