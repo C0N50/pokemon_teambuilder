@@ -58,7 +58,7 @@ function DefensiveTypeChart({ analysisTeam }) {
         return pokemon.typeData;
     })
 
-    console.log('damageRelationArray', damageRelationArray);
+    // console.log('damageRelationArray', damageRelationArray);
 
     // console.log('typeArray', typeArray);
 

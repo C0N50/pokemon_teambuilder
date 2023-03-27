@@ -37,7 +37,7 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
 
     const handlesaveChanges = () => {
 
-        console.log('moves', moves)
+        // console.log('moves', moves)
 
         if (moves.length > 0) {
 
@@ -62,7 +62,7 @@ function PokemonEditPage({ setPokemonEditFlag, pokemonEditFlag }) {
                 type: 'DELETE_ALL_MOVES'
             })
 
-            console.log('moves', moves)
+            // console.log('moves', moves)
 
             setPokemonEditFlag(!pokemonEditFlag);
         }

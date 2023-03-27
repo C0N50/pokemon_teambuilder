@@ -53,14 +53,14 @@ function SelectedTeam({ team, handlePokemonEditClick }) {
 
         if (hasMove) {
 
-            console.log('in Update Team');
+            // console.log('in Update Team');
 
             //Table : "team_pokemon"
             //Columns: "team_id", "api_id"
 
             //Table : "team"
             //Coumns : "user_id"
-            console.log('team', team);
+            // console.log('team', team);
 
 
             const teamId = team[0].metaData.team_id;
@@ -104,7 +104,7 @@ function SelectedTeam({ team, handlePokemonEditClick }) {
                 apiIdArray: saveTeamArray,
                 selected_attacks: attackData
             }
-            console.log('save Team Object', saveTeamObject);
+            // console.log('save Team Object', saveTeamObject);
 
 
             //This is Not Data Safe. This needs to be refactored.
@@ -137,7 +137,6 @@ function SelectedTeam({ team, handlePokemonEditClick }) {
      * Calls Saga to send DELETE team from reducer
      */
     const deleteTeam = () => {
-        console.log('in delete team');
         dispatch({
             type: 'DELETE_SELECTED_TEAM'
         })
@@ -149,7 +148,6 @@ function SelectedTeam({ team, handlePokemonEditClick }) {
      *  then sends the object to the saga to be POST to the server.
      */
     const saveTeam = () => {
-        console.log('clicked saveTeam');
         // console.log('selected', selectedTeamList);
 
         Swal.fire({
@@ -168,7 +166,7 @@ function SelectedTeam({ team, handlePokemonEditClick }) {
 
                 for (let pokemon of team) {
 
-                    console.log('in save pokemon.selectedAttacks', pokemon.selectedAttacks);
+                    // console.log('in save pokemon.selectedAttacks', pokemon.selectedAttacks);
                     if (pokemon.selectedAttacks && pokemon?.selectedAttacks[0]) {
                         hasMove = true;
                     }
@@ -213,7 +211,7 @@ function SelectedTeam({ team, handlePokemonEditClick }) {
                         apiIdArray: saveTeamArray,
                         selected_attacks: attackData
                     }
-                    console.log('save Team Object', saveTeamObject);
+                    // console.log('save Team Object', saveTeamObject);
 
                     dispatch({
                         type: 'POST_SELECTED_TEAM',

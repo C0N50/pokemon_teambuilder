@@ -240,11 +240,11 @@ These Ids are also to be used for any other attribute tables that are to referen
 router.post('/', rejectUnauthenticated, async (req, res) => {
 
 
-  console.log('in post metaData', req.body.metaData);
+  // console.log('in post metaData', req.body.metaData);
 
-  console.log('metaData team id', req.body.metaData.team_id)
+  // console.log('metaData team id', req.body.metaData.team_id)
 
-  console.log('req.user.id', req.user.id);
+  // console.log('req.user.id', req.user.id);
 
 
   // We need to use the same connection for all queries...
@@ -363,7 +363,7 @@ router.put("/:id", rejectUnauthenticated, (req, res) => {
 
   const queryParams = [teamName, teamId, userId];
 
-  console.log(queryParams);
+  // console.log(queryParams);
 
   pool
     .query(queryText, queryParams)

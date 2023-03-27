@@ -9,7 +9,7 @@ import axios from 'axios';
  */
 function* postSelectedTeam(action) {
     try {
-        console.log('in post', action.paylod);
+        // console.log('in post', action.paylod);
       yield axios.post("/team", action.payload);
       yield put({ type: "FETCH_TEAM_LIST" });
     } catch (error) {

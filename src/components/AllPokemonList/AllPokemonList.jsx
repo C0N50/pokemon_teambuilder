@@ -14,7 +14,7 @@ function AllPokemonList() {
   const user = useSelector((store) => store.user);
 
   useEffect(() => {
-    console.log("in use effect");
+    // console.log("in use effect");
     dispatch({
       type: "FETCH_ALL_POKEMON",
     });
