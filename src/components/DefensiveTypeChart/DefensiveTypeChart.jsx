@@ -90,7 +90,7 @@ function DefensiveTypeChart({ analysisTeam }) {
 
             }
             // console.log('type modifier:', typeName, modifier);
-            rowObject['pokemon' + damageRelationArray.indexOf(pokemon)] = modifier
+            rowObject[`pokemon${damageRelationArray.indexOf(pokemon)}`] = modifier;
         }
         calcRows.push(rowObject);
     }
@@ -205,6 +205,7 @@ function DefensiveTypeChart({ analysisTeam }) {
         calcTotalRows.push(rowObject)
     }
 
+    console.log
 
 
 
