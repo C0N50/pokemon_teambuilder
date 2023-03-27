@@ -43,24 +43,25 @@ CREATE TABLE "pokemon_type" (
 
 INSERT INTO "pokemon_type" ("name", "image_url")
 VALUES 
-('normal', 'NormalIC_SV.png'),
-('fire', 'FireIC_SV.png'),
-('fighting', 'FightingIC_SV.png'),
-('water', 'WaterIC_SV.png'),
-('flying', 'FlyingIC_SV.png'),
-('grass', 'GrassIC_SV.png'),
-('poison', 'PoisonIC_SV.png'),
-('electric', 'ElectricIC_SV.png'),
-('ground', 'GroundIC_SV.png'),
-('psychic', 'PsychicIC_SV.png'),
-('rock', 'RockIC_SV.png'),
-('ice', 'IceIC_SV.png'),
-('bug', 'BugIC_SV.png'),
-('dragon', 'DragonIC_SV.png'),
-('ghost', 'GhostIC_SV.png'),
-('dark', 'DarkIC_SV.png'),
-('steel', 'SteelIC_SV.png'),
-('fairy', 'FairyIC_SV.png');
+('normal', 'Types/NormalIC_SV.png'),
+('fire', 'Types/FireIC_SV.png'),
+('fighting', 'Types/FightingIC_SV.png'),
+('water', 'Types/WaterIC_SV.png'),
+('flying', 'Types/FlyingIC_SV.png'),
+('grass', 'Types/GrassIC_SV.png'),
+('poison', 'Types/PoisonIC_SV.png'),
+('electric', 'Types/ElectricIC_SV.png'),
+('ground', 'Types/GroundIC_SV.png'),
+('psychic', 'Types/PsychicIC_SV.png'),
+('rock', 'Types/RockIC_SV.png'),
+('ice', 'Types/IceIC_SV.png'),
+('bug', 'Types/BugIC_SV.png'),
+('dragon', 'Types/DragonIC_SV.png'),
+('ghost', 'Types/GhostIC_SV.png'),
+('dark', 'Types/DarkIC_SV.png'),
+('steel', 'Types/SteelIC_SV.png'),
+('fairy', 'Types/FairyIC_SV.png');
+
 
 
 
