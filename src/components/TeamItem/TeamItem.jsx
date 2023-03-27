@@ -93,7 +93,7 @@ function TeamItem({ team }) {
                             {team?.selectedAttacks && team.selectedAttacks[0] ?
                                 <>
                                     <div className='move-container'>
-                                       <div><img width='100%' src={`./${capitalize(team.selectedAttacks[0].type)}_Background.png`} /></div> 
+                                       <div><img width='100%' src={`./${team.selectedAttacks[0].type}_Background.png`} /></div> 
                                         <div className = 'move-text'>{capitalize(team.selectedAttacks[0].name)}</div>
                                     </div>
                                 </>
@@ -105,7 +105,7 @@ function TeamItem({ team }) {
                             {team?.selectedAttacks && team.selectedAttacks[1] ?
                                 <>
                                 <div className='move-container'>
-                                   <div><img width='100%' src={`./${capitalize(team.selectedAttacks[1].type)}_Background.png`} /></div> 
+                                   <div><img width='100%' src={`./${team.selectedAttacks[1].type}_Background.png`} /></div> 
                                     <div className = 'move-text'>{capitalize(team.selectedAttacks[1].name)}</div>
                                 </div>
                             </>
@@ -117,7 +117,7 @@ function TeamItem({ team }) {
                             {team?.selectedAttacks && team.selectedAttacks[2] ?
                                 <>
                                 <div className='move-container'>
-                                   <div><img width='100%' src={`./${capitalize(team.selectedAttacks[2].type)}_Background.png`} /></div> 
+                                   <div><img width='100%' src={`./${team.selectedAttacks[2].type}_Background.png`} /></div> 
                                     <div className = 'move-text'>{capitalize(team.selectedAttacks[2].name)}</div>
                                 </div>
                             </>
@@ -129,7 +129,7 @@ function TeamItem({ team }) {
                             {team?.selectedAttacks && team.selectedAttacks[3] ?
                                 <>
                                 <div className='move-container'>
-                                   <div><img width='100%' src={`./${capitalize(team.selectedAttacks[3].type)}_Background.png`} /></div> 
+                                   <div><img width='100%' src={`./${team.selectedAttacks[3].type}_Background.png`} /></div> 
                                     <div className = 'move-text'>{capitalize(team.selectedAttacks[3].name)}</div>
                                 </div>
                             </>
