@@ -95,7 +95,7 @@ function DefensiveTypeChart({ analysisTeam }) {
         calcRows.push(rowObject);
     }
 
-    // console.log('calcRows', calcRows);
+    console.log('calcRows', calcRows);
 
 
     let calcTotalRows = [];
