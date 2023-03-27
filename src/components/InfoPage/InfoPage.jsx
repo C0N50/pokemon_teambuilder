@@ -8,18 +8,13 @@ import './InfoPage.css'
 
 function InfoPage() {
   return (
-    <div className="container">
-      <h1 className='title'>Pokemon Team Builder Info</h1>
+    <>
+      <h1 className='title'>Information & Credits</h1>
 
-      <div className='info-paragraph'>Authored by: Connor Cloud Ferris</div>
-      <div className='info-paragraph'>Alias: C0N50</div>
-      <div className='info-paragraph'>Copyright: 2023 </div>
-      <div className='info-paragraph'>Technologies Used: React, Redux, Express, Node, PokeAPI  </div>
-      <div className='info-paragraph'>Thanks to External Parties: PokeAPI, Bulbapedia, Pokemon DB, Marriland  </div>
-      <div className='info-paragraph'>Special Thanks: Alyssa, Maryann, Richard, Anna, All my classmates and instructors, and you, the user.</div>
-
-      
-    </div>
+      <center>
+        <img width='80%' src='pokedex-info.png' />
+      </center>
+    </>
   );
 }
 
