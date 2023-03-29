@@ -31,11 +31,16 @@ function AllPokemonItem(pokemon) {
 
         if (team.length < 6) {
 
-        // console.log('clicked add')
+        //Interchangable URL & name depending on the functionality of the pokeAPI
 
         let pokemonUrl = pokemon.pokemon.url;
+                // console.log('pokemon url', pokemonUrl)
 
-        axios.get('/api/pokemon/apiURL', { params: { paramsURL: pokemonUrl } })
+        let pokemonName = pokemon.pokemon.name
+                // console.log('pokemon name', pokemonName)
+
+
+        axios.get('/api/pokemon/apiURL', { params: { paramsURL: pokemonName } })
             .then(response => {
                 // console.log(response.data);
 
