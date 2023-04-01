@@ -29,11 +29,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     .query(queryText, [userParam])
     .then((result) => {
 
-
-      // console.log('result moveset', result.rows[0].moveset);
-
       const moveSetArray = result.rows.map((pokemon) => {
         let team_pokemon_id = pokemon.team_pokemon_id;
+
+        //declares array of move names as strings to be appended to the pokieAPI call
         let moveSet = pokemon.moveset.flat();
 
         return {
@@ -42,15 +41,13 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         }
       })
 
-      // console.log('MoveSet Array', moveSetArray)
-
-
       //Creates the URL to send a GET request to the PokeAPI Endpoint to retrieve a Pokemon Data object. 
       //The Pokemon data object provides comprehensive 
       const pokemonEndpointsArray = result.rows.map((pokemonid) => {
         return `https://pokeapi.co/api/v2/pokemon/${pokemonid.api_pokemon_id}`
       })
 
+      //declares array holding promises for
       let promiseArray = [];
 
       for (let endpoint of pokemonEndpointsArray) {
@@ -67,7 +64,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         let i = 0;
 
         for (let value of values) {
-          // console.log('value.data', value.data);
 
           let pokemonObject = {
             id: value.data.id,
@@ -84,6 +80,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
           i++;
         }
 
+  
         let movePromiseArray = [];
 
         for (let moveSet of moveSetArray)
@@ -101,31 +98,21 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         // console.time('Move API START')
         Promise.all(movePromiseArray).then(function (apiMoves) {
           // console.timeEnd('Move API START')
-          // console.log(values[0].data);
-          // console.log('apiMoves', apiMoves);
 
+          //Parses an Array of pokemon objects fetched from API.
           for (let pokemon of pokemonArray) {
+
+            //declare Attacks which holds 4 attack names in an Array which is added to a pokemon object as the field pokemon.selectedAtttacks
             let attacksArray = [];
+
+            //Parses move
             for (let moveSet of moveSetArray) {
               if (moveSet.team_pokemon_id === pokemon.metaData.team_pokemon_id) {
-                // console.log('move.team_pokemon_id', move.team_pokemon_id);
-                // console.log('value.metaData.team_pokemon_id', value.metaData.team_pokemon_id)
-                // console.log('move.movename', move.movename)
                 let flattenedMoveSet = moveSet.moveSet.flat();
-
-                // console.log('flattened moveSet', flattenedMoveSet);
                 index = 0;
 
                 for (let flattenedMove of flattenedMoveSet) {
                   for (let apiMove of apiMoves) {
-
-                    // console.log('apiMove.data.name', apiMove.data.name);
-                    // console.log('flattened move', flattenedMoveSet[index])
-
-                    // console.log('movSet.team_pokemon_id', moveSet.team_pokemon_id)
-                    // console.log('pokemon.metaData.team_pokemon_id', pokemon.metaData.team_pokemon_id)
-
-
 
                     if (apiMove.data.name === flattenedMove && moveSet.team_pokemon_id === pokemon.metaData.team_pokemon_id) {
 

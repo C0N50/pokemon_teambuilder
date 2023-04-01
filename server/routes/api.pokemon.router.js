@@ -28,19 +28,11 @@ router.get('/apiURL', (req, res) => {
   //Both variables below are dependent on inputs from the "handleAdd" function in AllPokemonItem.jsx
 
   //APIURL fetches the pokemon by ID.
-
-  let APIURL = req.query.paramsURL;
-
-  // console.log('APIURL', req.query.paramsURL);
-
+  let idIURL = req.query.paramsURL;
 
   //Fall Back URL to use while POKEAPI IDs are wrong. 
-  //This variable is interchangable with the API URL in the axios call depending on how functional the pokemon API is.
-
+  //pokemonURL is interchangable with the API URL in the axios call depending on how functional the pokemon API is.
   let pokemonNameURL = `https://pokeapi.co/api/v2/pokemon/${req.query.paramsURL}`
-
-
-
 
   axios.get(pokemonNameURL, rejectUnauthenticated)
     .then(response => {

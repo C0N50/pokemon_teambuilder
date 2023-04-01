@@ -25,15 +25,12 @@ router.get('/', (req, res) => {
 
 router.get('/apiURL', (req, res) => {
 
-  // console.log('in get :apiURL')
-
-
   let MOVEAPIURL = 'https://pokeapi.co/api/v2/move/' + req.query.paramsURL;
 
 
   axios.get(MOVEAPIURL, rejectUnauthenticated)
     .then(response => {
-      // console.log(response.data);
+
 
       sendObject = {
         name : response.data.name,
