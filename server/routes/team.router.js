@@ -11,7 +11,7 @@ const {
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
 
-  console.time('GET START')
+  // console.time('GET START')
   // what is the value of req.user????
 
   //Step 1: Fetch Pokemon Team IDs and Pokemon API IDs and MoveNames from Database
@@ -198,7 +198,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             let myJsonString = JSON.stringify(pokemonArray);
 
             res.send(myJsonString);
-            console.timeEnd('GET START')
+            // console.timeEnd('GET START')
 
 
           })
