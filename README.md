@@ -1,13 +1,14 @@
 
-# Prime Solo Project Starting Repo
+# Pokemon Team Builder
+
+Welcome to the Pokemon Team Builder application! The Pokemon Team Builder app is designed to house competitive resources in a comprehensive application to provide one stop for learning, team building, and analytics. This help page is written as a brief tutorial and quickstart guide to the core installation and deployment of the Pokemon Team Builder application.
+
 This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
 
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
 
-## Use the Template for This Repository (Don't Clone)
+## Getting Started
 
-- Don't Fork or Clone. Instead, click the `Use this Template` button, and make a copy to your personal account. Make the project `PUBLIC`!
-
+- Fork or Clone or click the `Use this Template` button, and make a copy to your personal account.
 
 ## Prerequisites
 
@@ -19,17 +20,7 @@ Before you get started, make sure you have the following software installed on y
 
 ## Create database and table
 
-Create a new database called `prime_app` and create a `user` table:
-
-```SQL
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
-```
-
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
+Create a new database called `pokemon-team-builder` and run the commands in the database.sql file.
 
 ## Development Setup Instructions
 
@@ -116,6 +107,3 @@ This code is also heavily commented. We recommend reading through the comments, 
 1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
 1. In the deploy section, select manual deploy
 
-## Update Documentation
-
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
