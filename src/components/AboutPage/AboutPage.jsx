@@ -24,7 +24,7 @@ function AboutPage() {
   };
 
   const pikachuImageURL = `https://img.pokemondb.net/artwork/large/pikachu.jpg`;
-  const electric = 'ElectricIC_SV.png'
+  const electric = './Types/ElectricIC_SV.png'
   const electricMove = `./Background-Type/Electric_Background.png`
   const normalMove = `./Background-Type/Normal_Background.png`
   const waterMove = `./Background-Type/Water_Background.png`
