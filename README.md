@@ -1,12 +1,23 @@
 
 # Pokemon Team Builder
 
-Welcome to the Pokemon Team Builder application! The Pokemon Team Builder app is designed to house competitive resources in a comprehensive application to provide one stop for learning, team building, and analytics. This help page is written as a brief tutorial and quickstart guide to the core installation and deployment of the Pokemon Team Builder application.
-
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+Welcome to the Pokemon Team Builder application! The Pokemon Team Builder app is designed to house competitive resources in a comprehensive application to provide one stop for learning, team building, and analytics. Technologies I explored:
 
 
-## Getting Started
+
+## App Walk-Through!
+
+ - PokeAPI
+ - Material UI
+ - React/Node/PostgresSQL
+
+| Pokemon Team Builder |
+| :---: |
+||
+
+
+
+## Deploy the App Yourself!
 
 - Fork or Clone or click the `Use this Template` button, and make a copy to your personal account.
 
@@ -35,16 +46,6 @@ Create a new database called `pokemon-team-builder` and run the commands in the 
 - Run `npm run client`
 - Navigate to `localhost:3000`
 
-## Debugging
-
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
-
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
-
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
-
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
-
 ## Testing Routes with Postman
 
 To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum.
@@ -67,35 +68,6 @@ Before pushing to Heroku, run `npm run build` in terminal. This will create a bu
 - Start postgres if not running already by using `brew services start postgresql`
 - Run `npm start`
 - Navigate to `localhost:5000`
-
-## Lay of the Land
-
-There are a few videos linked below that show a walkthrough the client and sever setup to help acclimatize to the boilerplate. Please take some time to watch the videos in order to get a better understanding of what the boilerplate is like.
-
-- [Initial Set](https://vimeo.com/453297271)
-- [Server Walkthrough](https://vimeo.com/453297212)
-- [Client Walkthrough](https://vimeo.com/453297124)
-
-Directory Structure:
-
-- `src/` contains the React application
-- `public/` contains static assets for the client-side
-- `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
-- `server/` contains the Express App
-
-This code is also heavily commented. We recommend reading through the comments, getting a lay of the land, and becoming comfortable with how the code works before you start making too many changes. If you're wondering where to start, consider reading through component file comments in the following order:
-
-- src/components
-  - App/App
-  - Footer/Footer
-  - Nav/Nav
-  - AboutPage/AboutPage
-  - InfoPage/InfoPage
-  - UserPage/UserPage
-  - LoginPage/LoginPage
-  - RegisterPage/RegisterPage
-  - LogOutButton/LogOutButton
-  - ProtectedRoute/ProtectedRoute
 
 ## Deployment
 
