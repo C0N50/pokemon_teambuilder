@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TeamItem from "../TeamItem/TeamItem";
-import { useState } from "react";
 import './TeamList.css';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';

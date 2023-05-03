@@ -1,15 +1,12 @@
 import React from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AllPokemonList from '../AllPokemonList/AllPokemonList';
 import SelectedTeam from '../SelectedTeam/SelectedTeam';
 import PokemonEditPage from '../PokemonEditPage/PokemonEditPage';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import './TeamEditPage.css'
 
 /**
