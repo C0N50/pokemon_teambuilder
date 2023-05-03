@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SelectedTeamPokemon from "../SelectedTeamPokemon/SelectedTeamPokemon";
-import { useState } from "react";
 // import '../TeamList/TeamList.css';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import { useHistory } from "react-router-dom";
 import './SelectedTeam.css'

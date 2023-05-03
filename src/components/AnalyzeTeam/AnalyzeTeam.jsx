@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
 import '../TeamList/TeamList.css';
 import './AnalyzeTeam.css'
-import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
+
 
 import AnalyzeTeamItem from "../AnalyzeTeamItem/AnalyzeTeamItem";
 

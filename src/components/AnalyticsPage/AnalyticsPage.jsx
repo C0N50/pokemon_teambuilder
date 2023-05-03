@@ -1,16 +1,8 @@
 import React from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import AllPokemonList from '../AllPokemonList/AllPokemonList';
-import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
-
-
-
-
 
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -18,13 +10,6 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
-
-
-import AnalyzeTeam from '../AnalyzeTeam/AnalyzeTeam';
-import AnalyzeTeamItem from '../AnalyzeTeamItem/AnalyzeTeamItem';
-
-import CreatedTeamsByUserList from '../CreatedTeamsByUserList/CreatedTeamsByUserList';
-import TeamList from '../TeamList/TeamList';
 import AnalyzeTeamMenu from '../AnalyzeTeamMenu/AnalyzeTeamMenu';
 import DefensiveTypeChart from '../DefensiveTypeChart/DefensiveTypeChart';
 

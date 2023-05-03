@@ -1,13 +1,6 @@
 import React from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import AllPokemonList from '../AllPokemonList/AllPokemonList';
-import SelectedTeam from '../SelectedTeam/SelectedTeam';
-import SelectedTeamPokemon from '../SelectedTeamPokemon/SelectedTeamPokemon';
-
-import { Link } from 'react-router-dom';
 
 import PokemonMoveList from '../PokemonMoveList/PokemonMoveList';
 import './PokemonEditPage.css'
