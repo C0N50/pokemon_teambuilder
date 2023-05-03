@@ -16,66 +16,66 @@ Welcome to the Pokemon Team Builder application! The Pokemon Team Builder app is
 | Home/Register |
 | Users are routed to the home page to register a new account or can navigate to the register page by clicking the register button. |
 |  <img width="50%" src="screenshots/home.png"> |
-|  <img width="30%" src="screenshots/register.png"> |
+|  <img width="50%" src="screenshots/register.png"> |
 ||
 | Login |
 | Users supply their credentials on this page to log in. |
-| <img width="30%" src="screenshots/login.png"> |
+| <img width="50%" src="screenshots/login.png"> |
 ||
 | Main Page |
 | On Login, users will land on the the build page. On this page they can open create a new team by clicking the "Create New Team" button, open the shelf navigation by clicking the "hamburger" button, or log out. Lets create a new team by clicking the "Create New Team" button! |
-| <img width="30%" src="screenshots/main-page-empty.png"> |
+| <img width="50%" src="screenshots/main-page-empty.png"> |
 ||
 | Add Pokemon Page |
 | Users can add pokemon to their team from a list of every (base form) pokemon. To add a pokenon click the "Add" button within their card. Up to 6 pokemon can be added to a team. Lets add Charizard! |
-| <img width="30%" src="screenshots/create-team-pokemon-menu-open.png"> |
+| <img width="50%" src="screenshots/create-team-pokemon-menu-open.png"> |
 ||
 | Build Team Page - Charizard Selected |
 | Charizard has now been added to the team, but the team will not be saved until we click the save button. However, a pokemon must have at least one "move" selected in order to be saved. Charizard currently has zero. lets click the "edit" button to select some moves! |
-| <img width="30%" src="screenshots/create-team-charizard-selected.png"> |
+| <img width="50%" src="screenshots/create-team-charizard-selected.png"> |
 ||
 | Edit Pokemon Moves Page - No Moves Selected |
 | The edit pokemon moves page presents users with a list of every possible move a pokemon can learn. Users can add up to 4 moves to the pokemon by clicking the "add" button on a move |
-| <img width="30%" src="screenshots/edit-charizard-no-moves.png"> |
+| <img width="50%" src="screenshots/edit-charizard-no-moves.png"> |
 ||
 | Once the desired moves are selected the user clicks save to return to the Create Team Page |
-| <img width="30%" src="screenshots/charizard-edit-full-moves.png"> |
+| <img width="50%" src="screenshots/charizard-edit-full-moves.png"> |
 ||
 | Build Team Page - Charizard with moves Selected | 
 | Charizard now has selected moves added and can be saved at any time. However, lets keep adding more pokemon to the team!|
-| <img width="30%" src="screenshots/charizard-team-select-full-moves.png"> |
+| <img width="50%" src="screenshots/charizard-team-select-full-moves.png"> |
 ||
 | Build Team Page - Full Team |
 | We have now added 6 pokemon to the team each with all moveslots populated. This team will NOT be saved through refresh until the "Save Team" button is clicked. Saving the Team with the save team button will permanently write the team to the database. Lets Save the team! |
-| <img width="30%" src="screenshots/full-team-selected.png">  |
+| <img width="50%" src="screenshots/full-team-selected.png">  |
 ||
 | Name Team Alert |
 | Users will be prompted to chose a name for their team upon save. |
-| <img width="30%" src="screenshots/Name-Team.png">|
+| <img width="50%" src="screenshots/Name-Team.png">|
 ||
 | Build Team Page - New Team Created |
 | Viola! The new team is saved and reflected on the build team page. But the fun doesn't end there. Let's click the hamburger to bring up the sidebar navigation! |
-| <img width="30%" src="screenshots/New-Team-Created.png"> |
+| <img width="50%" src="screenshots/New-Team-Created.png"> |
 ||
 | Navigation Bar |
 | Users can navigate between the Build, Analyze, Help, and Info pages using the sidebar. More Features are slated to be added in the future including extra analytics and exporting teams via textfile. Lets Navigate to the Analyze page!
-| <img width="30%" src="screenshots/side-bar-navigation.png"> |
+| <img width="50%" src="screenshots/side-bar-navigation.png"> |
 ||
 | Analyze Team Page |
 | The Teams are now transformed from building mode into single buttons that can be clicked to provide full type matchup analysis. Let's click our newly built team to have it analyzed for weaknesses. |
-| <img width="30%" src="screenshots/Analyze-Team-List.png"> |
+| <img width="50%" src="screenshots/Analyze-Team-List.png"> |
 ||
 | Type Chart Analysis |
 | To understand this page one must have some knowledge of pokemon. Pokemon have elemental weaknesses and resistances that play out much like a game of rock paper scissors. This chart shows which pokemon have which weaknesses and resistances. It also aggregates those weaknesses and resistances into a totals chart to give the user a complete view of their teams weakness profile. This second chart is arguably the most useful when balancing a teams weaknesses. |
-| <img width="30%" src="screenshots/Type-Chart.png"> |
+| <img width="50%" src="screenshots/Type-Chart.png"> |
 ||
 | Help Page |
 | Navigate to this page with the side bar to find a quickstart users guide |
-| <img width="30%" src="screenshots/about-page.png"> |
+| <img width="50%" src="screenshots/about-page.png"> |
 ||
 | Info & Credits Page |
 | Navigate to this page with the side bar to show technologies used and creator credits & special thanks |
-| <img width="30%" src="screenshots/Information-credits.png"> |
+| <img width="50%" src="screenshots/Information-credits.png"> |
 
 
 
