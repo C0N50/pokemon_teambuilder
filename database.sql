@@ -8,7 +8,7 @@ CREATE TABLE "user" (
 );
 
 CREATE TABLE "team" (
-	"id" serial PRIMARY KEY,
+	"id" serial PRIMARY KEY,	
 	"team_name" VARCHAR(255) NOT NULL,
 	"user_id" INT NOT NULL REFERENCES "user"
 );
