@@ -13,7 +13,14 @@ Welcome to the Pokemon Team Builder application! The Pokemon Team Builder app is
 
 | Pokemon Team Builder |
 | :---: |
+| Home/Register |
+| Users are routed to the home page to register a new account or can navigate to the register page by clicking the register button. |
+|  <img width="30%" src="screenshots/home.png"> |
+|  <img width="30%" src="screenshots/register.png"> |
 ||
+| Login |
+| Users supply their credentials on this page to log in. |
+| <img width="30%" src="screenshots/login.png"> |
 
 
 
