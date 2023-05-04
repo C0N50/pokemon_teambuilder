@@ -127,9 +127,7 @@ function AboutPage() {
 
       <>
         <section className="about-selected-list-style">
-          <Button variant="contained">
-            Clear Team
-          </Button>
+          <Button variant="contained">Clear Team</Button>
 
           <Card
             className="selected-card-style"
@@ -174,54 +172,45 @@ function AboutPage() {
                 </Typography>
                 <Typography className="Move-2" variant="caption">
                   <div className="move-body">
-                      {/* <>
+                    {/* <>
                         <div>{capitalize(pokemon.selectedAttacks[1].name)}</div>
                       </> */}
-                      <div></div>
+                    <div></div>
                   </div>
                 </Typography>
                 <Typography className="Move-3" variant="caption">
                   <div className="move-body">
-                      {/* <>
+                    {/* <>
                         <div>{capitalize(pokemon.selectedAttacks[2].name)}</div>
                       </> */}
-                      <div></div>
-
+                    <div></div>
                   </div>
                 </Typography>
                 <Typography className="Move-4" variant="caption">
                   <div className="move-body">
-                      {/* <>
+                    {/* <>
                         <div>{capitalize(pokemon.selectedAttacks[3].name)}</div>
                       </> */}
-                      <div></div>
+                    <div></div>
                   </div>
                 </Typography>
               </div>
             </CardContent>
             <CardActions>
               <div className="card-action-button-style">
-                <Button
-                  variant="contained"
-                  size="small"
-                >
+                <Button variant="contained" size="small">
                   Edit
                 </Button>
-                <Button size="small">
-                  Delete
-                </Button>
+                <Button size="small">Delete</Button>
               </div>
             </CardActions>
           </Card>
 
-              {/* <Button onClick={updateTeam} variant="contained">
+          {/* <Button onClick={updateTeam} variant="contained">
                 Update Team
               </Button> */}
 
-              <Button variant="contained">
-                Save Team
-              </Button>
-
+          <Button variant="contained">Save Team</Button>
         </section>
       </>
 
@@ -397,8 +386,94 @@ function AboutPage() {
       <div className="about-page-style-container">
         <div id="landing-page-description">
           <p>
-            Each pokemon's add button creates a pokemon team list that can hold up to a full
-            team of six pokemon.
+            Once the Moves are saved to the pokemon they will appear the team
+            edit page.
+          </p>
+        </div>
+      </div>
+
+      <>
+        <section className="about-selected-list-style">
+          <Button variant="contained">Clear Team</Button>
+
+          <Card
+            className="selected-card-style"
+            sx={{
+              width: 400,
+              boxShadow: 3,
+            }}
+          >
+            <CardContent>
+              <Typography variant="h5" component="div">
+                Pikachu
+              </Typography>
+              <div className="type-flex-style">
+                <CardMedia
+                  className="pokemon-image-style"
+                  sx={{
+                    height: 20,
+                    width: "45%",
+                    backgroundSize: "contain",
+                  }}
+                  image={electric}
+                />
+              </div>
+              <CardMedia
+                className="pokemon-image-style"
+                sx={{
+                  height: 100,
+                  width: "100%",
+                  backgroundSize: "contain",
+                }}
+                image={pikachuImageURL}
+              />
+
+              <div className="move-flex-style">
+                <Typography className="Move-1" variant="caption">
+                  <div className="move-body">
+                    <div>Volt-tackle</div>
+                  </div>
+                </Typography>
+                <Typography className="Move-2" variant="caption">
+                  <div className="move-body">
+                    <div>Extreme-speed</div>
+                  </div>
+                </Typography>
+                <Typography className="Move-3" variant="caption">
+                  <div className="move-body">
+                    <div>Surf</div>
+                  </div>
+                </Typography>
+                <Typography className="Move-4" variant="caption">
+                  <div className="move-body">
+                    <div>Knock-off</div>
+                  </div>
+                </Typography>
+              </div>
+            </CardContent>
+            <CardActions>
+              <div className="card-action-button-style">
+                <Button variant="contained" size="small">
+                  Edit
+                </Button>
+                <Button size="small">Delete</Button>
+              </div>
+            </CardActions>
+          </Card>
+
+          {/* <Button onClick={updateTeam} variant="contained">
+                Update Team
+              </Button> */}
+
+          <Button variant="contained">Save Team</Button>
+        </section>
+      </>
+
+      <div className="about-page-style-container">
+        <div id="landing-page-description">
+          <p>
+            Saving the team creates a pokemon team list that can hold
+            up to a full team of six pokemon.
           </p>
         </div>
       </div>
