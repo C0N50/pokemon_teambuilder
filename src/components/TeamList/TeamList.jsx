@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import { useHistory } from "react-router-dom";
 
-
-
 /**
  * 
  * @param {object} team 
@@ -16,17 +14,13 @@ import { useHistory } from "react-router-dom";
  */
 function TeamList({ team }) {
 
-
     const history = useHistory();
     const dispatch = useDispatch();
     // const teamList = useSelector((store) => store.teamList);
     const user = useSelector((store) => store.user);
 
     // console.log('teamList', team);
-
-
     // console.log('team name', team[0].metaData.team_name);
-
 
     const handleTeamDelete = () => {
         // console.log('clicked delete team');
@@ -52,7 +46,6 @@ function TeamList({ team }) {
 
     const handleUpdateTeamName = () => {
         // console.log('in handle update team name');
-
 
         Swal.fire({
             title: "Change Team Name?",
