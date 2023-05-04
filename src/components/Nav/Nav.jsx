@@ -19,7 +19,7 @@ function Nav() {
 
   return (
 
-    <Box className="nav" sx={{ flexGrow: 1 }}>
+    <Box className="nav" sx={{ flexGrow: 1, boxShadow: 2 }}>
       <AppBar position="static">
         <Toolbar style={{ display: "flex", justifyContent: "space-between", flexGrow: 1 }} >
 
