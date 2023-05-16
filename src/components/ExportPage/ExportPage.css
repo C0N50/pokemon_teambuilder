@@ -1,0 +1,55 @@
+/* * {
+  border : black 1px solid;  
+} */
+
+.analysis-teams-title {
+    /* position: sticky;
+    top: 0px;
+    z-index: 100; */
+    text-align: center;
+    background-color: white;
+    padding-bottom: 1px;
+    margin-left: 5.2%;
+    margin-right: 5.3%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+
+.analyze-team-isAnalyzed-style {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: sticky;
+    top: 0px;
+    z-index: 100;
+}
+
+
+.analyze-team-isAnalyzed-style:hover {
+    cursor: pointer;
+    box-shadow: 0 10px 16px 0 rgb(67, 67, 67);
+}
+
+.centerwrapper {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.export-text-body {
+    display: flex;
+    flex-flow: wrap column;
+    justify-content: flex-start;
+    font-size: .80em;
+}
+
+.export-text-name{
+    margin: 0px;
+    padding:0px;
+}
+
+.export-text-move {
+    margin: 0px;
+    padding:0px;
+}
