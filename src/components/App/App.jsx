@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import TeamEditPage from '../TeamEditPage/TeamEditPage';
 import AnalyticsPage from '../AnalyticsPage/AnalyticsPage';
+import ExportPage from '../ExportPage/ExportPage';
 
 import './App.css';
 
@@ -100,13 +101,21 @@ function App() {
             </ProtectedRoute>
 
             <ProtectedRoute
-              // logged in shows InfoPage else shows LoginPage
               exact
               path="/analyze"
             >
               <AnalyticsPage />
             </ProtectedRoute>
 
+            <ProtectedRoute
+              exact
+              path="/export"
+            >
+              <ExportPage />
+            </ProtectedRoute>
+
+
+            
 
             <Route
               exact

@@ -8,6 +8,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import InfoIcon from '@mui/icons-material/Info';
 import BiotechIcon from '@mui/icons-material/Biotech';
+import SendIcon from '@mui/icons-material/Send';
 
 export const MuiDrawer = () => {
 
@@ -52,6 +53,14 @@ export const MuiDrawer = () => {
                         </Link>
 
 
+                        <Link to="/export" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                            <ListItem button>
+                                <ListItemIcon>
+                                    <SendIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={"Export"} />
+                            </ListItem>
+                        </Link>
 
                         <Link to="/about" style={{ color: 'inherit', textDecoration: 'inherit' }}>
                             <ListItem button>
