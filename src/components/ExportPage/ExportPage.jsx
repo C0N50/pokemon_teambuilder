@@ -9,6 +9,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import TextareaAutosize from "@mui/base/TextareaAutosize";
 
 import AnalyzeTeamMenu from "../AnalyzeTeamMenu/AnalyzeTeamMenu";
 import DefensiveTypeChart from "../DefensiveTypeChart/DefensiveTypeChart";
@@ -108,6 +109,19 @@ function ExportPage() {
     return capital;
   };
 
+  let teamData = analysisTeam?.map((pokemon) => {
+    return (
+      pokemon.name +
+      "\n" +
+      pokemon.metaData.moveset.map((move) => {
+        return "-" + move + "\n";
+      }) +
+      "\n"
+    );
+  });
+
+  let teamDataString = teamData.toString().replaceAll(",", '')
+
   //Displays Users Analytics page. Teams are now buttons that the user can click to enter analytics on that specific Team.
   return (
     <div className="container">
@@ -176,18 +190,18 @@ function ExportPage() {
               );
             })}
           </div>
-          {analysisTeam?.map((pokemon) => {
-            return (
-                <div className="centerwrapper">
-                <div className="export-text-body">
-                  <p className="export-text-name">{pokemon.name}</p>
-                  {pokemon.metaData.moveset.map((move) => {
-                   return  <p className="export-text-move">-{move}</p>;
-                  })}
-                </div>
-                </div>
-            );
-          })}
+          
+          <div className="centerwrapper">
+            <div className="export-text-body">
+              <TextareaAutosize
+                minRows={36}
+                aria-label="maximum height"
+                placeholder="Pokemon-Text-Here"
+                defaultValue={teamDataString}
+                style={{ width: "75%", }}
+              />
+            </div>
+          </div>
         </>
       ) : (
         <div>
