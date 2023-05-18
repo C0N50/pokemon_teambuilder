@@ -10,6 +10,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
+import { Button } from "@mui/material";
 
 import AnalyzeTeamMenu from "../AnalyzeTeamMenu/AnalyzeTeamMenu";
 import DefensiveTypeChart from "../DefensiveTypeChart/DefensiveTypeChart";
@@ -17,6 +18,8 @@ import DefensiveTypeChart from "../DefensiveTypeChart/DefensiveTypeChart";
 import "./ExportPage.css";
 
 function ExportPage() {
+
+
   const user = useSelector((store) => store.user);
   const analysisTeam = useSelector((store) => store.analysisTeam);
   const dbTypeList = useSelector((store) => store.typeList);
@@ -109,6 +112,8 @@ function ExportPage() {
     return capital;
   };
 
+  //Below code bloack parses the analysis-team array and formats the pokemon field data in text format.
+  //The text value is then set to the Mateiral UI Text Area default value to be displayed
   let teamData = analysisTeam?.map((pokemon) => {
     return (
       pokemon.name +
@@ -120,7 +125,22 @@ function ExportPage() {
     );
   });
 
-  let teamDataString = teamData.toString().replaceAll(",", '')
+  let teamDataString = teamData.toString().replaceAll(",", "");
+
+
+  const handleSaveToPC = (teamDataString) => {
+    console.log('teamDataString', teamDataString)
+    const blob = new Blob([teamDataString], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    const time = new Date().toLocaleTimeString();
+    link.download = `pokemon_team_${time}.txt`;
+    link.href = url;
+    link.click();
+  };
+
+
+
 
   //Displays Users Analytics page. Teams are now buttons that the user can click to enter analytics on that specific Team.
   return (
@@ -190,16 +210,17 @@ function ExportPage() {
               );
             })}
           </div>
-          
+
           <div className="centerwrapper">
             <div className="export-text-body">
               <TextareaAutosize
-                minRows={36}
+                minRows={3}
                 aria-label="maximum height"
                 placeholder="Pokemon-Text-Here"
-                defaultValue={teamDataString}
-                style={{ width: "75%", }}
+                value={teamDataString}
+                style={{ width: "75%" }}
               />
+              <Button onClick={() => handleSaveToPC(teamDataString)}>Export</Button>
             </div>
           </div>
         </>
