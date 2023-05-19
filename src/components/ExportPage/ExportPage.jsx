@@ -127,20 +127,16 @@ function ExportPage() {
 
   let teamDataString = teamData.toString().replaceAll(",", "");
 
-
   const handleSaveToPC = (teamDataString) => {
     console.log('teamDataString', teamDataString)
     const blob = new Blob([teamDataString], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     const time = new Date().toLocaleTimeString();
-    link.download = `pokemon_team_${time}.txt`;
+    link.download = `${analysisTeam[0].metaData.team_name}_${time}.txt`;
     link.href = url;
     link.click();
   };
-
-
-
 
   //Displays Users Analytics page. Teams are now buttons that the user can click to enter analytics on that specific Team.
   return (
@@ -218,7 +214,7 @@ function ExportPage() {
                 aria-label="maximum height"
                 placeholder="Pokemon-Text-Here"
                 value={teamDataString}
-                style={{ width: "75%" }}
+                style={{ width: "75%", resize: "none" }}
               />
               <Button onClick={() => handleSaveToPC(teamDataString)}>Export</Button>
             </div>
